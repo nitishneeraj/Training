@@ -1,0 +1,560 @@
+----------------------------------Theory Git--------------------------------------------
+1. Version Control System
+	:- Tracking of changes in version form
+2. Snapshorts
+	:- all version are properly stored
+	   version are also named accurately
+	   
+3. SCM(Sourace code management) 
+	:- all code store in one locaton
+
+4. VCM Tools
+	:- Git ,CVS ,Mercurical ,Subversion
+5. CVCS (centralized version control system) 
+	:- all system connected in remote repository without any inter mediate
+
+6.DVSC (distributed version control system)
+	: all System connected firstly local repository then connect to remote repository
+	
+7. Git 
+	:- Git is Distributed control tool that support distributed non linear workflows 
+	by providing data assurance for developing quality software
+8. feature 
+	:- Leightweight
+	Speed
+	Open source
+	Distributed 
+	secure
+	Reliable
+
+9. 
+
+-------------------------------Git Commands------------------------------------------
+1. Check out Git Version
+	Command: git --version
+            git version 2.25.1
+2. git init
+ 	:- git init is one way to start a new project with Git. To initialize a repository
+ 	Ex: git init
+           Initialized empty Git repository in /home/beryl/Music/git/.git/
+
+   Step 1: Git  add to staging area. (because git track to changes)
+ 	Ex: git add any_file _name(git.txt)
+ 	
+   Step 2:  check git 
+   	Ex: git status
+   
+   Step 3: 
+   	Ex: git commit -m " "
+   	
+   Step 4: push remote repository
+   	Ex:git push
+		Enumerating objects: 12, done.
+		Counting objects: 100% (12/12), done.
+		Delta compression using up to 4 threads
+		Compressing objects: 100% (6/6), done.
+		Writing objects: 100% (9/9), 1.12 KiB | 143.00 KiB/s, done.
+		Total 9 (delta 2), reused 0 (delta 0)
+		remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+		To github.com:nitishneeraj/Pactice.git
+		   4cdde1f..43731d2  master -> master
+
+   
+3. Add to staging mode
+ 	: because git track to changes
+ 	ex: git add git.txt
+ 
+4. recover git file 
+ 	Ex: git -r git.txt
+ 	
+5. git diff 
+	: check out file entry difference
+	Ex: git diff
+		diff --git a/Git/Git.txt b/Git/Git.txt
+		index a80920f..f759676 100644
+		--- a/Git/Git.txt
+		+++ b/Git/Git.txt
+		@@ -66,8 +66,8 @@
+				          GitHub,
+				          viewing a remote's branches,
+				          and manually adding remote.
+		-                       +
+		-                       +
+		+                       
+		+                       
+				        +Welcom to Digital World
+				        +
+                       
+6. git status
+	:- displays the state of the working directory and the staging area.
+	 It lets you see which changes have been staged, 
+	 Ex:git status
+			On branch master
+			Your branch is ahead of 'origin/master' by 1 commit.
+			  (use "git push" to publish your local commits)
+
+			Changes to be committed:
+			  (use "git restore --staged <file>..." to unstage)
+				modified:   Git/Git.txt
+				new file:   demo1.txt
+
+			Changes not staged for commit:
+			  (use "git add <file>..." to update what will be committed)
+			  (use "git restore <file>..." to discard changes in working directory)
+				modified:   Git/Git.txt
+
+7. git Commit	
+	: to create a snapshot of the staged changes along a timeline of a Git projects history.
+	Ex: git commit git.txt -m(msg) " This is small changes"
+	
+	 
+8. git commit to all without going staging mode
+	: all file commit in one command
+	Ex: git commit -a -m "This is small changes"
+		[master (root-commit) 22ad6ee] This is small changes
+		 1 file changed, 13 insertions(+)
+		 create mode 100644 Git.txt
+
+	
+9. git Key Generation
+	: ssh-keygen -t rsa
+	: eval $(ssh-agent -s)
+	: ssh-add ~/.ssh/id_rsa
+	: cat ~/.ssh/id_rsa.pub   then go to github generate Key
+	
+10. How to get branch 
+	: which branch are use it 
+	Ex: git branch
+           * master
+
+11. add all staging mode to all 
+	Ex: git add -A  
+	
+12. Create new branch
+	Ex: git branch fix
+		beryl@beryl-Latitude-E6520:~/Desktop/Pactice$ git branch
+		  fix
+		* master
+
+13. how to change branch_name
+	Ex: git checkout fix
+		Switched to branch 'fix'
+
+	
+14. how to merge file 
+	Ex: git merge file_name(programs(ye directory file name h jo merge krna h))
+
+
+15. git clone 
+	: git clone https://github.com/nitishneeraj/Commands.git
+		Cloning into 'Commands'...
+		remote: Enumerating objects: 36, done.
+		remote: Counting objects: 100% (36/36), done.
+		remote: Compressing objects: 100% (23/23), done.
+		remote: Total 36 (delta 2), reused 32 (delta 1), pack-reused 0
+		Unpacking objects: 100% (36/36), 4.11 KiB | 420.00 KiB/s, done.
+		
+	
+16. configration
+	:  git config --global user.name any_name
+	:  git config --global user.email any_email
+	Ex:- git config --global user.name
+             Nitish
+        EX:- git config --global user.email
+             nitish@gmail.com
+
+
+
+17. shortcut open terminal Visual Studio
+	Ex: code .
+	
+18. Show all files with hidden file 
+	Ex: ls -lart
+		total 16
+		drwxr-xr-x 21 beryl beryl 4096 Oct 13 10:10 ..
+		drwxrwxr-x  5 beryl beryl 4096 Oct 13 10:10 Pactice
+		drwxr-xr-x  4 beryl beryl 4096 Oct 13 10:24 .
+		drwxrwxr-x  8 beryl beryl 4096 Oct 13 10:24 .git
+
+19. After commit file data delete then recover
+	: git checkout file_name(pehle wale commit se match kr deta  h )
+	Ex: git checkout demo1.txt
+		Updated 1 path from the index
+	
+20. Recover all commit match file 
+	Ex: git checkout -f
+	
+21. git log 
+	: read a history of everything that happens to a repository
+	Ex: git log
+		commit eaa73312216d714ec0ee704564f22c8d14270ed6 (HEAD -> master)
+		Author: Nitish <nitishneeraj16@gmail.com>
+		Date:   Mon Oct 11 11:58:44 2021 +0530
+
+		    Read to file upload
+		 
+22. Show last commit history repository    
+	Ex: git log -p (n)   
+				commit eaa73312216d714ec0ee704564f22c8d14270ed6 (HEAD -> master)
+				Author: Nitish <nitishneeraj16@gmail.com>
+				Date:   Mon Oct 11 11:58:44 2021 +0530
+
+				    Read to file upload
+
+				diff --git a/Linux/Linux.txt b/Linux/Linux.txt
+				new file mode 100644
+				index 0000000..8cbb0d4
+				--- /dev/null
+				+++ b/Linux/Linux.txt
+				@@ -0,0 +1,512 @@
+				
+				
+23. You remove staging mode direct commit
+	Ex: git commit -a -m "any_msg"
+	
+
+24. How to remove staging mode 
+	: git add index.html     // tract mode
+	
+	Ex: git rm --cached index.html  // return Untrack mode
+	
+25. File Delete in HHD
+	: git rm -f file_name
+	
+26. git status -s
+	: currently which file modife
+	Ex: git status -s
+             M Git/Git.txt
+	
+27. What is .gitignore 
+	:  .gitignore file are use for git not track your file
+	Ex: touch .gitignore 
+	: open .gitignore file  and mention file/directory name
+		Ex: touch mypack.log index.log
+			all log files  not track
+				Ex: .gitignore/ Ex: - /.cpp,*.log,any_file_any_directory_name
+				
+28. Create branch with switch
+	Ex:- git branch -b any_branch_name(create branch name)
+
+
+29. Add all stages
+	: git add .
+
+30.  configration
+	: cat .gitconfig
+		[user]
+			name = Nitish
+			email = abc@gmail.com
+			
+			
+31. config
+	: cat config
+			[core]
+				repositoryformatversion = 0
+				filemode = true
+				bare = false
+				logallrefupdates = true
+			[remote "origin"]
+				url = git@github.com:nitishneeraj/Pactice.git
+				fetch = +refs/heads/*:refs/remotes/origin/*
+			[branch "master"]
+				remote = origin
+				merge = refs/heads/master
+
+			
+32. show .git file in list form
+	Ex: ls -la .git
+			total 60
+			drwxrwxr-x  8 beryl beryl 4096 Oct 11 17:25 .
+			drwxrwxr-x  6 beryl beryl 4096 Oct 11 16:55 ..
+			drwxrwxr-x  2 beryl beryl 4096 Oct 11 14:44 branches
+			-rw-rw-r--  1 beryl beryl    5 Oct 11 17:18 COMMIT_EDITMSG
+			-rw-rw-r--  1 beryl beryl  318 Oct 11 17:22 config
+			-rw-rw-r--  1 beryl beryl   73 Oct 11 14:44 description
+			-rw-rw-r--  1 beryl beryl   19 Oct 11 17:25 HEAD
+			drwxrwxr-x  2 beryl beryl 4096 Oct 11 14:44 hooks
+			-rw-rw-r--  1 beryl beryl 1121 Oct 11 17:25 index
+			drwxrwxr-x  2 beryl beryl 4096 Oct 11 14:44 info
+			drwxrwxr-x  3 beryl beryl 4096 Oct 11 14:44 logs
+			drwxrwxr-x 36 beryl beryl 4096 Oct 11 17:18 objects
+			-rw-rw-r--  1 beryl beryl   41 Oct 11 17:20 ORIG_HEAD
+			-rw-rw-r--  1 beryl beryl  191 Oct 11 14:44 packed-refs
+			drwxrwxr-x  5 beryl beryl 4096 Oct 11 14:44 refs
+
+
+33. git log show only two history repository
+	Ex:  git log -n 2
+		commit cd910c003d2ccd9c54a96e6a8876da23ad3da05d (HEAD -> m2, origin/m2)
+		Merge: c805e24 f3cca6f
+		Author: Nitish <nitishneeraj16@gmail.com>
+		Date:   Mon Oct 11 17:18:42 2021 +0530
+
+		    Merge branch 'f1' into m2
+
+		commit c805e245a0e6d2be0b77d7fb61fdc9059e20f105
+		Author: Nitish <nitishneeraj16@gmail.com>
+		Date:   Mon Oct 11 17:18:09 2021 +0530
+
+		    City
+	    
+34. Head
+	: is reference to the most recent commit in current branch
+	EX:-   git show 728cfb
+			commit 728cfb6ce4beb8d3b1bc4cc8f6615a99552a809a (HEAD -> master)
+			Author: Nitish <nitishneeraj16@gmail.com>
+			Date:   Wed Oct 13 15:23:16 2021 +0530
+
+			    head practice
+
+			diff --git a/.gitignore b/.gitignore
+			new file mode 100644
+			index 0000000..dcaf716
+			--- /dev/null
+			+++ b/.gitignore
+			@@ -0,0 +1 @@
+			+index.html
+			diff --git a/demo1.txt b/demo1.txt
+			index 894a0cf..ba0b76e 100644
+			--- a/demo1.txt
+			+++ b/demo1.txt
+			@@ -7,14 +7,11 @@ hello
+			 
+			 
+			 
+			-Welcom
+			+Welcome 
+
+
+35. compare b/w two commit
+			Ex:- git show 728cfb6ce4beb8d3b1bc4cc8f6615a99552a809a 
+                f76a6a4fa32839a1bc8e195e535a89e8072f5609
+		commit 728cfb6ce4beb8d3b1bc4cc8f6615a99552a809a (HEAD -> master)
+		Author: Nitish <nitishneeraj16@gmail.com>
+		Date:   Wed Oct 13 15:23:16 2021 +0530
+
+		    head practice
+
+		diff --git a/.gitignore b/.gitignore
+		new file mode 100644
+		index 0000000..dcaf716
+		--- /dev/null
+		+++ b/.gitignore
+		@@ -0,0 +1 @@
+		+index.html
+		diff --git a/demo1.txt b/demo1.txt
+		index 894a0cf..ba0b76e 100644
+		--- a/demo1.txt
+		+++ b/demo1.txt
+		@@ -7,14 +7,11 @@ hello
+		 
+		 
+		 
+		-Welcom
+		+Welcome 
+		
+36. multi commit to git 
+	Ex: git commit -a  enter go to automatically nano editer
+	
+37. unstage file
+	: Untrack
+	Ex: git rm --cached demo1.txt 
+         rm 'demo1.txt'
+	Ex: git status
+		On branch master
+		Your branch is ahead of 'origin/master' by 6 commits.
+		  (use "git push" to publish your local commits)
+
+		Changes to be committed:
+		  (use "git restore --staged <file>..." to unstage)
+			modified:   Git/Git.txt
+			modified:   Linux/Linux.txt
+			deleted:    demo1.txt
+
+		Untracked files:
+		  (use "git add <file>..." to include in what will be committed)
+			demo1.txt
+
+
+ 38. Amend Command
+ 	: currently commit add msg
+ 	Ex: git commit --amend -m" not update demo1.txt"
+		[master 2d7e306]  not update demo1.txt
+		 Date: Wed Oct 13 15:44:40 2021 +0530
+		 3 files changed, 96 insertions(+), 3 deletions(-)
+		beryl@beryl-Latitude-E6520:~/Desktop/Pactice$ git log
+		commit 2d7e306bc854143984c6050e579970ab012ded41 (HEAD -> master)
+		Author: Nitish <nitishneeraj16@gmail.com>
+		Date:   Wed Oct 13 15:44:40 2021 +0530
+
+		     not update demo1.txt
+
+39. git revert
+	: your commit  data change(back position )
+	Ex: git revert c2571ea
+		[master ed1af19] revert update This reverts commit    
+		 c2571ea94f9f495ced9bf8ff22710462db7a9b5e.
+		 1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ 
+ 40. git pull 
+ 	: used to fetch and download content from a remote repository
+ 	Ex:- git pull
+		remote: Enumerating objects: 5, done.
+		remote: Counting objects: 100% (5/5), done.
+		remote: Compressing objects: 100% (2/2), done.
+		remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+		Unpacking objects: 100% (3/3), 647 bytes | 215.00 KiB/s, done.
+		From github.com:nitishneeraj/gitpractice
+		   1a4c6a0..2d27f70  master     -> origin/master
+		Updating 1a4c6a0..2d27f70
+		Fast-forward
+		 main.txt | 4 ++--
+		 1 file changed, 2 insertions(+), 2 deletions(-)
+		 
+41. git fetch 
+	: RR---> LR
+	Ex:- git fetch
+		remote: Enumerating objects: 5, done.
+		remote: Counting objects: 100% (5/5), done.
+		remote: Compressing objects: 100% (3/3), done.
+		remote: Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+		Unpacking objects: 100% (3/3), 675 bytes | 18.00 KiB/s, done.
+		From github.com:nitishneeraj/RegistrationPage
+		   85132ac..57578a4  master     -> origin/master
+
+
+	
+	
+
+
+
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
