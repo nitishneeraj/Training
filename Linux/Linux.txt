@@ -1,0 +1,705 @@
+------------------------------------- Liunux Command--------------------------------------------
+
+1. pwd 
+	: print working directory
+	Ex: pwd
+            /home/beryl/Desktop/Folder123
+            
+2. mkdir 
+	: create directory
+	Ex: mkdir files
+
+  -> mkdir
+  	: create sub-directories of a directory.
+  	Ex: mkdir -p files/files/files/files
+  	
+  -> mkdir 
+  	: create multiple directory
+  	Ex: mkdir file file1 file2 .....
+  -> mkdir
+  	: print a message with every new file created.
+  	Ex:  mkdir -v file file1 file2
+		mkdir: created directory 'file'
+		mkdir: created directory 'file1'
+		mkdir: created directory 'file2'
+  -> mkdir
+  	: can create a long list files together like "office/client/raj/date/day"with a 
+  	printed message for each file.
+  	Ex: mkdir -vp India/Haryana/faridabad
+		mkdir: created directory 'India'
+		mkdir: created directory 'India/Haryana'
+		mkdir: created directory 'India/Haryana/faridabad'
+  -> mkdir 
+  	:Linux Directories mkdir -m=MODE
+  	:the permission on the directory you are creating. Access means to give the 
+  	authority to read(r), write(w), and execute(x).
+  	Ex: mkdir -m = rw sharma
+
+3. rmdir 
+	: Empty remove directory
+	Ex: rmdir files
+	
+4. touch git
+	: Create files
+	Ex: touch index.html
+	
+  -> touch 
+	 : create multimple file 
+	  Ex: touch demo1.txt demo2.txt
+	
+	
+5. rm 
+	: remove 
+	Ex: rm demo2.txt
+
+  -> rm 
+  	:  delete a directory having sub directories inside it.
+  	Ex: rm -r files(directory_name)
+  	
+  -> rm 
+  	: remove all the files ending with same extensions like .pdf, .txt, .odt, .png, etc.
+  	Ex: rm *.txt
+  -> rm 
+	: To remove multiple directories at once, use the rm -r command followed by the directory names separated by space.
+	Ex: rm -rf Linux(directory)
+
+  -> rm 
+  	: Before deleting a file it will ask you whether you want to delete it or not.(files)
+  	Ex: rm -i file3.txt
+            rm: remove regular empty file 'file3.txt'? y
+  
+  -> rm 
+  	: Before deleting a file it will ask you whether you want to delete it or not.(directory)
+	Ex: rm -ri Git
+            rm: descend into directory 'Git'? n
+
+6. cd
+	:change directory
+	Ex: cd directory_name
+	
+  -> cd 
+  	: root directory
+  	Ex: cd \
+  	
+  -> cd 
+  	: home directory
+  	Ex: cd ~
+  	
+  -> cd
+  	: Change to the previous directory (same as pwd)
+  	Ex: cd -
+
+  -> cd 
+  	: Change to Parent Directory
+  	Ex: cd ..
+  	
+  -> cd 
+  	: Change to another user's home directory
+  	Ex: cd ~
+		~_apt                 ~kernoops/            ~sshd/
+		~avahi/               ~list                 ~sync/
+		~avahi-autoipd/       ~lp                   ~sys/
+		~backup/              ~mail/                ~syslog
+		~beryl/               ~man/                 ~systemd-coredump/
+		~bin/                 ~messagebus           ~systemd-network/
+		~colord/              ~news                 ~systemd-resolve/
+		~cups-pk-helper       ~nm-openvpn/          ~systemd-timesync/
+		~daemon/              ~nobody               ~tcpdump
+		~dnsmasq/             ~postgres/            ~tss/
+		~games/               ~proxy/               ~usbmux
+		~gdm/                 ~pulse                ~uucp
+		~geoclue/             ~redis/               ~uuidd/
+		~gnats                ~root/                ~whoopsie
+		~gnome-initial-setup  ~rtkit/               ~www-data
+		~hplip                ~saned                
+		~irc                  ~speech-dispatcher/  
+		
+  -> cd
+  	: Change up to multiple Sub Directories
+  	Ex: d Desktop/Pactice/Linux/
+  	
+ 7. df 
+ 	: df command to see the available disk space in each of the partitions in your system.
+ 	Ex: df
+		Filesystem     1K-blocks     Used Available Use% Mounted on
+		udev             1921912        0   1921912   0% /dev
+		tmpfs             390308     1888    388420   1% /run
+		/dev/sda5      238797468 13289708 213307776   6% /
+		tmpfs            1951536       44   1951492   1% /dev/shm
+		tmpfs               5120        4      5116   1% /run/lock
+		tmpfs            1951536        0   1951536   0% /sys/fs/cgroup
+		/dev/loop1         56832    56832         0 100% /snap/core18/2128
+		/dev/loop4        224256   224256         0 100% /snap/gnome-3-34-1804/72
+		/dev/loop3         33152    33152         0 100% /snap/snapd/13170
+		/dev/loop7         56832    56832         0 100% /snap/core18/1988
+		/dev/loop0        224256   224256         0 100% /snap/gnome-3-34-1804/66
+		/dev/loop9         52224    52224         0 100% /snap/snap-store/547
+		/dev/loop8         52352    52352         0 100% /snap/snap-store/518
+		/dev/loop10        66816    66816         0 100% /snap/gtk-common-themes/1519
+		/dev/loop2         66432    66432         0 100% /snap/gtk-common-themes/1514
+		/dev/loop5        221568   221568         0 100% /snap/code/76
+		/dev/loop11        33280    33280         0 100% /snap/snapd/13270
+		/dev/loop6           128      128         0 100% /snap
+		
+8. unzip 
+	: the act of extracting the files from a zipped single file or similar file archive. ...
+	Ex: unzip directory_nmae
+	
+9. gzip
+	: gzip command
+	:- It is a compressing tool. file having '.gz' extension.
+	Ex:- gzip demo2.txt
+		beryl@beryl-Latitude-E6520:~/Music$ ls
+		demo1.txt  demo2.txt.gz  file1.txt  file2.txt  hello  Hi  nex.txt
+		
+10. gunzip 
+	:- used to decompress a file. It is a reverse operation of gzip command.
+	Ex:- gunzip demo2.txt
+		beryl@beryl-Latitude-E6520:~/Music$ ls
+		demo1.txt  demo2.txt  file1.txt  file2.txt  hello  Hi  nex.txt
+		
+11. sleep command
+	:- used to hold the terminal by the specified amount of time.
+	Ex: sleep 4 ( hold 4 second)
+
+12. time command
+	:- used to display the time to execute a command.
+	Ex- time
+
+		real	0m0.000s
+		user	0m0.000s
+		sys	0m0.000s
+
+13. zcat command
+	:- used to display the compressed files.
+	Ex:- ls
+	
+14. mount command
+	:- command is used to connect an external device file system to the system's 
+	file system.
+	Ex: mount
+	
+15. exit command
+	:- used to exit from the current shell.
+	Ex:- exit
+
+16. ip command
+	:- command is an updated version of the ipconfig command. It is used to assign an
+	 IP address, initialize an interface, disable an interface.
+	 Ex:- ip
+	Usage: ip [ OPTIONS ] OBJECT { COMMAND | help }
+	       ip [ -force ] -batch filename
+	where  OBJECT := { link | address | addrlabel | route | rule | neigh | ntable |
+		           tunnel | tuntap | maddress | mroute | mrule | monitor | xfrm |
+		           netns | l2tp | fou | macsec | tcp_metrics | token | netconf | ila |
+		           vrf | sr | nexthop }
+	       OPTIONS := { -V[ersion] | -s[tatistics] | -d[etails] | -r[esolve] |
+		            -h[uman-readable] | -iec | -j[son] | -p[retty] |
+		            -f[amily] { inet | inet6 | mpls | bridge | link } |
+		            -4 | -6 | -I | -D | -M | -B | -0 |
+		            -l[oops] { maximum-addr-flush-attempts } | -br[ief] |
+		            -o[neline] | -t[imestamp] | -ts[hort] | -b[atch] [filename] |
+		            -rc[vbuf] [size] | -n[etns] name | -N[umeric] | -a[ll] |
+		            -c[olor]}
+
+17. ssh command
+	:- is used to create a remote connection through the ssh protocol.
+	Ex:  Syntx-{ ssh user_name@host(IP/Domain_name)</p> }
+	
+18. mail command
+	:- command is used to send emails from the command line.
+	Ex:- mail -s "Hello" abc@gmail.com
+	
+19. ping command
+	:- check the connectivity between two nodes, that is whether the server is
+	 connected. It is a short form of "Packet Internet Groper."
+	 Ex:- ping www.google.com
+
+20. host command
+	:- used to display the IP address for a given domain name and vice versa. 
+	Ex:- host www.google.com
+		www.google.com has address 142.250.71.4
+		www.google.com has IPv6 address 2404:6800:4002:805::2004
+
+21. Clear Screen Ubuntu
+	Ex:- Ctrl+L
+	     Clear Command   
+
+22. Open ubuntu terminal
+	Ex:- press Ctrl+Alt+T. 
+
+23. Id command
+	:- used to display the user ID (UID) and group ID (GID).
+	Ex:- id
+	uid=1000(beryl) gid=1000(beryl) groups=1000(beryl),4(adm),24(cdrom),27(sudo),
+	30(dip),46(plugdev),120(lpadmin),131(lxd),132(sambashare)
+ 
+24. useradd command 
+	:- used to add or remove a user on a Linux server.
+	Ex:- sudo useradd CKS
+
+25. passwd command
+	:- used to create and change the password for a user.
+	Ex:- sudo passwd CKS
+		New password: 
+		Retype new password: 
+		passwd: password updated successfully
+
+26. groupadd command
+	:-used to create a user group
+	Ex:- sudo groupadd Developer
+
+27. grep command
+	:- The grep is the most powerful and used filter in a Linux system. The 'grep' 
+	stands for "global regular expression print." It is useful for searching the 
+	content from a file. Generally, it is used with the pipe.
+	Ex:- at demo1.txt | grep 2
+			2
+			22
+
+28. comm command
+	:- used to compare two files or streams. By default, it displays three columns, 
+	first displays non-matching items of the first file, second indicates the 
+	non-matching item of the second file, and the third column displays the 
+	matching items of both files.
+	Ex:-  comm demo1.txt demo2.txt
+				1
+				2
+				3
+				4
+				5
+			55
+		6
+			66
+		7
+
+29. tr command
+	:- used to translate the file content like from lower case to upper case.
+	Ex:- cat demo1.txt | tr 'sohan' 'Sohan'
+		1
+		2
+		3
+		4
+		5
+		6
+		7
+		Sohan
+
+30. wc command 
+	:- used to count the lines, words, and characters in a file.
+	Ex:- wc demo1.txt
+            8  8 20 demo1.txt
+
+
+31. uniq Command
+	:- every word will occur only once. 
+	Ex- cat demo1.txt | uniq 
+			1
+			2
+			3
+			4
+			5
+			6
+			7
+			sohan
+
+32. od command
+	:- display the content of a file in different s, such as hexadecimal, octal,
+	 and ASCII characters.
+	 Ex: od -b demo1.txt (octa)
+	     od -t x1 demo1.txt (Hexa)
+	     od -c demo1.txt (ASCII)
+
+33. sort command
+	:- sort files in alphabetical order.
+	Ex: sort demo1.txt
+			1
+			2
+			3
+			3
+			4
+			5
+			6
+			7
+
+34. find command
+	:- Find a particular file within a directory.
+	Ex:- find . -name "*.txt"
+		./nex.txt
+		./demo2.txt
+		./file2.txt
+		./hello/file4.txt
+		./Hi/hello.txt
+		./file1.txt
+		./demo1.txt
+35. shutdown command
+	: use shutdown
+	Ex: shutdown -h 2
+	stop shutdown
+	Ex: shutdown -c (cancel)
+
+36. Top Command
+	: used to display process id 
+	: top show all process running
+	Ex: top  
+	
+  -> Top Command 
+	: Kill any process
+	Ex: k and port Pid no
+	
+  -> Top Command
+	: change delay time
+	Ex: d 
+
+37. ps Command
+	: System cuttently precess check out
+	Ex: ps
+		    PID TTY          TIME CMD
+		   3299 pts/1    00:00:00 bash
+		  10040 pts/1    00:00:00 ps
+		  
+  -> ps Command 
+	: all process in list form
+	Ex: ps -ef
+		UID          PID    PPID  C STIME TTY          TIME CMD
+		root           1       0  0 09:55 ?        00:00:08 /sbin/init splash
+		root           2       0  0 09:55 ?        00:00:00 [kthreadd]
+		root           3       2  0 09:55 ?        00:00:00 [rcu_gp]
+		root           4       2  0 09:55 ?        00:00:00 [rcu_par_gp]
+		root           6       2  0 09:55 ?        00:00:00 [kworker/0:0H-events_highpri
+		root           8       2  0 09:55 ?        00:00:00 [mm_percpu_wq]
+		root           9       2  0 09:55 ?        00:00:00 [rcu_tasks_rude_]
+		root          10       2  0 09:55 ?        00:00:00 [rcu_t
+
+  -> ps Command
+	: all process in tree form
+	Ex: pstree
+		
+  -> ps Command
+	: thread precess check out
+	Ex: ps -eLf
+	
+  -> ps Command
+	: show particular data show
+	Ex: ps -axo priority,pid,user,comm
+			PRI     PID USER     COMMAND
+			 20       1 root     systemd
+			 20       2 root     kthreadd
+			  0       3 root     rcu_gp
+			  0       4 root     rcu_par_gp
+			  0       6 root     kworker/0:0H-events_highpri
+			  0       8 root     mm_percpu_wq
+			 20       9 root     rcu_tasks_rude_
+			 20      10 root     rcu_tasks_trace
+			 20      11 root     ksoftirqd/0
+			 20      12 root     rcu_sched
+			-100     13 root     migration/0
+			-51      14 root     idle_inject/0
+			 20      16 root     cpuhp/0
+
+38. date command
+	:- used to display date, time, time zone, and more.
+	Ex: date
+            Wednesday 13 October 2021 11:36:39 AM IST
+            	
+39. cal command
+	:- display the current month's calendar with the current date highlighted.
+	Ex:- cal
+		    October 2021      
+		Su Mo Tu We Th Fr Sa  
+				1  2  
+		 3  4  5  6  7  8  9  
+		10 11 12 13 14 15 16  
+		17 18 19 20 21 22 23  
+			24 25 26 27 28 29 30  
+		31    
+                
+40. head command
+	:- used to display the content of a file. It displays the first 10 lines of a file.
+	Ex:- head file1.txt
+
+41. tail command
+	:- that it displays the last ten lines of the file content.It is useful for 
+	reading the error message.
+	Ex:- tail file1.txt
+	
+42. tac command
+	:- the reverse of cat command, as its name specified. It displays the file content
+	 in reverse order (from the last line).
+	Ex:- tac file1.txt
+	
+43. su command
+	:- allows access of the Linux shell to another user.
+	Ex:- su any_user_name
+
+44. ls command
+	:- list long format including hidden files.
+	Ex: ls -la
+	total 16
+	drwxrwxrwx 1 beryl beryl  4096 Oct 16 01:11 .
+	drwxrwxrwx 1 beryl beryl  4096 Oct 16 00:22 ..
+	drwxrwxrwx 1 beryl beryl  4096 Oct 16 20:29 .git
+	drwxrwxrwx 1 beryl beryl  4096 Oct 15 19:53 Git
+	drwxrwxrwx 1 beryl beryl  4096 Oct 15 21:15 Linux
+	-rwxrwxrwx 1 beryl beryl 12662 Oct 16 20:10 Linux.txt
+	-rwxrwxrwx 1 beryl beryl    13 Oct 15 19:53 demo1.txt
+
+  -> ls
+	: list file size 
+	Ex:  ls -s
+	 ls -s
+	total 16
+	 0 Git   0 Linux  16 Linux.txt   0 demo1.txt
+
+  -> ls 
+	: sort by file size
+	Ex: ls -S
+            Linux.txt  Git  Linux  demo1.txt
+
+  -> ls 
+	: sort by time & date
+	Ex: ls -t
+            Linux.txt  Linux  demo1.txt  Git
+
+  -> ls 
+	: sort by extension name
+	Ex: ls -X
+            Git  Linux  Linux.txt  demo1.txt
+ 
+  -> ls 
+	: list all files including hidden file starting with '.'
+	Ex: ls -a
+              .  ..  .git  Git  Linux  Linux.txt  demo1.txt
+
+  -> ls 
+	: list recursively directory tree
+	Ex:  ls -R
+	 ls -R
+           	.:
+           	Git  Linux  Linux.txt  demo1.txt
+
+		./Git:
+		git.txt
+
+		./Linux:
+		Linux.txt  file2.txt
+
+
+  -> ls
+	: list in reverse order
+	Ex: ls -r
+		demo1.txt  Linux.txt  Linux  Git
+
+  -> ls 
+	: list with long format with file size
+	Ex:  ls -ls
+	total 16
+	 0 drwxrwxrwx 1 beryl beryl  4096 Oct 15 19:53 Git
+	 0 drwxrwxrwx 1 beryl beryl  4096 Oct 15 21:15 Linux
+	16 -rwxrwxrwx 1 beryl beryl 12662 Oct 16 20:10 Linux.txt
+	 0 -rwxrwxrwx 1 beryl beryl    13 Oct 15 19:53 demo1.txt
+
+  -> ls 
+	: colored list [=always/never/auto]
+	Ex:  ls -color
+	total 16
+	-rwxrwxrwx 1 beryl    13 Oct 15 19:53 demo1.txt
+	-rwxrwxrwx 1 beryl 14163 Oct 16 20:50 Linux.txt
+	drwxrwxrwx 1 beryl  4096 Oct 16 20:10 Linux
+	drwxrwxrwx 1 beryl  4096 Oct 15 19:53 Git
+
+  -> ls
+	: list long format with readable file size
+	Ex:  ls -lh
+	total 16K
+	drwxrwxrwx 1 beryl beryl 4.0K Oct 15 19:53 Git
+	drwxrwxrwx 1 beryl beryl 4.0K Oct 15 21:15 Linux
+	-rwxrwxrwx 1 beryl beryl  14K Oct 16 20:50 Linux.txt
+	-rwxrwxrwx 1 beryl beryl   13 Oct 15 19:53 demo1.txt
+
+  -> ls 
+	: list with long format - show permissions
+	Ex:  ls -l
+	total 16
+	drwxrwxrwx 1 beryl beryl  4096 Oct 15 19:53 Git
+	drwxrwxrwx 1 beryl beryl  4096 Oct 15 21:15 Linux
+	-rwxrwxrwx 1 beryl beryl 14163 Oct 16 20:50 Linux.txt
+	-rwxrwxrwx 1 beryl beryl    13 Oct 15 19:53 demo1.txt
+
+  -> ls 
+	: list file's inode index number
+	Ex:  ls -i
+             11258999068576961 Git   9288674231605528 Linux   2814749767378747 Linux.txt   9288674231602459 demo1.txt
+
+  -> ls 
+	: add one char of */=>@| to enteries
+	Ex:  ls -F
+             Git/  Linux/  Linux.txt*  demo1.txt*
+
+  -> ls -F Command 
+	:- will add the '/' character at the end of each directory.
+	Ex:- ls -F
+		Desktop/    Downloads/  Pictures/  Templates/
+		Documents/  Music/      Public/    Videos/
+
+  -> ls 
+	:- will show the latest modification file or directory date as last.
+	Ex:- ls -ltr
+		total 32
+		drwxr-xr-x 2 beryl beryl 4096 Oct  5 18:30 Videos
+		drwxr-xr-x 2 beryl beryl 4096 Oct  5 18:30 Templates
+		drwxr-xr-x 2 beryl beryl 4096 Oct  5 18:30 Public
+		drwxr-xr-x 2 beryl beryl 4096 Oct  5 18:30 Pictures
+		drwxr-xr-x 2 beryl beryl 4096 Oct  5 18:30 Music
+		drwxr-xr-x 2 beryl beryl 4096 Oct  5 18:30 Desktop
+		drwxr-xr-x 3 beryl beryl 4096 Oct  6 18:24 Documents
+		drwxr-xr-x 3 beryl beryl 4096 Oct  7 12:15 Downloads
+
+  ->  ls -n Command 
+	:- Display UID and GID of Files
+	Ex:- ls -n
+		total 32
+		drwxr-xr-x 2 1000 1000 4096 Oct  5 18:30 Desktop
+		drwxr-xr-x 3 1000 1000 4096 Oct  6 18:24 Documents
+		drwxr-xr-x 3 1000 1000 4096 Oct  7 12:19 Downloads
+		drwxr-xr-x 2 1000 1000 4096 Oct  5 18:30 Music
+		drwxr-xr-x 2 1000 1000 4096 Oct  5 18:30 Pictures
+		drwxr-xr-x 2 1000 1000 4096 Oct  5 18:30 Public
+		drwxr-xr-x 2 1000 1000 4096 Oct  5 18:30 Templates
+		drwxr-xr-x 2 1000 1000 4096 Oct  5 18:30 Videos
+
+45. cat Command 
+	:- It will show content of given filename
+	Ex:- cat NewDemo.txt
+	
+  -> cat Command 
+	:- To view multiple files 
+	Ex:- cat NewDemo.txt demo2.txt
+	
+  -> cat Command 
+	:- It will show content with line number
+	Ex:- cat -n demo2.txt(file_name)
+
+  -> cat Command
+	:- Will show the content of all text files present in the folder.
+	Ex:- cat *.txt
+
+  -> cat Command
+	:- merge the contents of multiple files. 
+		Ex: /Music$ cat "file1.txt" "file2.txt" "file3.txt" > "file4.txt"
+		beryl@beryl-Latitude-E6520:~/Music$ cat file4.txt
+		Welcome
+		Digital
+		World
+
+  -> cat Command
+	:- the file has a lot of content 
+	Ex:-cat "file1.txt" | more
+		Welcome
+		
+  -> cat Command 
+	:- highlight the end of line. 
+	Ex:-cat -E "file1.txt"
+		Welcome$
+
+  -> cat command
+	:- the contents of one file to the end of another file.
+	Ex: beryl@beryl-Latitude-E6520:~/Music$ cat file1.txt >> file2.txt
+		beryl@beryl-Latitude-E6520:~/Music$ cat file2.txt
+		Digital
+		Welcome
+		Welcome
+
+  -> cat Command
+	:- Copy the contents of one file to another file. 
+	Ex:-  $cat [filename-whose-contents-is-to-be-copied] > [destination-filename]
+
+	        beryl@beryl-Latitude-E6520:~/Music$ cat file1.txt > file2.txt
+		beryl@beryl-Latitude-E6520:~/Music$ cat file1.txt
+		Welcome
+		beryl@beryl-Latitude-E6520:~/Music$ cat file2.txt
+		Welcome
+
+  -> cat -b 
+	: add line numbers to non blank lines
+	Ex: cat -b file2.txt
+     		1  welcome:wq
+     		2  :wq
+
+
+  -> cat -n
+	: cat -n file2.txt
+     	1  welcome:wq
+     	2  :wq
+
+  -> cat -E
+	: show $ at the end of line
+	Ex: cat -E file2.txt
+		welcome:wq$
+		:wq$
+
+46. mv
+	: used to move files and directories.
+	Ex: man mv   (help manual)
+	
+  -> mv -v
+	: verbose - print source and destination files 
+	Ex:  mv -v text.txt  ~ /mnt/c/Users/Nitish\ Kumar/Desktop/LinuxPractice/folder/
+	renamed 'text.txt' -> '/mnt/c/Users/Nitish Kumar/Desktop/LinuxPractice/folder/text.txt'
+	created directory '/mnt/c/Users/Nitish Kumar/Desktop/LinuxPractice/folder/beryl'
+	mv: cannot remove '/home/beryl': Permission denied
+
+  -> mv  -f
+	: force move by overwriting destination file without prompt
+	Ex: 
+		
+
+47. cp 
+	:  copy files and directories.
+	: recursive copy (including hidden files)
+	Ex: cp -R 
+
+  -> cp -v
+	: verbose - print informative messages
+	Ex: cp -v demo1.txt  folder
+          'demo1.txt' -> 'folder/demo1.txt'
+
+  -> cp -i 
+	: interactive - ask before overwrite
+	Ex:  cp -i file.txt  folder
+	     cp: overwrite 'folder/file.txt'?
+
+  -> cp -l
+	: link files instead of copy
+	Ex: cp -l file.txt  folder
+            cp: cannot create hard link 'folder/file.txt' to 'file.txt': File exists
+
+  -> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
