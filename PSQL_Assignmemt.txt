@@ -92,21 +92,22 @@
 	------------------------------------------ flights-----------------------------------------------------
 		
 		
-		assignment=# select * from flights ;
-		
-		 flno |    from_    |     to_     | distance | departs  | arrives  | price  
-		------+-------------+-------------+----------+----------+----------+--------
-		    1 | Delhi       | Goa         |     3029 | 07:30:00 | 12:12:00 |  10000
-		    2 | Malaysia    | Los Angeles |    13000 | 07:30:00 | 12:12:00 |  90500
-		    3 | Los Angeles | India       |     8490 | 06:30:00 | 19:12:00 |  77500
-		    4 | India       | China       |     2982 | 12:00:00 | 18:10:00 |  18674
-		    5 | India       | South korea |     4691 | 18:00:00 | 01:10:00 |  28630
-		    6 | South korea | New York    |     6961 | 08:00:00 | 22:10:00 |  66688
-		    7 | India       | Dubai       |     2181 | 11:00:00 | 14:40:00 |  30688
-		    8 | Rasiya      | India       |     2181 | 12:00:00 | 18:10:00 |  50971
-		    9 | India       | canada      |    11626 | 02:00:00 | 16:10:00 |  73626
-		   10 | Australia   | India       |    10426 | 04:00:00 | 18:10:00 | 129392
-		(10 rows)
+			assignment=# select * from flights;
+			 flno |    from_    |     to_     | distance | departs  | arrives  | price  
+			------+-------------+-------------+----------+----------+----------+--------
+			    1 | Delhi       | Goa         |     3029 | 07:30:00 | 12:12:00 |  10000
+			    2 | Malaysia    | Los Angeles |    13000 | 07:30:00 | 12:12:00 |  90500
+			    5 | India       | South korea |     4691 | 18:00:00 | 01:10:00 |  28630
+			    6 | South korea | New York    |     6961 | 08:00:00 | 22:10:00 |  66688
+			    7 | India       | Dubai       |     2181 | 11:00:00 | 14:40:00 |  30688
+			    8 | Rasiya      | India       |     2181 | 12:00:00 | 18:10:00 |  50971
+			    9 | India       | canada      |    11626 | 02:00:00 | 16:10:00 |  73626
+			   10 | Australia   | India       |    10426 | 04:00:00 | 18:10:00 | 129392
+			    3 | Los Angeles | Honolulu    |     8490 | 06:30:00 | 19:12:00 |  77500
+			    4 | Los Angeles | Chicago     |     2982 | 12:00:00 | 18:10:00 |  18674
+			(10 rows)
+
+
 
 
 	----------------------------------------Employees--------------------------------------------------------
@@ -174,10 +175,102 @@
 			Qutar
 			(1 row)
 
+
+
 	B. For each pilot who is certified for more than three aircraft, find the eid and the maximum cruisingrange 
 	   of the aircraft for which she or he is certified. 
 	   	-> Solution:
 	   	
 	 
+	C. Find the names of pilots whose salary is less than the price of the cheapest 
+           route from Los Angeles to Honolulu. 
+           	-> Solution:
+           	assignment=# select e.ename from employees as e, certified as c,aircraft as a where e.eid=c.eid AND c.aid=a.aid 
+           	AND e.salary >45000;
+           	
+		  ename  
+		---------
+		 parkesh
+		(1 row)
+           
+           
+           
+         D. For all aircraft with cruisingrange over 1000 miles, find the name of the 
+		aircraft and the average salary of all pilots certified for this aircraft.
+		-> Solution:
+		
+		assignment=# select a.aname,avg(e.salary) from aircraft as a,employees as e,certified as c where a.aid=c.aid AND 					c.eid=e.eid AND a.cruisingrange > 1000  group by a.aname;
+		    aname    |          avg           
+		-------------+------------------------
+		 Malindo air | 15000.0000000000000000
+		 Qutar       |  8333.3333333333333333
+		 Emirates    |     57500.000000000000
+		 Boeing      | 15000.0000000000000000
+		(4 rows)
 
+
+	E. Find the names of pilots certified for some Boeing aircraft.
+		-> Solution:
+		
+		assignment=# select e.ename from aircraft as a,employees as e where e.eid=a.aid  AND a.aname='Boeing';
+		
+		 ename  
+		--------
+		 mohan
+		 satyam
+		(2 rows)
+		
+	
+	F. Find the aids of all aircraft that can be used on routes from Los Angeles to Chicago.
+		-> Solution: 
+		
+		
+		
+	
+	G. Identify the routes that can be piloted by every pilot who makes more than $100,000.
+		-> Solution:
+		
+		assignment=# select f.from_,f.to_ from flights as f,employees as e  where f.flno=e.eid  AND e.salary >100000;
+		
+		    from_    |   to_    
+		-------------+----------
+		 South korea | New York
+		(1 row)
+
+
+
+	H. Print the enames of pilots who can operate planes with cruisingrange greater 
+		than 3000 miles but are not certified on any Boeing aircraft.	
+		-> Solution:
+		assignment=# select e.ename from employees as e, aircraft as a where e.eid=a.aid  
+		AND  a.aname not like 'Boeing%' AND  a.cruisingrange >3000;
+		
+		 ename  
+		--------
+		 sagar
+		 sanjay
+		 Aman
+		 kalu
+		 lokesh
+		(5 rows)
+		
+		
+		
+	I. A customer wants to travel from Madison to New York with no more than two 
+	changes of flight. List the choice of departure times from Madison if the customer wants to arrive in New York by 6 p.m.
+		-> Solution:
+		
+		
+		
+	J. Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
+		-> Solution:
+			
+			
+			
+			
+	K. Print the name and salary of every nonpilot whose salary is more than the 
+		average salary for pilots.
+		-> Solution
+			 			
+           
 	
