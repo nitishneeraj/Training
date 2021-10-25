@@ -1,0 +1,614 @@
+------------------------------------------postgreSQL---------------------------------------------
+
+1:->  Check server version 
+	: server_version    12.8
+	Ex: Select version();                                                                    					                                                                                
+		-------------------------------------------------------------------------------------------------------------------------------------
+		 PostgreSQL 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1) on x86_64-pc-linux-gnu, 
+		 compiled by gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0, 64-bit
+				 (1 row)
+				 
+				 
+	:->  Show client version
+	Ex: \! psql -V
+	psql (PostgreSQL) 14.0 (Ubuntu 14.0-1.pgdg20.04+1)
+
+
+
+2:->  List available databases
+	Ex: \l
+		                     List of databases
+	   Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges   
+	-----------+----------+----------+---------+-------+-----------------------
+	 dbname    | postgres | UTF8     | en_IN   | en_IN | 
+	 postgres  | postgres | UTF8     | en_IN   | en_IN | 
+	 template0 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+		   |          |          |         |       | postgres=CTc/postgres
+	 template1 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+		   |          |          |         |       | postgres=CTc/postgres
+	(4 rows)
+
+
+3:->  Create database without any constraints
+	Ex: create database person;
+	CREATE DATABASE
+
+
+4:->  Switch connection to a new database
+	Ex: \c any_database_name
+	Ex: \c person
+	psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1), server 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1))
+	You are now connected to database "person" as user "postgres".
+
+
+5:->  how to delete the database in PostgreSQL.
+	Ex: drop database person;
+	DROP DATABASE
+	postgres=# \l
+				             List of databases
+		   Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges   
+		-----------+----------+----------+---------+-------+-----------------------
+		 dbname    | postgres | UTF8     | en_IN   | en_IN | 
+		 postgres  | postgres | UTF8     | en_IN   | en_IN | 
+		 template0 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+			   |          |          |         |       | postgres=CTc/postgres
+		 template1 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+			   |          |          |         |       | postgres=CTc/postgres
+			   
+
+6:->  Create table in psql
+	Ex: create table person( 
+	create table person( 
+	dbname(# id int ,
+	dbname(# first_name varchar(20),
+	dbname(# last_name varchar(20),
+	dbname(# gender varchar(10),
+	dbname(# DOB DATE);
+	CREATE TABLE
+
+
+	:-> List available tables
+	Ex: \dt
+		 List of relations
+	 Schema |  Name  | Type  |  Owner   
+	--------+--------+-------+----------
+	 public | person | table | postgres
+	(1 row)
+	
+	
+	:-> Describe a table
+	Ex: \d table_name
+	Ex: \d person
+		                Table "public.person"
+	   Column   |         Type          | Collation | Nullable | Default 
+	------------+-----------------------+-----------+----------+---------
+	 id         | integer               |           |          | 
+	 first_name | character varying(20) |           |          | 
+	 last_name  | character varying(20) |           |          | 
+	 gender     | character varying(10) |           |          | 
+	 dob        | date                  |           |          | 
+	 
+	 
+	 :-> List available schema
+	 : To list all schemas of the currently connected database, you use the \dn command.
+	 Ex: \dn
+	  List of schemas
+	  Name  |  Owner   
+	--------+----------
+	 public | postgres
+	(1 row)
+	
+	
+	:-> List available functions
+	: To list available functions in the current database, you use the \df command.
+	Ex: \df
+		               List of functions
+	 Schema | Name | Result data type | Argument data types | Type 
+	--------+------+------------------+---------------------+------
+	(0 rows)
+
+
+	:-> List users and their roles
+	: To list all users and their assign roles, you use \du command:
+	Ex: \du
+		                           List of roles
+	 Role name |                         Attributes                         | Member of 
+	-----------+------------------------------------------------------------+-----------
+	 admin     | Superuser, Create role, Create DB                          | {}
+	 postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+
+	:-> Command history
+	Ex: \s
+	
+	
+	:-> Quit psql
+	Ex: \q
+	
+	
+	:-> Execute the previous command
+	Ex: \g
+	
+	
+	:-> Get help on psql commands
+	Ex: \?
+	
+	
+	:-> Edit command in your own editor
+	Ex: \e
+
+		Select an editor.  To change later, run 'select-editor'.
+		  1. /bin/nano        <---- easiest
+		  2. /usr/bin/vim.basic
+		  3. /usr/bin/vim.tiny
+		  4. /usr/bin/code
+		  5. /bin/ed
+
+		Choose 1-5 [1]: any_no_type
+
+
+	:-> Switch output options
+	Ex: \a  command switches from aligned to non-aligned column output.
+	Ex: \H  command formats the output to HTML format.
+	
+	
+	:-> Execute psql commands from a file
+	Ex: \i path_to_sql_file
+	Ex: \i /home/beryl/Desktop/Linux_Practic/PostgreSQL/person.sql
+	
+	
+	
+7:->  Create table with constraints
+	Ex: CREATE TABLE Sales (
+	    Sale_Id int NOT NULL UNIQUE,
+	    Sale_Amount int NOT NULL,
+	    Vendor_Name varchar(255),
+	    Sale_Date date,
+	    Profit int
+	);
+	
+8:->  How to create 1000 of records
+	: www.mockaroo.com
+	Ex: \i /home/beryl/Desktop/Linux_Practic/PostgreSQL/person.sql
+	
+
+9:->  order by
+	: ORDER BY keyword is used to sort the result-set in ascending or descending order.
+	: ORDER BY keyword sorts the records in ascending order by default.
+	
+	Ex: SELECT id,first_name from person ORDER by DESC;
+	Ex: SELECT * FROM person order by email DESC  LIMIT 3;
+ id | first_name | last_name |         email         |    phone     |       address       
+----+------------+-----------+-----------------------+--------------+---------------------
+ 14 | Uriah      | Robke     | urobked@i2i.jp        |  188-466-0804 | 9548 Clemons Street
+ 15 | Tansy      | Mewhirter | tmewhirtere@naver.com | 869-560-8871 | 2 Sachtjen Avenue
+ 18 | Travus     | Erskin    | terskinh@latimes.com  | 933-164-6253 | 8 Talisman Street
+(3 rows)
+
+
+select * from company order by salary DESC limit 5;
+																																															
+ id |      name       | age |        address        | salary  
+----+-----------------+-----+-----------------------+---------
+ 26 | Daveta MacAvddy |  20 | 0116 Anhalt Place     | $965.29
+ 71 | Sholom Wombwell |  57 | 8206 Arkansas Terrace | $957.09
+ 29 | Clem Geldard    |  34 | 85 Carioca Point      | $956.34
+ 65 | Briana Syfax    |  19 | 5 North Plaza         | $953.09
+  2 | Sigismund Godin |  30 | 71 Brentwood Parkway  | $951.30
+(5 rows)
+
+
+	
+	
+10:->  Comparison operator
+	Ex: select 1=2;
+	 ?column? 
+	----------
+	 f
+	(1 row)
+
+11: ->  Limit , Offset 
+	: 
+	Ex: select * from person offset 2 limit 3;
+ id | first_name | last_name |       email        |    phone     |        address        
+----+------------+-----------+--------------------+--------------+-----------------------
+  3 | Gary       | Grint     | ggrint2@gov.uk     | 607-628-6617 | 9 Carberry Avenue
+  4 | Perla      | Iannello  | piannello3@msn.com | 869-685-9909 | 0703 Holmberg Parkway
+  5 | Eilis      | Kightly   | ekightly4@ucsd.edu | 914-363-0275 | 796 Superior Trail
+(3 rows)
+
+
+
+12: -> fetch
+	Ex: select * from person offset 4 FETCH FIRST 3 ROW ONLY;
+ id | first_name |  last_name  |                email                 |    phone     |      address       
+----+------------+-------------+--------------------------------------+--------------+--------------------
+  5 | Eilis      | Kightly     | ekightly4@ucsd.edu                   | 914-363-0275 | 796 Superior Trail
+  6 | Cchaddie   | Wicklin     | cwicklin5@nytimes.com                | 528-937-3620 | 3 3rd Point
+  7 | Isaac      | Kobierzycki | ikobierzycki6@networkadvertising.org | 603-923-8180 | 000 Goodland Park
+(3 rows)
+
+
+13: -> WHERE 
+	Ex: SELECT * FROM employee WHERE country='China' LIMIT 2;
+ id | first_name | last_name |         email         |   gender    |   city   | state | country 
+----+------------+-----------+-----------------------+-------------+----------+-------+---------
+  4 | Spenser    | Kerwood   | skerwood3@apache.org  | Polygender  | Pingshan |       | China
+  9 | Belicia    | Fairbrace | bfairbrace8@upenn.edu | Genderqueer | Yanshang |       | China
+(2 rows)
+
+
+14: -> IN
+	Ex: SELECT * from employee where country IN ('China','Japan') LIMIT 3;
+ id | first_name | last_name |         email         |   gender    |   city   | state | country 
+----+------------+-----------+-----------------------+-------------+----------+-------+---------
+  4 | Spenser    | Kerwood   | skerwood3@apache.org  | Polygender  | Pingshan |       | China
+  9 | Belicia    | Fairbrace | bfairbrace8@upenn.edu | Genderqueer | Yanshang |       | China
+ 10 | Maxi       | Patey     | mpatey9@columbia.edu  | Bigender    | Uenohara |       | Japan
+(3 rows)
+
+
+15: -> BETWEEN
+	Ex: select id,first_name, last_name,email,gender,city from employee where id 
+	 BETWEEN   '6' AND '10';
+ id | first_name | last_name |         email         |   gender    |   city    
+----+------------+-----------+-----------------------+-------------+-----------
+  6 | Osbourn    | Bordman   | obordman5@yandex.ru   | Agender     | Waenenda
+  7 | Vidovik    | Clitherow | vclitherow6@cnbc.com  | Agender     | Kybartai
+  8 | Nissy      | Meadway   | nmeadway7@amazon.com  | Male        | Stockholm
+  9 | Belicia    | Fairbrace | bfairbrace8@upenn.edu | Genderqueer | Yanshang
+ 10 | Maxi       | Patey     | mpatey9@columbia.edu  | Bigender    | Uenohara
+(5 rows)
+
+
+	:-> select emp_name , dept ,dob from employees where dob between '2020-05-05'
+	 AND '2020-06-05';
+	    emp_name     |      dept       |    dob     
+	-----------------+-----------------+------------
+	 Junia Lemar     | Engineering     | 2020-05-11
+	 Arlina Hadcroft | Sales           | 2020-05-12
+	 Rea Turbern     | Human Resources | 2020-05-11
+	 Yvonne Hunstone | Legal           | 2020-05-12
+	 Orelia Laity    | Engineering     | 2020-05-11
+	 Rodi Leftwich   | Services        | 2020-05-11
+	 Greg Waleworke  | Sales           | 2020-05-11
+	(7 rows)
+
+	
+
+16: -> LIKE operator
+	Ex: select id,first_name,last_name,email,gender,city from employee where email 
+	like '%.com'order by first_name limit 3;
+ id | first_name | last_name |           email            |   gender   |    city    
+----+------------+-----------+----------------------------+------------+------------
+ 42 | Abbye      | Everist   | aeverist15@hexun.com       | Agender    | Welkom
+ 91 | Abigael    | McParland | amcparland2i@wired.com     | Agender    | Kalandagan
+ 78 | Addia      | Hubbucke  | ahubbucke25@shutterfly.com | Non-binary | Duyun
+(3 rows)
+
+17: -> Group by
+	Ex: select dept , count(dept) from employees group by dept;
+		   dept           | count
+	--------------------------+-------
+	 Marketing                |    22
+	 Training                 |    23
+	 Product Management       |    31
+	 Business Development     |    37
+	 Research and Development |    33
+	 Sales                    |    40
+	 Support                  |    23
+	 Legal                    |    34
+	 Accounting               |    35
+	 Human Resources          |    31
+	 Services                 |    27
+	 Engineering              |    33
+	(12 rows)
+	
+	
+18: -> Having 
+	:
+	Ex: select model, count(model) from car group by model having count(model) >3 ;
+		     model     | count 
+		---------------+-------
+		 Suburban 2500 |     4
+		 Sable         |     5
+		 Ram 3500      |     4
+		 Suburban 1500 |     5
+		 Pajero        |     5
+		 Montero       |     4
+		 Cabriolet     |     5
+		 Explorer      |     7
+		 SRX           |     4
+		 LS            |     4
+		 Corolla       |     4
+		 928           |     4
+		(12 rows)
+
+
+19: ->  Calcuating Aggregation function
+	:
+	Ex: select make,model, min(price) from car group by make,model limit 5;
+	    make    |     model     |    min     
+	------------+---------------+------------
+	 GMC        | Jimmy         | $891991.51
+	 GMC        | Yukon XL 2500 | $130991.49
+	 Suzuki     | Kizashi       | $838669.12
+	 Mitsubishi | Precis        | $155592.10
+	 Cadillac   | CTS-V         | $731700.98
+	(5 rows)
+
+
+
+
+
+
+20: -> Update data
+	Ex: update company set age = 51 where id =1;
+		UPDATE 1
+		
+	Ex: update car set make ='sharma' where id =1;
+		UPDATE 1
+		dbname=# select * from car where id =1;
+		 id |  make  | model  |   price    
+		----+--------+--------+------------
+		  1 | sharma | Armada | $650182.23
+		(1 row)
+
+
+
+21: -> Delete query
+	Ex: delete from company where id =1;
+            DELETE 1
+            
+        Ex: delete from car where id =2;
+		DELETE 1
+		dbname=# select * from car where id =2;
+		 id | make | model | price 
+		----+------+-------+-------
+		(0 rows)
+
+
+22: -> Like 
+	Ex: select * from company where age::text like '3%' LIMIT 2;
+	 id |      name       | age |       address        | salary  
+	----+-----------------+-----+----------------------+---------
+	  2 | Sigismund Godin |  30 | 71 Brentwood Parkway | $951.30
+	  6 | Basilio Macrow  |  35 | 4 Merrick Point      | $575.30
+	(2 rows)
+	
+
+23: -> Timestamps and Dates
+	Ex:  select now();
+               now                
+----------------------------------
+ 2021-10-20 10:25:00.695596+05:30
+(1 row)
+
+	-> Ex: select now()::DATE;
+		    now     
+		------------
+		 2021-10-20
+		(1 row)
+		
+	-> Ex: select now()::Time;
+		       now       
+		-----------------
+		 10:28:22.414819
+		(1 row)
+		
+	-> Ex: select now() -INTERVAL  '1 year';
+		     ?column?             
+	----------------------------------
+	 2020-10-20 10:32:39.078165+05:30
+	(1 row)
+
+
+24: -> Extracting fields
+	Ex: select extract (year from now());
+		 date_part 
+		-----------
+		      2021
+		(1 row)
+		
+	
+25: -> Age Function
+	Ex: select emp_name,dob,dept, salary,Age(now() , dob) AS Age  from employees limit 10;
+       emp_name       |    dob     |   dept    |  salary   |                age                
+----------------------+------------+-----------+-----------+-----------------------------------
+ Lemar Shearer        | 2021-04-01 | Sales     | $12150.27 | 6 mons 19 days 10:46:06.388435
+ Melamie Lenahan      | 2020-10-11 | Services  | $65192.13 | 1 year 9 days 10:46:06.388435
+ Aveline Meeus        | 2021-06-02 | Sales     | $94080.72 | 4 mons 18 days 10:46:06.388435
+ Renate Walsh         | 2021-03-02 | Marketing | $56730.82 | 7 mons 18 days 10:46:06.388435
+ Sigrid MacAindreis   | 2021-04-05 | Training  | $72639.27 | 6 mons 15 days 10:46:06.388435
+ Barnie Hartell       | 2020-11-11 | Support   | $45669.58 | 11 mons 9 days 10:46:06.388435
+ Westbrook Forrington | 2021-12-04 | Support   | $59109.13 | -1 mons -14 days -13:13:53.611565
+ Raleigh Brisbane     | 2021-05-01 | Training  | $66369.32 | 5 mons 19 days 10:46:06.388435
+ Olivie Nutter        | 2021-07-04 | Services  | $56611.18 | 3 mons 16 days 10:46:06.388435
+ Charlotte Hartington | 2020-12-11 | Training  | $80973.13 | 10 mons 9 days 10:46:06.388435
+(10 rows)
+
+
+
+26: -> Relationship car & person
+	- person has car
+	- person can only have one car
+	- car csn belong to one person only
+	
+	Ex: \d person;
+                                       Table "public.person"
+   Column   |         Type          | Collation | Nullable |                Default                 
+------------+-----------------------+-----------+----------+----------------------------------------
+ id         | integer               |           | not null | nextval('person_id_seq'::regclass)
+ first_name | character varying(50) |           | not null | 
+ last_name  | character varying(50) |           | not null | 
+ email      | character varying(50) |           | not null | 
+ phone      | character varying(50) |           | not null | 
+ address    | character varying(50) |           | not null | 
+ car_id     | integer               |           | not null | nextval('person_car_id_seq'::regclass)
+Indexes:
+    "person_pkey" PRIMARY KEY, btree (id)
+    "person_car_id_key" UNIQUE CONSTRAINT, btree (car_id)
+Foreign-key constraints:
+    "person_car_id_fkey" FOREIGN KEY (car_id) REFERENCES car(id)
+
+
+
+	Ex: select * from person limit 5;
+	
+	
+ id | first_name | last_name |         email         |    phone     |        address        | car_id 
+----+------------+-----------+-----------------------+--------------+-----------------------+--------
+  1 | Orelia     | Millgate  | omillgate0@phpbb.com  | 657-382-8403 | 79248 Huxley Alley    |      1
+  3 | Gary       | Grint     | ggrint2@gov.uk        | 607-628-6617 | 9 Carberry Avenue     |      3
+  4 | Perla      | Iannello  | piannello3@msn.com    | 869-685-9909 | 0703 Holmberg Parkway |      4
+  5 | Eilis      | Kightly   | ekightly4@ucsd.edu    | 914-363-0275 | 796 Superior Trail    |      5
+  6 | Cchaddie   | Wicklin   | cwicklin5@nytimes.com | 528-937-3620 | 3 3rd Point           |      6
+(5 rows)
+
+
+
+
+27: -> Join
+	Ex: select * from person join car on person.car_id = car.id limit 2;
+			-[ RECORD 1 ]---------------------
+			id         | 1
+			first_name | Orelia
+			last_name  | Millgate
+			email      | omillgate0@phpbb.com
+			phone      | 657-382-8403
+			address    | 79248 Huxley Alley
+			car_id     | 1
+			id         | 1
+			make       | sharma
+			model      | Armada
+			price      | $650182.23
+			-[ RECORD 2 ]---------------------
+			id         | 3
+			first_name | Gary
+			last_name  | Grint
+			email      | ggrint2@gov.uk
+			phone      | 607-628-6617
+			address    | 9 Carberry Avenue
+			car_id     | 3
+			id         | 3
+			make       | Cadillac
+			model      | SRX
+			price      | $494221.65
+			
+			
+	Ex: select person.id, person.first_name,person.email,person.phone,
+	car.make,car.model,car.price from person join car on person.car_id = car.id limit 3;
+ id | first_name |        email         |    phone     |   make   |    model    |   price    
+----+------------+----------------------+--------------+----------+-------------+------------
+  1 | Orelia     | omillgate0@phpbb.com | 657-382-8403 | sharma   | Armada      | $650182.23
+  3 | Gary       | ggrint2@gov.uk       | 607-628-6617 | Cadillac | SRX         | $494221.65
+  4 | Perla      | piannello3@msn.com   | 869-685-9909 | Pontiac  | Trans Sport | $540248.57
+(3 rows)
+
+
+
+
+
+28.  changing the column data type
+	:     ALTER TABLE table_name  
+              ALTER COLUMN column_name [SET DATA] TYPE new_data_type;
+              
+        :     ALTER TABLE Student_information 
+              ALTER COLUMN Stu_name TYPE VARCHAR;   
+
+29. update email column
+	:     UPDATE Persons  
+	    SET Email = 'JohnSmith11@gmail.com'  
+	    WHERE  
+	    Person_id = 1; 
+
+30.  Add column 
+	: alter table persons add column address varchar(20);;
+
+31.  Add PRIMARY KEY constraint9
+	:     ALTER TABLE Station1 ADD PRIMARY KEY (St_id); 
+	:     alter table from company drop company_pkey; 
+
+32. Remove NOT NULL constraint
+	:     	ALTER TABLE Station1   
+		ALTER COLUMN   
+		St_City DROP NOT NULL; 
+33. Add NOT NULL constraint
+	: ALTER TABLE Station1 ALTER COLUMN St_City SET NOT NULL; 
+
+34. drop a table 
+	: drop table Station;
+	
+   : -> 
+	drop a Database
+	: drop database test;
+   :->
+	 Add a column  
+	: alter table station add column light REAL(Data_type) ; 
+	 
+   :-> 
+	 DROP COLUMN Command
+	: alter table station drop column light; 
+	:       ALTER TABLE table_name  
+    		DROP COLUMN column_name_1,  
+    		DROP COLUMN column_name_2;  
+
+  :-> 
+	 Rename a column
+	: alter table station rename column st_name To Name;
+	
+  :->
+	 Rename a table    
+	: ALTER TABLE Station RENAME TO  Station1; 
+	
+  :-> 
+	 Change column type
+	  : ALTER TABLE Station1  
+	    ALTER COLUMN St_City TYPE Varchar(30),  
+	    ALTER COLUMN St_State TYPE Varchar(20); 
+ 
+	:-> What is PostgreSQL?
+		: PostgreSQL is an ORDBMS [Open-Source Object-Relational Database Management System].
+		: The PostgreSQL follow the transaction along with the ACID (Atomicity, Consistency, Isolation, and Durability) properties.
+
+	:-> PostgreSQL Features
+		: PostgreSQL is an object-relational database management system (ORDBMS). 
+
+	:-> Add Primary key
+		:alter table station add primary key(id); 
+	
+
+	:-> remove primary key 
+		: Indexes:
+         	 "company_pkey" PRIMARY KEY, btree (id)
+		: alter table station drop constraint company_pkey;
+
+	:-> Add foreign key 
+		: alter table student add foreign key(course_id) references course(cr_id);
+
+	:-> Add check constraints
+		: alter table student add check (gender='male' OR gender='female');
+																				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

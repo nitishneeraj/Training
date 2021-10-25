@@ -1,0 +1,248 @@
+select * from employees;
+ emp_id |       emp_name       |    dob     |         city          |  pin  
+--------+----------------------+------------+-----------------------+-------
+      2 | Lemar Shearer        | 2021-04-01 | Terang                | 043
+      3 | Melamie Lenahan      | 2020-10-11 | Barrancas             | 4195
+      7 | Aveline Meeus        | 2021-06-02 | Leigu                 | 5167
+      8 | Renate Walsh         | 2021-03-02 | Foxton                | 4
+     11 | Sigrid MacAindreis   | 2021-04-05 | Wiązownica            | 72
+     12 | Barnie Hartell       | 2020-11-11 | Baoyang               | 723
+     15 | Westbrook Forrington | 2021-12-04 | Sainte-Anne-des-Monts | 370
+     18 | Raleigh Brisbane     | 2021-05-01 | Cherryville           | 34343
+     25 | Olivie Nutter        | 2021-07-04 | Babice                | 933
+     28 | Charlotte Hartington | 2020-12-11 | Kinsealy-Drinan       | 60099
+     29 | Theresina Durham     | 2021-02-02 | Jāti                  | 436
+(11 rows)
+
+
+                    
+select * from course;
+ c_id | course_name 
+------+-------------
+    1 | MBA
+    2 | BBA
+    3 | MS
+    4 | B.COM
+    5 | B.TECH
+    6 | MBBS
+    7 | BA
+    8 | B.ED
+    9 | BCA
+   10 | BSC
+(10 rows)
+
+joins=# select * from depatment;
+ d_id |   department_name    |  salary  
+------+----------------------+----------
+    1 | Support              | $3523.85
+    2 | Accounting           | $2432.48
+    3 | Marketing            | $2864.00
+    4 | Human Resources      | $8283.84
+    5 | Product Management   | $6312.25
+    6 | Accounting           | $8637.29
+    7 | Human Resources      | $7640.73
+    8 | Marketing            | $4210.48
+    9 | Legal                | $8615.86
+   10 | Business Development | $9529.90
+(10 rows)
+
+
+joins-# \dt
+           List of relations
+ Schema |   Name    | Type  |  Owner   
+--------+-----------+-------+----------
+ public | course    | table | postgres
+ public | depatment | table | postgres
+ public | employees | table | postgres
+ public | id        | table | postgres
+ public | student   | table | postgres
+(5 rows)
+
+
+joins=# select * from department;
+ d_id |   department_name    
+------+----------------------
+    1 | Support
+    2 | Accounting
+    3 | Marketing
+    4 | Human Resources
+    5 | Product Management
+    6 | Accounting
+    7 | Human Resources
+    8 | Marketing
+    9 | Legal
+   10 | Business Development
+(10 rows)
+
+
+joins=# select * from department;
+ d_id |   department_name    | salary 
+------+----------------------+--------
+    1 | Support              |       
+    2 | Accounting           |       
+    3 | Marketing            |       
+    4 | Human Resources      |       
+    5 | Product Management   |       
+    6 | Accounting           |       
+    7 | Human Resources      |       
+    8 | Marketing            |       
+    9 | Legal                |       
+   10 | Business Development |       
+(10 rows)
+
+
+joins=# select * from department;
+ d_id |   department_name    | salary 
+------+----------------------+--------
+    1 | Support              |  10000
+    2 | Accounting           |  20000
+    4 | Human Resources      |  25000
+    3 | Marketing            |  22000
+    5 | Product Management   |  26000
+    6 | Accounting           |  30000
+    7 | Human Resources      |  35000
+    8 | Marketing            |  32000
+    9 | Legal                |  35000
+   10 | Business Development |  30000
+(10 rows)
+
+                                                             ^
+joins=# \d id
+                 Table "public.id"
+ Column |  Type   | Collation | Nullable | Default 
+--------+---------+-----------+----------+---------
+ s_id   | integer |           |          | 
+ c_id   | integer |           |          | 
+ d_id   | integer |           |          | 
+ emp_id | integer |           |          | 
+ id     | integer |           | not null | 
+Indexes:
+    "id_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "id_c_id_fkey" FOREIGN KEY (c_id) REFERENCES course(c_id)
+    "id_d_id_fkey" FOREIGN KEY (d_id) REFERENCES department(d_id)
+    "id_emp_id_fkey" FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+    "id_s_id_fkey" FOREIGN KEY (s_id) REFERENCES student(s_id)
+
+joins=# select e.emp_id,e.emp_name,d.department_name from employees as e, department as d,id as i where i.emp_id=e.emp_id AND i.d_id=d.d_id AND salary 
+  BETWEEN 30000 AND 50000;
+ emp_id | emp_name | department_name 
+--------+----------+-----------------
+(0 rows)
+
+
+joins=# select * from department;
+ d_id |   department_name    | salary 
+------+----------------------+--------
+    1 | Support              |  10000
+    2 | Accounting           |  20000
+    4 | Human Resources      |  25000
+    3 | Marketing            |  22000
+    5 | Product Management   |  26000
+    6 | Accounting           |  30000
+    7 | Human Resources      |  35000
+    8 | Marketing            |  32000
+    9 | Legal                |  35000
+   10 | Business Development |  30000
+(10 rows)
+
+
+joins=# \e
+ emp_id |       emp_name       |  department_name   
+--------+----------------------+--------------------
+      2 | Lemar Shearer        | Support
+      3 | Melamie Lenahan      | Accounting
+      8 | Renate Walsh         | Marketing
+     29 | Theresina Durham     | Human Resources
+     25 | Olivie Nutter        | Human Resources
+     28 | Charlotte Hartington | Product Management
+(6 rows)
+
+joins=# select e.emp_id,e.emp_name,d.department_name from employees as e, department as d,id as i where i.emp_id=e.emp_id AND i.d_id=d.d_id AND d.department_name = 'Human Resources';
+ emp_id |     emp_name     | department_name 
+--------+------------------+-----------------
+     29 | Theresina Durham | Human Resources
+     25 | Olivie Nutter    | Human Resources
+(2 rows)
+
+joins=# select e.emp_id,e.emp_name,d.department_name from employees as e, department as d,id as i where i.emp_id=e.emp_id AND i.d_id=d.d_id AND d.department_name = 'Human Resources' AND d.salary between 10000 AND 50000;
+ emp_id |     emp_name     | department_name 
+--------+------------------+-----------------
+     29 | Theresina Durham | Human Resources
+     25 | Olivie Nutter    | Human Resources
+(2 rows)
+
+
+joins=# select * from department;
+ d_id |   department_name    | salary 
+------+----------------------+--------
+    1 | Support              |  10000
+    2 | Accounting           |  20000
+    4 | Human Resources      |  25000
+    3 | Marketing            |  22000
+    5 | Product Management   |  26000
+    6 | Accounting           |  30000
+    7 | Human Resources      |  35000
+    8 | Marketing            |  32000
+    9 | Legal                |  35000
+   10 | Business Development |  30000
+(10 rows)
+
+
+joins=# select * from employees;
+ emp_id |       emp_name       |    dob     |         city          |  pin  
+--------+----------------------+------------+-----------------------+-------
+      2 | Lemar Shearer        | 2021-04-01 | Terang                | 043
+      3 | Melamie Lenahan      | 2020-10-11 | Barrancas             | 4195
+      7 | Aveline Meeus        | 2021-06-02 | Leigu                 | 5167
+      8 | Renate Walsh         | 2021-03-02 | Foxton                | 4
+     11 | Sigrid MacAindreis   | 2021-04-05 | Wiązownica            | 72
+     12 | Barnie Hartell       | 2020-11-11 | Baoyang               | 723
+     15 | Westbrook Forrington | 2021-12-04 | Sainte-Anne-des-Monts | 370
+     18 | Raleigh Brisbane     | 2021-05-01 | Cherryville           | 34343
+     25 | Olivie Nutter        | 2021-07-04 | Babice                | 933
+     28 | Charlotte Hartington | 2020-12-11 | Kinsealy-Drinan       | 60099
+     29 | Theresina Durham     | 2021-02-02 | Jāti                  | 436
+(11 rows)
+
+
+joins=# select * from id;
+ s_id | c_id | d_id | emp_id | id 
+------+------+------+--------+----
+    1 |    1 |    1 |      2 |  1
+    2 |    2 |    2 |      3 |  2
+    3 |    3 |    3 |      8 |  3
+    4 |    4 |    4 |     29 |  4
+    4 |    4 |    4 |     25 |  5
+    2 |    4 |    5 |     28 |  6
+(6 rows)
+
+
+joins=# select e.emp_id,e.emp_name,d.department_name from employees as e, department as d,id as i where i.emp_id=e.emp_id AND i.d_id=d.d_id AND d.department_name = 'Human Resources' AND d.salary =25000;
+ emp_id |     emp_name     | department_name 
+--------+------------------+-----------------
+     29 | Theresina Durham | Human Resources
+     25 | Olivie Nutter    | Human Resources
+(2 rows)
+
+
+joins=# select e.emp_id,e.emp_name,d.department_name from employees as e, department as d,id as i where i.emp_id=e.emp_id AND i.d_id=d.d_id AND d.department_name = 'Human Resources' AND d.salary =25000;
+ emp_id |     emp_name     | department_name 
+--------+------------------+-----------------
+     29 | Theresina Durham | Human Resources
+     25 | Olivie Nutter    | Human Resources
+(2 rows)
+
+joins=# select * from id;
+ s_id | c_id | d_id | emp_id | id 
+------+------+------+--------+----
+    1 |    1 |    1 |      2 |  1
+    2 |    2 |    2 |      3 |  2
+    3 |    3 |    3 |      8 |  3
+    4 |    4 |    4 |     29 |  4
+    4 |    4 |    4 |     25 |  5
+    2 |    4 |    5 |     28 |  6
+(6 rows)
+
+
+
