@@ -166,7 +166,7 @@
 		(10 rows)
 
 
-	
+
 	A. Find the names of aircraft such that all pilots certified to operate them earn more than $80,000. 
 		-> Solution:
 		assignment=# select  a.aname from aircraft as a, employees as e,certified as c  where a.aid=c.aid AND  e.eid = c.eid 
@@ -339,7 +339,6 @@
 	M. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, 
 	but on at least two such aircrafts.
 	-> Solution :
-	
 	
 	
 	
