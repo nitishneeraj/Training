@@ -1182,16 +1182,765 @@ joins=# \dt
 (5 rows)
 
 
+
+
+postgres=# \l
                                   List of databases
         Name         |  Owner   | Encoding | Collate | Ctype |   Access privileges   
 ---------------------+----------+----------+---------+-------+-----------------------
+ assignment          | postgres | UTF8     | en_IN   | en_IN | 
  company             | postgres | UTF8     | en_IN   | en_IN | 
  employee_management | postgres | UTF8     | en_IN   | en_IN | 
+ postgres            | postgres | UTF8     | en_IN   | en_IN | 
  school              | postgres | UTF8     | en_IN   | en_IN | 
  template0           | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
                      |          |          |         |       | postgres=CTc/postgres
  template1           | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
                      |          |          |         |       | postgres=CTc/postgres
  test                | postgres | UTF8     | en_IN   | en_IN | 
+(8 rows)
+
+
+company=# select * from car;
+ id |       model        
+----+--------------------
+  1 | volvo S90
+  2 | volvo XC60
+  3 | TATA Punch
+  4 | TATA Punch
+  5 | MG Aster
+  6 | Mahindra XUV700
+  7 | Hyundai i20 N Line
+  8 | Audi e-tron GT
+(8 rows)
+
+company=# select * from employee;
+ id |  name  |      email       | date_of_birth | gender |   department   | salary 
+----+--------+------------------+---------------+--------+----------------+--------
+  1 | Rahul  | rahul@gmail.com  | 1998-04-14    | male   | sales          |  15000
+  2 | Mohan  | mohan@gmail.com  | 1997-10-20    | male   | Human Resource |  20000
+  3 | sita   | sita@gmail.com   | 2020-10-20    | female | Human Resource |  18000
+  6 | mukesh | mukesh@gmail.com | 1999-05-10    | male   | Purchase       |  25000
+  4 | kajal  | kajal@gmail.com  | 1998-11-15    | female | Finance        |  25000
+  5 | ram    | ram@gmail.com    | 1996-01-15    | male   | Purchase       |  23000
+  7 | sanjay | sanjay@gmail.com | 1995-04-10    | male   | IT             |  30000
+  8 | suraj  | saraj@gmail.com  | 1990-08-17    | male   | IT             |  35000
+  9 | sagar  | sagar@gmail.com  | 1993-06-19    | male   | Account        |  35000
+ 10 | sapna  | sapna@gmail.com  | 1994-07-19    | female | Marketing      |  25000
+(10 rows)
+
+company=# select * from id;
+ id | p_id | e_id | c_id 
+----+------+------+------
+  7 |    3 |    3 |    1
+  8 |    4 |    3 |    2
+  9 |    1 |    1 |    4
+ 10 |      |    6 |    3
+ 11 |      |    6 |    4
+ 12 |      |    6 |    5
+  1 |    2 |    2 |    1
+  2 |    2 |    3 |    1
+  3 |    2 |    1 |    1
+  4 |    2 |    6 |    2
+  5 |    4 |    4 |    4
+  6 |    2 |    4 |    2
+(12 rows)
+
+company=# select * from project;
+ id |  name   
+----+---------
+  1 | Batman
+  2 | Canary
+  3 | Hornets
+  4 | Bigfoot
+  5 | Cascade
+(5 rows)
+
+company=# \c school
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1), server 12.8 (Ubuntu 12.8-1.pgdg20.04+1))
+You are now connected to database "school" as user "postgres".
+school=# ls
+school-# \dt
+          List of relations
+ Schema |  Name   | Type  |  Owner   
+--------+---------+-------+----------
+ public | course  | table | postgres
+ public | hobby   | table | postgres
+ public | state   | table | postgres
+ public | student | table | postgres
+(4 rows)
+
+
+school=# select * from course;
+ id | course 
+----+--------
+  5 | BA
+  6 | B.COM
+  7 | BBA
+  8 | MBA
+  1 | BBA
+  2 | B.COM
+  3 | B.Tech
+  4 | MBA
+(8 rows)
+
+school=# select * from hobby;
+ id |  name   
+----+---------
+  1 | Movie
+  2 | reading
+  3 | driving
+  4 | singing
+(4 rows)
+
+school=# select * from state;
+ id | state 
+----+-------
+  1 | UP
+  2 | BR
+  4 | RJ
+  6 | GOA
+  8 | RJ
+  3 | BR
+  5 | HR
+  7 | RJ
+(8 rows)
+
+school=# select * from student;
+ id |  name  | gender | city_id | course_id | hb_id |    dob     
+----+--------+--------+---------+-----------+-------+------------
+  2 | Mohan  | Male   |       2 |         2 |     1 | 1998-10-12
+  1 | rahul  | male   |       2 |         3 |     1 | 1995-11-12
+  3 | sita   | female |       4 |         1 |     3 | 1998-01-12
+  4 | reeta  | female |       5 |         1 |     2 | 1999-11-12
+  5 | kajal  | female |       6 |         4 |     4 | 2000-01-12
+  6 | sohan  | Male   |       4 |         3 |     2 | 2004-01-12
+  7 | Yogesh | male   |       1 |         5 |     4 | 1998-04-12
+  8 | retika | female |       5 |         3 |     1 | 1998-11-12
+(8 rows)
+
+school=# \c st
+
+school=# \c employee_management 
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1), server 12.8 (Ubuntu 12.8-1.pgdg20.04+1))
+You are now connected to database "employee_management" as user "postgres".
+employee_management=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner   
+--------+------------+-------+----------
+ public | course     | table | postgres
+ public | department | table | postgres
+ public | employee   | table | postgres
+ public | id         | table | postgres
+ public | intern     | table | postgres
+(5 rows)
+
+employee_management=# select * from course;
+ c_id | course_name 
+------+-------------
+    1 | MBA
+    2 | BBA
+    3 | MS
+    4 | B.COM
+    5 | B.TECH
+    6 | MBBS
+    7 | BA
+    8 | B.ED
+    9 | BCA
+   10 | BSC
+(10 rows)
+
+employee_management=# alter table course rename column c_id to id;
+ALTER TABLE
+employee_management=# alter table course rename column course_name to course;
+ALTER TABLE
+employee_management=# select * from course;
+ id | course 
+----+--------
+  1 | MBA
+  2 | BBA
+  3 | MS
+  4 | B.COM
+  5 | B.TECH
+  6 | MBBS
+  7 | BA
+  8 | B.ED
+  9 | BCA
+ 10 | BSC
+(10 rows)
+
+employee_management=# select * from intern;
+ s_id | first_name  |  last_name   | gender |            email            |           address           | date_of_birth 
+------+-------------+--------------+--------+-----------------------------+-----------------------------+---------------
+    1 | Guillemette | Coggeshall   | F      | gcoggeshall0@usnews.com     | 12833 Hanson Trail          | 1997-01-01
+    2 | Veriee      | Hakeworth    | F      | vhakeworth1@flavors.me      | 52 Golf View Place          | 1998-02-02
+    3 | Tyrus       | Clausewitz   | M      | tclausewitz2@geocities.jp   | 3 Mayer Point               | 1999-03-03
+    4 | Julietta    | Fewlass      | F      | jfewlass3@com.com           | 7 Dawn Hill                 | 2000-04-04
+    5 | Alexandro   | Margrem      | M      | amargrem4@alibaba.com       | 01330 Doe Crossing Avenue   | 2001-05-05
+    6 | Jayson      | Foster-Smith | M      | jfostersmith5@pinterest.com | 09 Dennis Parkway           | 2001-06-05
+    7 | Tyrus       | Toovey       | M      | ttoovey6@wikispaces.com     | 7 Blaine Junction           | 1998-06-02
+    8 | Mommy       | Croasdale    | F      | mcroasdale7@mediafire.com   | 2 Bonner Pass               | 1996-06-01
+    9 | Whitney     | Cloney       | M      | wcloney8@hatena.ne.jp       | 80462 Tennessee Pass        | 1995-05-01
+   10 | Grannie     | Pumphrey     | M      | gpumphrey9@engadget.com     | 6 Green Circle              | 1997-11-01
+   11 | Eldridge    | Shilvock     | M      | eshilvocka@columbia.edu     | 95522 Laurel Place          | 1994-12-11
+   12 | Randy       | Kibby        | M      | rkibbyb@hud.gov             | 20010 Vermont Street        | 1998-12-14
+   13 | Stanford    | Thorburn     | M      | sthorburnc@edublogs.org     | 68647 Clyde Gallagher Park  | 1997-12-14
+   14 | Ekaterina   | Aspy         | F      | easpyd@weibo.com            | 605 Fallview Crossing       | 1994-09-14
+   15 | Ferdie      | Mangenet     | M      | fmangenete@nifty.com        | 13891 Northwestern Junction | 1994-10-14
+   16 | Arlette     | Stockoe      | F      | astockoef@myspace.com       | 860 Upham Street            | 1996-10-13
+   17 | Lynde       | Courvert     | F      | lcourvertg@pen.io           | 0932 Lighthouse Bay Plaza   | 1994-11-13
+   18 | Sharona     | Emmet        | F      | semmeth@ted.com             | 93927 Miller Court          | 1993-12-13
+   19 | Padgett     | Maddicks     | M      | pmaddicksi@ibm.com          | 0653 Saint Paul Parkway     | 1999-07-13
+   20 | Opalina     | Lemanu       | F      | olemanuj@prnewswire.com     | 6561 Menomonie Street       | 2000-07-13
+(20 rows)
+
+employee_management=# alter table intern rename column s_id to id;
+ALTER TABLE
+employee_management=# select * from intern;
+ id | first_name  |  last_name   | gender |            email            |           address           | date_of_birth 
+----+-------------+--------------+--------+-----------------------------+-----------------------------+---------------
+  1 | Guillemette | Coggeshall   | F      | gcoggeshall0@usnews.com     | 12833 Hanson Trail          | 1997-01-01
+  2 | Veriee      | Hakeworth    | F      | vhakeworth1@flavors.me      | 52 Golf View Place          | 1998-02-02
+  3 | Tyrus       | Clausewitz   | M      | tclausewitz2@geocities.jp   | 3 Mayer Point               | 1999-03-03
+  4 | Julietta    | Fewlass      | F      | jfewlass3@com.com           | 7 Dawn Hill                 | 2000-04-04
+  5 | Alexandro   | Margrem      | M      | amargrem4@alibaba.com       | 01330 Doe Crossing Avenue   | 2001-05-05
+  6 | Jayson      | Foster-Smith | M      | jfostersmith5@pinterest.com | 09 Dennis Parkway           | 2001-06-05
+  7 | Tyrus       | Toovey       | M      | ttoovey6@wikispaces.com     | 7 Blaine Junction           | 1998-06-02
+  8 | Mommy       | Croasdale    | F      | mcroasdale7@mediafire.com   | 2 Bonner Pass               | 1996-06-01
+  9 | Whitney     | Cloney       | M      | wcloney8@hatena.ne.jp       | 80462 Tennessee Pass        | 1995-05-01
+ 10 | Grannie     | Pumphrey     | M      | gpumphrey9@engadget.com     | 6 Green Circle              | 1997-11-01
+ 11 | Eldridge    | Shilvock     | M      | eshilvocka@columbia.edu     | 95522 Laurel Place          | 1994-12-11
+ 12 | Randy       | Kibby        | M      | rkibbyb@hud.gov             | 20010 Vermont Street        | 1998-12-14
+ 13 | Stanford    | Thorburn     | M      | sthorburnc@edublogs.org     | 68647 Clyde Gallagher Park  | 1997-12-14
+ 14 | Ekaterina   | Aspy         | F      | easpyd@weibo.com            | 605 Fallview Crossing       | 1994-09-14
+ 15 | Ferdie      | Mangenet     | M      | fmangenete@nifty.com        | 13891 Northwestern Junction | 1994-10-14
+ 16 | Arlette     | Stockoe      | F      | astockoef@myspace.com       | 860 Upham Street            | 1996-10-13
+ 17 | Lynde       | Courvert     | F      | lcourvertg@pen.io           | 0932 Lighthouse Bay Plaza   | 1994-11-13
+ 18 | Sharona     | Emmet        | F      | semmeth@ted.com             | 93927 Miller Court          | 1993-12-13
+ 19 | Padgett     | Maddicks     | M      | pmaddicksi@ibm.com          | 0653 Saint Paul Parkway     | 1999-07-13
+ 20 | Opalina     | Lemanu       | F      | olemanuj@prnewswire.com     | 6561 Menomonie Street       | 2000-07-13
+(20 rows)
+
+employee_management=# select * from employee;
+ emp_id |       emp_name       |    dob     |         city          |  pin  
+--------+----------------------+------------+-----------------------+-------
+      2 | Lemar Shearer        | 2021-04-01 | Terang                | 043
+      3 | Melamie Lenahan      | 2020-10-11 | Barrancas             | 4195
+      7 | Aveline Meeus        | 2021-06-02 | Leigu                 | 5167
+      8 | Renate Walsh         | 2021-03-02 | Foxton                | 4
+     11 | Sigrid MacAindreis   | 2021-04-05 | Wiązownica            | 72
+     12 | Barnie Hartell       | 2020-11-11 | Baoyang               | 723
+     15 | Westbrook Forrington | 2021-12-04 | Sainte-Anne-des-Monts | 370
+     18 | Raleigh Brisbane     | 2021-05-01 | Cherryville           | 34343
+     25 | Olivie Nutter        | 2021-07-04 | Babice                | 933
+     28 | Charlotte Hartington | 2020-12-11 | Kinsealy-Drinan       | 60099
+     29 | Theresina Durham     | 2021-02-02 | Jāti                  | 436
+(11 rows)
+
+employee_management=# alter table employee rename column emp_id to id;
+ALTER TABLE
+employee_management=# alter table employee rename column emp_name to name;
+ALTER TABLE
+employee_management=# alter table employee drop column pin;
+ALTER TABLE
+employee_management=# select * from employee;
+ id |         name         |    dob     |         city          
+----+----------------------+------------+-----------------------
+  2 | Lemar Shearer        | 2021-04-01 | Terang
+  3 | Melamie Lenahan      | 2020-10-11 | Barrancas
+  7 | Aveline Meeus        | 2021-06-02 | Leigu
+  8 | Renate Walsh         | 2021-03-02 | Foxton
+ 11 | Sigrid MacAindreis   | 2021-04-05 | Wiązownica
+ 12 | Barnie Hartell       | 2020-11-11 | Baoyang
+ 15 | Westbrook Forrington | 2021-12-04 | Sainte-Anne-des-Monts
+ 18 | Raleigh Brisbane     | 2021-05-01 | Cherryville
+ 25 | Olivie Nutter        | 2021-07-04 | Babice
+ 28 | Charlotte Hartington | 2020-12-11 | Kinsealy-Drinan
+ 29 | Theresina Durham     | 2021-02-02 | Jāti
+(11 rows)
+
+employee_management=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner   
+--------+------------+-------+----------
+ public | course     | table | postgres
+ public | department | table | postgres
+ public | employee   | table | postgres
+ public | id         | table | postgres
+ public | intern     | table | postgres
+(5 rows)
+
+employee_management=# select * from department;
+ d_id |   department_name    | salary 
+------+----------------------+--------
+    1 | Support              |  10000
+    2 | Accounting           |  20000
+    4 | Human Resources      |  25000
+    3 | Marketing            |  22000
+    5 | Product Management   |  26000
+    6 | Accounting           |  30000
+    7 | Human Resources      |  35000
+    8 | Marketing            |  32000
+    9 | Legal                |  35000
+   10 | Business Development |  30000
+(10 rows)
+
+employee_management=# alter table department rename column d_id to id;
+ALTER TABLE
+employee_management=# select e.name,d.department_name,d.salary from employee as e,department as d where e.id =d.id ;
+      name       | department_name | salary 
+-----------------+-----------------+--------
+ Lemar Shearer   | Accounting      |  20000
+ Melamie Lenahan | Marketing       |  22000
+ Aveline Meeus   | Human Resources |  35000
+ Renate Walsh    | Marketing       |  32000
+(4 rows)
+
+employee_management=# select e.id,e.name,d.department_name,d.salary from employee as e,department as d where e.id =d.id ;
+ id |      name       | department_name | salary 
+----+-----------------+-----------------+--------
+  2 | Lemar Shearer   | Accounting      |  20000
+  3 | Melamie Lenahan | Marketing       |  22000
+  7 | Aveline Meeus   | Human Resources |  35000
+  8 | Renate Walsh    | Marketing       |  32000
+(4 rows)
+
+employee_management=# select i.first_name,c.course from course as c,intern as i where i.id=c.id ;
+ first_name  | course 
+-------------+--------
+ Guillemette | MBA
+ Veriee      | BBA
+ Tyrus       | MS
+ Julietta    | B.COM
+ Alexandro   | B.TECH
+ Jayson      | MBBS
+ Tyrus       | BA
+ Mommy       | B.ED
+ Whitney     | BCA
+ Grannie     | BSC
+(10 rows)
+
+employee_management=# select i.first_name,c.course from course as c,intern as i where i.id=c.id where c.course ='MS' ;
+ERROR:  syntax error at or near "where"
+LINE 1: ...urse from course as c,intern as i where i.id=c.id where c.co...
+                                                             ^
+employee_management=# select i.first_name,c.course from course as c,intern as i where i.id=c.id AND c.course ='MS' ;
+ first_name | course 
+------------+--------
+ Tyrus      | MS
+(1 row)
+
+employee_management=# CREATE DATABASE ORG;
+CREATE DATABASE
+
+
+
+
+org=# CREATE TABLE Worker (
+WORKER_ID SERIAL NOT NULL PRIMARY KEY,
+FIRST_NAME CHAR(25),
+LAST_NAME CHAR(25),
+SALARY INT,
+JOINING_DATE DATE,
+DEPARTMENT CHAR(25)
+);
+CREATE TABLE
+
+org=# \d worker
+                                      Table "public.worker"
+    Column    |     Type      | Collation | Nullable |                  Default                  
+--------------+---------------+-----------+----------+-------------------------------------------
+ worker_id    | integer       |           | not null | nextval('worker_worker_id_seq'::regclass)
+ first_name   | character(25) |           |          | 
+ last_name    | character(25) |           |          | 
+ salary       | integer       |           |          | 
+ joining_date | date          |           |          | 
+ department   | character(25) |           |          | 
+Indexes:
+    "worker_pkey" PRIMARY KEY, btree (worker_id)
+
+
+
+postgres=# \c org
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1), server 12.8 (Ubuntu 12.8-1.pgdg20.04+1))
+You are now connected to database "org" as user "postgres".
+org=# \dt
+         List of relations
+ Schema |  Name  | Type  |  Owner   
+--------+--------+-------+----------
+ public | worker | table | postgres
+(1 row)
+
+
+
+org=# select * from worker;
+ worker_id |        first_name         |         last_name         | salary | joining_date |        department         
+-----------+---------------------------+---------------------------+--------+--------------+---------------------------
+         1 | Monika                    | Arora                     | 100000 | 2020-02-14   | HR                       
+         2 | Niharika                  | Verma                     |  80000 | 2011-06-14   | Admin                    
+         3 | Vishal                    | Singhal                   | 300000 | 2020-02-14   | HR                       
+         4 | Amitabh                   | Singh                     | 500000 | 2020-02-14   | Admin                    
+         5 | Vivek                     | Bhati                     | 500000 | 2011-06-14   | Admin                    
+         6 | Vipul                     | Diwan                     | 200000 | 2011-06-14   | Account                  
+         7 | Satish                    | Kumar                     |  75000 | 2020-01-14   | Account                  
+         8 | Geetika                   | Chauhan                   |  90000 | 2011-04-14   | Admin                    
+(8 rows)
+
+           
+org=# 
+CREATE TABLE Bonus (
+        WORKER_REF_ID INT,
+        BONUS_AMOUNT INT,
+        BONUS_DATE DATE,
+        FOREIGN KEY (WORKER_REF_ID)
+                REFERENCES Worker(WORKER_ID)
+        ON DELETE CASCADE
+);
+CREATE TABLE
+
+
+org=# select * from bonus ;
+ worker_ref_id | bonus_amount | bonus_date 
+---------------+--------------+------------
+             1 |         5000 | 2020-02-16
+             2 |         3000 | 2011-06-16
+             3 |         4000 | 2020-02-16
+             1 |         4500 | 2020-02-16
+             2 |         3500 | 2011-06-16
+(5 rows)
+
+
+org-# \dt
+         List of relations
+ Schema |  Name  | Type  |  Owner   
+--------+--------+-------+----------
+ public | bonus  | table | postgres
+ public | worker | table | postgres
+(2 rows)
+
+
+org=# CREATE TABLE Title (
+        WORKER_REF_ID INT,
+        WORKER_TITLE CHAR(25),
+        AFFECTED_FROM DATE,
+        FOREIGN KEY (WORKER_REF_ID)
+                REFERENCES Worker(WORKER_ID)
+        ON DELETE CASCADE
+);
+CREATE TABLE
+
+
+
+org=# \dt
+         List of relations
+ Schema |  Name  | Type  |  Owner   
+--------+--------+-------+----------
+ public | bonus  | table | postgres
+ public | title  | table | postgres
+ public | worker | table | postgres
+(3 rows)
+
+
+org=# \d bonus 
+                   Table "public.bonus"
+    Column     |  Type   | Collation | Nullable | Default 
+---------------+---------+-----------+----------+---------
+ worker_ref_id | integer |           |          | 
+ bonus_amount  | integer |           |          | 
+ bonus_date    | date    |           |          | 
+Foreign-key constraints:
+    "bonus_worker_ref_id_fkey" FOREIGN KEY (worker_ref_id) REFERENCES worker(worker_id) ON DELETE CASCADE
+
+
+org=# \d title 
+                      Table "public.title"
+    Column     |     Type      | Collation | Nullable | Default 
+---------------+---------------+-----------+----------+---------
+ worker_ref_id | integer       |           |          | 
+ worker_title  | character(25) |           |          | 
+ affected_from | date          |           |          | 
+Foreign-key constraints:
+    "title_worker_ref_id_fkey" FOREIGN KEY (worker_ref_id) REFERENCES worker(worker_id) ON DELETE CASCADE
+
+
+
+org=# \d worker
+                                      Table "public.worker"
+    Column    |     Type      | Collation | Nullable |                  Default                  
+--------------+---------------+-----------+----------+-------------------------------------------
+ worker_id    | integer       |           | not null | nextval('worker_worker_id_seq'::regclass)
+ first_name   | character(25) |           |          | 
+ last_name    | character(25) |           |          | 
+ salary       | integer       |           |          | 
+ joining_date | date          |           |          | 
+ department   | character(25) |           |          | 
+Indexes:
+    "worker_pkey" PRIMARY KEY, btree (worker_id)
+Referenced by:
+    TABLE "bonus" CONSTRAINT "bonus_worker_ref_id_fkey" FOREIGN KEY (worker_ref_id) REFERENCES worker(worker_id) ON DELETE CASCADE
+    TABLE "title" CONSTRAINT "title_worker_ref_id_fkey" FOREIGN KEY (worker_ref_id) REFERENCES worker(worker_id) ON DELETE CASCADE
+
+
+
+
+
+
+
+Question 1: Write an SQL query to fetch “FIRST_NAME” from Worker table using the alias name as <WORKER_NAME>.
+
+org=# select first_name as worker_name from worker;
+        worker_name        
+---------------------------
+ Monika                   
+ Niharika                 
+ Vishal                   
+ Amitabh                  
+ Vivek                    
+ Vipul                    
+ Satish                   
+ Geetika                  
+(8 rows)
+
+
+Question 2:  Write an SQL query to fetch “FIRST_NAME” from Worker table in upper case.
+
+org=# select upper(first_name) from worker order by first_name DESC;
+  upper   
+----------
+ VIVEK
+ VISHAL
+ VIPUL
+ SATISH
+ NIHARIKA
+ MONIKA
+ GEETIKA
+ AMITABH
+(8 rows)
+
+org=# select upper(first_name) from worker ;
+  upper   
+----------
+ MONIKA
+ NIHARIKA
+ VISHAL
+ AMITABH
+ VIVEK
+ VIPUL
+ SATISH
+ GEETIKA
+(8 rows)
+
+
+Question 3:  Write an SQL query to fetch unique values of DEPARTMENT from Worker table.
+
+org=# select distinct department from worker;
+        department         
+---------------------------
+ Admin                    
+ Account                  
+ HR                       
+(3 rows)
+
+
+Question 4: Write an SQL query to print the first three characters of  FIRST_NAME from Worker table.
+
+org=# select substring(first_name,1,3) from worker;
+ substring 
+-----------
+ Mon
+ Nih
+ Vis
+ Ami
+ Viv
+ Vip
+ Sat
+ Gee
+(8 rows)
+
+
+Question 5: Write an SQL query to find the position of the alphabet (‘a’) in the first name column ‘Amitabh’ from Worker table.
+
+org=# 
+
+Q6 : Write an SQL query that fetches the unique values of DEPARTMENT from Worker table and prints its length.
+
+
+org=# select distinct department, length(department)from worker;
+        department         | length 
+---------------------------+--------
+ HR                        |      2
+ Account                   |      7
+ Admin                     |      5
+(3 rows)
+
+
+Q7 : Write an SQL query to print the FIRST_NAME from Worker table after replacing ‘a’ with ‘A’.
+
+org=# select replace(first_name, 'a','A') from worker;
+ replace  
+----------
+ MonikA
+ NihArikA
+ VishAl
+ AmitAbh
+ Vivek
+ Vipul
+ SAtish
+ GeetikA
+(8 rows)
+
+
+Q8 : Write an SQL query to print the FIRST_NAME and LAST_NAME from Worker table into a single column COMPLETE_NAME. A space char 
+	should separate them.
+	
+org=# Select concat(FIRST_NAME, LAST_NAME) AS COMPLETE_NAME from Worker;
+                   complete_name                    
+----------------------------------------------------
+ Monika                   Arora                    
+ Niharika                 Verma                    
+ Vishal                   Singhal                  
+ Amitabh                  Singh                    
+ Vivek                    Bhati                    
+ Vipul                    Diwan                    
+ Satish                   Kumar                    
+ Geetika                  Chauhan                  
+(8 rows)
+
+
+Q9 : Write an SQL query to print all Worker details from the Worker table order by FIRST_NAME Ascending.
+
+
+org=# select * from worker order by first_name;
+ worker_id |        first_name         |         last_name         | salary | joining_date |        department         
+-----------+---------------------------+---------------------------+--------+--------------+---------------------------
+         4 | Amitabh                   | Singh                     | 500000 | 2020-02-14   | Admin                    
+         8 | Geetika                   | Chauhan                   |  90000 | 2011-04-14   | Admin                    
+         1 | Monika                    | Arora                     | 100000 | 2020-02-14   | HR                       
+         2 | Niharika                  | Verma                     |  80000 | 2011-06-14   | Admin                    
+         7 | Satish                    | Kumar                     |  75000 | 2020-01-14   | Account                  
+         6 | Vipul                     | Diwan                     | 200000 | 2011-06-14   | Account                  
+         3 | Vishal                    | Singhal                   | 300000 | 2020-02-14   | HR                       
+         5 | Vivek                     | Bhati                     | 500000 | 2011-06-14   | Admin                    
+(8 rows)
+
+Q10 : Write an SQL query to print all Worker details from the Worker table order by FIRST_NAME Ascending and DEPARTMENT Descending.
+
+org=# select * from worker order by first_name ASC, department DESC; 
+ worker_id |        first_name         |         last_name         | salary | joining_date |        department         
+-----------+---------------------------+---------------------------+--------+--------------+---------------------------
+         4 | Amitabh                   | Singh                     | 500000 | 2020-02-14   | Admin                    
+         8 | Geetika                   | Chauhan                   |  90000 | 2011-04-14   | Admin                    
+         1 | Monika                    | Arora                     | 100000 | 2020-02-14   | HR                       
+         2 | Niharika                  | Verma                     |  80000 | 2011-06-14   | Admin                    
+         7 | Satish                    | Kumar                     |  75000 | 2020-01-14   | Account                  
+         6 | Vipul                     | Diwan                     | 200000 | 2011-06-14   | Account                  
+         3 | Vishal                    | Singhal                   | 300000 | 2020-02-14   | HR                       
+         5 | Vivek                     | Bhati                     | 500000 | 2011-06-14   | Admin                    
+(8 rows)
+
+
+Q11 : Write an SQL query to print details for Workers with the first name as “Vipul” and “Satish” from Worker table.
+
+org=# select first_name from worker where first_name IN ('Vipul','Satish');
+        first_name         
+---------------------------
+ Vipul                    
+ Satish                   
+(2 rows)
+
+
+Q-12. Write an SQL query to print details of Workers with DEPARTMENT name as “Admin”.
+
+org=# select * from worker where department like 'Admin%';
+ worker_id |        first_name         |         last_name         | salary | joining_date |        department         
+-----------+---------------------------+---------------------------+--------+--------------+---------------------------
+         2 | Niharika                  | Verma                     |  80000 | 2011-06-14   | Admin                    
+         4 | Amitabh                   | Singh                     | 500000 | 2020-02-14   | Admin                    
+         5 | Vivek                     | Bhati                     | 500000 | 2011-06-14   | Admin                    
+         8 | Geetika                   | Chauhan                   |  90000 | 2011-04-14   | Admin                    
+(4 rows)
+
+
+Q-13. Write an SQL query to print details of the Workers whose FIRST_NAME contains ‘a’.
+
+org=# select * from worker where first_name like '%a%';
+ worker_id |        first_name         |         last_name         | salary | joining_date |        department         
+-----------+---------------------------+---------------------------+--------+--------------+---------------------------
+         1 | Monika                    | Arora                     | 100000 | 2020-02-14   | HR                       
+         2 | Niharika                  | Verma                     |  80000 | 2011-06-14   | Admin                    
+         3 | Vishal                    | Singhal                   | 300000 | 2020-02-14   | HR                       
+         4 | Amitabh                   | Singh                     | 500000 | 2020-02-14   | Admin                    
+         7 | Satish                    | Kumar                     |  75000 | 2020-01-14   | Account                  
+         8 | Geetika                   | Chauhan                   |  90000 | 2011-04-14   | Admin                    
 (6 rows)
+
+
+Q-14. Write an SQL query to print details of the Workers whose SALARY lies between 100000 and 500000.
+
+
+org=# select * from worker where salary between 100000 and 500000;
+ worker_id |        first_name         |         last_name         | salary | joining_date |        department         
+-----------+---------------------------+---------------------------+--------+--------------+---------------------------
+         1 | Monika                    | Arora                     | 100000 | 2020-02-14   | HR                       
+         3 | Vishal                    | Singhal                   | 300000 | 2020-02-14   | HR                       
+         4 | Amitabh                   | Singh                     | 500000 | 2020-02-14   | Admin                    
+         5 | Vivek                     | Bhati                     | 500000 | 2011-06-14   | Admin                    
+         6 | Vipul                     | Diwan                     | 200000 | 2011-06-14   | Account                  
+(5 rows)
+
+
+Q-15. Write an SQL query to fetch the count of employees working in the department ‘Admin’.
+
+
+org=# select count(*) from worker where department='Admin';
+ count 
+-------
+     4
+(1 row)
+
+
+Q-16. Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000.
+
+org=# select first_name,last_name,salary from worker where salary between 50000 and 100000;
+        first_name         |         last_name         | salary 
+---------------------------+---------------------------+--------
+ Monika                    | Arora                     | 100000
+ Niharika                  | Verma                     |  80000
+ Satish                    | Kumar                     |  75000
+ Geetika                   | Chauhan                   |  90000
+(4 rows)
+
+
+Q-17. Write an SQL query to fetch the no. of workers for each department in the descending order.
+
+
+org=# select department,count(worker_id) as no_of_workers from worker group by department order by no_of_workers DESC;
+        department         | no_of_workers 
+---------------------------+---------------
+ Admin                     |             4
+ Account                   |             2
+ HR                        |             2
+(3 rows)
+
+
+Q-18. Write an SQL query to print details of the Workers who are also Managers.
+
+org=# select distinct w.first_name,t.worker_title from title as t,worker as w where w.worker_id = t.worker_ref_id AND t.worker_title = 'Manager';
+        first_name         |       worker_title        
+---------------------------+---------------------------
+ Monika                    | Manager                  
+ Vivek                     | Manager                  
+(2 rows)
+
+
+Q-19. Write an SQL query to show only even rows from a table.
+
+org=# select * from worker where  MOD(worker_id,2)=0;
+ worker_id |        first_name         |         last_name         | salary | joining_date |        department         
+-----------+---------------------------+---------------------------+--------+--------------+---------------------------
+         2 | Niharika                  | Verma                     |  80000 | 2011-06-14   | Admin                    
+         4 | Amitabh                   | Singh                     | 500000 | 2020-02-14   | Admin                    
+         6 | Vipul                     | Diwan                     | 200000 | 2011-06-14   | Account                  
+         8 | Geetika                   | Chauhan                   |  90000 | 2011-04-14   | Admin                    
+(4 rows)
 
