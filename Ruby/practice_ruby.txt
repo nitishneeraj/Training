@@ -1,0 +1,202 @@
+-------------------------------------------------------------Ruby Programming Language-----------------------------------------------------------
+
+
+1. Ruby 
+	:  A dynamic, open source programming language with a focus on simplicity and productivity. 
+	   It has an elegant syntax that is natural to read and easy to write. 
+	   Ruby is a pure object-oriented programming language. It was created in 1993 by Yukihiro Matsumoto of Japan.
+	   Ruby has features that are similar to Smalltalk are scripting languages. Smalltalk is a true object-oriented language.
+	   
+	   
+	   
+2. Features of Ruby
+	:  Ruby is an open-source and is freely available on the Web
+           Ruby is a true object-oriented programming language.
+           Ruby can be used to write Common Gateway Interface (CGI) scripts.
+           Ruby is a server-side scripting language similar to Python and PERL.
+           Ruby has a clean and easy syntax that allows a new developer to learn very quickly and easily.
+           Ruby support many GUI tools such as Tcl/Tk, GTK, and OpenGL.
+           Ruby can easily be connected to DB2, MySQL, Oracle, and Sybase.
+	
+
+3. Ruby Installation - Ubuntu
+	URL:- https://gorails.com/setup/ubuntu/20.04
+	
+	commands: 
+		.sudo apt install curl
+		.curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+		.curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+		.echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+		.sudo apt-get update
+		.sudo apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 
+		  libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
+		.sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+		.gpg --keyserver hkp://keys.gnupg.net --recv-keys 
+		409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+		. curl -sSL https://get.rvm.io | bash -s stable
+		.source ~/.rvm/scripts/rvm
+		.rvm install 3.0.2
+		.rvm use 3.0.2 --default
+		
+		
+4. How check version in ruby
+	Ex: ruby -v
+	    ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x86_64-linux]
+
+5. Methods used
+
+
+	-> puts:  This method is used to display some message to the user.
+		(Puts automatically adds a new line at the end of your message every time you use it.)
+		Ex: puts "Hello there!"
+	-> gets:  This method is used to take input from the user.
+	-> .to_i: this method returns the integer conversion of the given string.
+	-> print : If you don’t want a newline, then use print.
+		Ex: print 123	
+	
+6. comments
+	-> Single-Line Comments
+	 Ex:  # This line is ignored by the Ruby interpreter
+	 
+	->  Multi-Line Comments 
+	Ex:   =begin   
+		any number of lines may be written.
+	      =end 
+		
+		
+7. Interactive Ruby (IRb)
+	-> Check version
+		Ex: irb -v
+		    irb 1.3.5 (2021-04-03)
+	
+	-> Ex: irb
+		3.0.2 :001 > num=123;
+		 => 123 
+		3.0.2 :002 > def sayhi
+		3.0.2 :003 >   puts "  hello "
+		3.0.2 :004 > end
+		 => :sayhi 
+		3.0.2 :005 > sayhi
+		  hello 
+		 => nil 
+		3.0.2 :006 > exit
+		
+
+8. All ruby files will have extension .rb.
+	Ex:  ruby test.rb
+
+		
+9. Reserved Words
+	: BEGIN 	do 		next 	 	then
+	  END 		else 		nil 		true
+	 alias 	elsif 		not 		undef
+	 and 	  	end 		or 		unless
+	begin 		ensure 	redo 		until
+	break 	 	false 		rescue  	when
+	case 		for 		retry 		while
+	class 		if 		return 	while
+	def 		in 		self 		__FILE__
+	defined? 	module 	super 		__LINE__
+		
+		
+		
+		
+10. Ruby Begin statement
+	Syntax:
+		BEGIN {
+			code
+		} 		
+		
+		Ex: puts "This is main Ruby Program"
+			BEGIN {
+			   puts "Initializing Ruby Program"
+			}
+			
+		Output : 
+			Initializing Ruby Program  
+			This is main Ruby Program
+		
+		
+11. Ruby END statement
+	Ex: puts "This is main Ruby Program"
+		END {
+		   puts "Terminating Ruby Program"
+		}
+		BEGIN {
+		   puts "Initializing Ruby Program"
+		}		
+		
+		Output:
+			Initializing Ruby Program
+			This is main Ruby Program
+			Terminating Ruby Program
+
+		
+12. Class in Ruby
+	Ex: Class Vehicle {
+	   Number no_of_wheels
+	   Number horsepower
+	   Characters type_of_tank
+	   Number Capacity
+	   Function speeding {
+	   }
+	   
+	   Function driving {
+	   }
+	   
+	   Function halting {
+	   }
+	}	
+
+13. Variables in a Ruby Class
+	Ex: Local Variables     (Local variables begin with a lowercase letter or _.)
+	    Instance Variables  ( by the at sign (@) )
+	    Class Variables     ( by the sign @@ )
+	    Global Variables    (by the dollar sign ($).)
+
+
+
+	-> Creating Objects in Ruby using new Method
+	
+		cust1 = Customer. new
+		cust2 = Customer. new
+		
+		
+	-> Custom Method to Create Ruby Objects
+	
+		class Customer
+		   @@no_of_customers = 0
+		   def initialize(id, name, addr)
+		      @cust_id = id
+		      @cust_name = name
+		      @cust_addr = addr
+		   end
+		end
+
+
+	-> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
