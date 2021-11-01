@@ -866,7 +866,169 @@
 		 => "100" 
 
 		 
-	-> : 
+	-> : swapcase → new_str
+	Ex: 	3.0.2 :001 > "Hello".swapcase  
+		 => "hELLO" 
+		3.0.2 :002 > "cYbEr_PuNk11".swapcase
+		 => "CyBeR_pUnK11" 
+		 
+	-> : click to toggle source
+	Ex: 	3.0.2 :001 > "Hello".swapcase  
+		 => "hELLO" 
+		3.0.2 :002 > "cYbEr_PuNk11".swapcase
+		 => "CyBeR_pUnK11" 
+		3.0.2 :003 > '9'.to_c 
+		 => (9+0i) 
+		3.0.2 :004 > '2.5'.to_c 
+		 => (2.5+0i) 
+		3.0.2 :005 > '2.5/1'.to_c 
+		 => ((5/2)+0i) 
+		3.0.2 :006 > '-i'.to_c 
+		 => (0-1i) 
+		3.0.2 :007 > 'ruby'.to_c  
+		 => (0+0i) 
+		3.0.2 :008 > '-0.0-0.0i'.to_c 
+		 => (-0.0-0.0i) 
+
+
+	-> : to_f → float
+	Ex: 	3.0.2 :009 > "123.45e1".to_f  
+		 => 1234.5 
+		3.0.2 :010 > "45.67 degrees".to_f 
+		 => 45.67 
+		3.0.2 :011 > "thx1138".to_f  
+		 => 0.0 
+
+	-> : to_i(base=10) → integer
+	Ex: 	3.0.2 :012 > "12345".to_i  
+		 => 12345 
+		3.0.2 :013 > "99 red balloons".to_i
+		 => 99 
+		3.0.2 :014 > "0a".to_i   
+		 => 0 
+		3.0.2 :015 > "0a".to_i(16) 
+		 => 10 
+		3.0.2 :016 > "1100101".to_i(2)
+		 => 101 
+		3.0.2 :017 > "1100101".to_i(8) 
+		 => 294977 
+		3.0.2 :018 > "1100101".to_i(10) 
+		 => 1100101 
+		 
+	-> : to_r → rational
+	Ex:	 3.0.2 :019 > '  2  '.to_r
+		 => (2/1) 
+		3.0.2 :020 > '300/2'.to_r 
+		 => (150/1) 
+		3.0.2 :021 > '-9.2'.to_r
+		 => (-46/5) 
+		3.0.2 :022 > '21 June 09'.to_r 
+		 => (21/1) 
+		3.0.2 :023 > '21 June 09'.to_r
+		 => (21/1) 
+		3.0.2 :024 > '21/06/09'.to_r 
+		 => (7/2) 
+		3.0.2 :025 > 'BWV 1079'.to_r
+		 => (0/1) 
+		3.0.2 :026 > "0.3".to_r == 3/10r
+		 => true 
+		3.0.2 :027 > 0.3.to_r   == 3/10r 
+		 => false 
+
+	-> : tr(from_str, to_str) => new_str
+	Ex: 	3.0.2 :028 > "hello".tr('el', 'ip')
+		 => "hippo" 
+		3.0.2 :029 > "hello".tr('aeiou', '*') 
+		 => "h*ll*" 
+		3.0.2 :030 > "hello".tr('aeiou', 'AA*') 
+		 => "hAll*" 
+		3.0.2 :031 > "hello".tr('a-y', 'b-z')  
+		 => "ifmmp" 
+		3.0.2 :032 > "hello".tr('^aeiou', '*')
+		 => "*e**o" 
+		3.0.2 :033 > "hello^world".tr("\\^aeiou", "*")
+		 => "h*ll**w*rld" 
+		3.0.2 :034 > "hello-world".tr("a\\-eo", "*") 
+		 => "h*ll**w*rld" 
+		3.0.2 :035 > "hello\r\nworld".tr("\r", "") 
+		 => "hello\nworld" 
+		3.0.2 :036 > "hello\r\nworld".tr("\\\r", "")
+		 => "hello\nworld" 
+		3.0.2 :037 > "hello\r\nworld".tr("\\r", "")
+		 => "hello\r\nwold" 
+		3.0.2 :038 > "X['\\b']".tr("X\\", "") 
+		 => "['b']" 
+		3.0.2 :039 > "X['\\b']".tr("X-\\]", "")
+		 => "'b'" 
+		 
+	-> : tr_s(from_str, to_str) → new_str
+	Ex: 	3.0.2 :040 > "hello".tr_s('l', 'r')  
+		 => "hero" 
+		3.0.2 :041 > "hello".tr_s('el', '*') 
+		 => "h*o" 
+		3.0.2 :042 > "hello".tr_s('el', 'hx') 
+		 => "hhxo"
+		 
+	-> : undump → new_str
+	Ex:  	3.0.2 :043 > "\"hello \\n ''\"".undump
+		 => "hello \n ''" 
+		 
+	-> : unicode_normalize(form=:nfc)
+	Ex: 	3.0.2 :044 > "a\u0300".unicode_normalize   
+		 => "à" 
+		3.0.2 :045 > "a\u0300".unicode_normalize(:nfc) 
+		 => "à" 
+		3.0.2 :046 > "\u00E0".unicode_normalize(:nfd)
+		 => "à" 
+		 3.0.2 :048 > "a\u0300".unicode_normalized?  
+		 => false 
+		3.0.2 :049 > "a\u0300".unicode_normalized?(:nfd) 
+		 => true 
+		3.0.2 :050 > "\u00E0".unicode_normalized?
+		 => true 
+		3.0.2 :051 > "\u00E0".unicode_normalized?(:nfd) 
+		 => false 
+		 
+	-> : unpack(format) → anArray
+	Ex: 	3.0.2 :054 >    "abc \0\0".unpack('a3a3')  
+		 => ["abc", " \x00\x00"] 
+		3.0.2 :055 > "abc \0abc \0".unpack('Z*Z*')
+		 => ["abc ", "abc "] 
+		3.0.2 :056 > "aa".unpack('b8B8')  
+		 => ["10000110", "01100001"] 
+		3.0.2 :057 > "aaa".unpack('h2H2c') 
+		 => ["16", "61", 97] 
+		3.0.2 :058 > "\xfe\xff\xfe\xff".unpack('sS') 
+		 => [-2, 65534] 
+		3.0.2 :059 > "now=20is".unpack('M*')
+		 => ["now is"] 
+		3.0.2 :060 > "whole".unpack('xax2aX2aX1aX2a') 
+		 => ["h", "e", "l", "l", "o"] 
+		 
+	-> : unpack1(format) → obj
+	Ex: 	3.0.2 :061 > "abc \0\0abc \0\0".unpack('A6Z6')
+		 => ["abc", "abc "] 
+		3.0.2 :062 > "abc \0\0abc \0\0".unpack1('A6Z6')
+		 => "abc" 
+	
+	-> : upcase → new_str
+	Ex: 	3.0.2 :063 > "hEllO".upcase 
+ 		=> "HELLO"
+
+
+		 
+	-> : valid_encoding? → true or false
+	Ex: 	3.0.2 :065 > "\xc2\xa1".force_encoding("UTF-8").valid_encoding? 
+		 => true 
+		3.0.2 :066 > "\xc2".force_encoding("UTF-8").valid_encoding? 
+		 => false 
+		3.0.2 :067 > "\x80".force_encoding("UTF-8").valid_encoding? 
+		 => false 
+		 
+	
+
+
+
 
 
 
