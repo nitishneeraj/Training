@@ -1,0 +1,942 @@
+---------------------Public Class Methods--------------------------------------------
+
+
+1. new 
+	: Returns a new String that is a copy of string.
+	Ex: 	3.0.2 :001 > s=String.new
+		 => ""
+	Ex:  	3.0.2 :002 > s.encoding
+ 		=> #<Encoding:ASCII-8BIT> 
+
+ 	
+ 	
+ 	-> : single String argument string, returns a copy of string with the same encoding as string:
+ 	Ex: 	3.0.2 :003 > s = String.new("Que veut dire \u{e7}a?")
+ 		=> "Que veut dire ça?" 
+
+ 	Ex:  	3.0.2 :004 > s.encoding
+		 => #<Encoding:UTF-8> 
+		 
+	-> : these are equivalent:
+		3.0.2 :005 > s0 = String.new('foo', encoding: 'ASCII')
+		 => "foo" 
+		3.0.2 :006 > s1 = 'foo'.force_encoding('ASCII')
+		 => "foo" 
+		3.0.2 :007 > s0.encoding == s1.encoding # => true
+		 => true 
+
+	-> : 	3.0.2 :008 > String.new(capacity: 1) # => ""
+		 => "" 
+		3.0.2 :009 > String.new(capacity: 4096) # => ""
+		 => "" 
+
+	-> : 	3.0.2 :010 > String.new('hello', encoding: 'UTF-8', capacity: 25)
+		 => "hello" 
+		 
+		 
+	-------------------------------------Public Instance Methods--------------------------------------
+	
+2.  string % object → new_string
+	
+	:  object into the format specification self
+	Ex: 	3.0.2 :011 > "%05d" % 123 
+ 		=> "00123" 
+
+
+	-> 	3.0.2 :012 > "%-5s: %016x" % [ "ID", self.object_id ]
+	 	=> "ID   : 0000000000000104" 
+	
+	-> 	3.0.2 :013 > "foo = %{foo}" % {foo: 'bar'} # => "foo = bar"
+		 => "foo = bar" 
+
+	-> 	 3.0.2 :014 > "foo = %{foo}, baz = %{baz}" % {foo: 'bar', baz: 'bat'}
+ 		=> "foo = bar, baz = bat" 
+		 
+	-> 	3.0.2 :015 > "Ho! " * 3 
+ 		=> "Ho! Ho! Ho! " 
+ 		
+ 	-> 	3.0.2 :016 > "Ho! " * 0
+ 		=> "" 
+ 		
+ 	-> 	3.0.2 :017 > "Hello from " + self.to_s 
+ 		=> "Hello from main" 
+ 		
+ 	-> 	3.0.2 :018 > s = 'foo'
+		 => "foo" 
+		3.0.2 :019 > s << 'bar' 
+		 => "foobar" 
+		 
+	-> 	3.0.2 :020 > s = 'foo'
+		 => "foo" 
+		3.0.2 :021 > s << 33 # => "foo!"
+		 => "foo!" 	
+		 
+		 
+	-> : string <=> other_string → -1, 0, 1, or nil
+		3.0.2 :022 > 'foo' <=> 'foo'
+		 => 0 
+		3.0.2 :023 > 'foo' <=> 'food'
+		 => -1 
+		3.0.2 :024 > 'food' <=> 'foo'
+		 => 1 
+		3.0.2 :025 > 'FOO' <=> 'foo'
+		 => -1 
+		3.0.2 :026 > 'foo' <=> 'FOO'
+		 => 1 
+		3.0.2 :027 > 'foo' <=> 1
+		 => nil 
+
+
+	-> : string == object → true or false
+		3.0.2 :028 > s= 'foo'
+		 => "foo" 
+		3.0.2 :029 > s=='foo'
+		 => true 
+		3.0.2 :030 > s=='food'
+		 => false 
+		3.0.2 :031 > s== 'FOO'
+		 => false
+		 
+	-> : string =~ object → integer or nil
+	: the Integer index of the first substring that matches the given regexp, or nil if no match found:
+		3.0.2 :032 > 'foo' =~ /f/
+		 => 0 
+		3.0.2 :033 > 'foo' =~ /t/
+		 => nil 
+		3.0.2 :034 > 'foo' =~ /p/
+		 => nil 
+		3.0.2 :035 > 'foo' =~ /o/
+		 => 1 
+		3.0.2 :036 > 'foo' =~ /1/
+		 => nil 
+		3.0.2 :037 > 'foo' =~ /x/
+		 => nil 
+
+	
+	-> : string[index] → new_string or nil
+	: string[start, length] → new_string or nil
+	: string[substring] → new_string or nil
+	: string[range] → new_string or nil
+	Ex:	 3.0.2 :042 > 'bar'[-2]
+		 => "a" 
+		3.0.2 :043 > 'bar'[-3]
+		 => "b" 
+		3.0.2 :044 > 'bar'[-4]
+		 => nil 
+		3.0.2 :045 > 'bar'[4]
+		 => nil 
+		3.0.2 :046 > 'bar'[0,2]
+		 => "ba" 
+		3.0.2 :047 > 'bar'[0,0]
+		 => "" 
+		3.0.2 :048 > 'bar'[-2,2]
+		 => "ar" 
+		3.0.2 :049 > 'bar'[3,2]
+		 => "" 
+		3.0.2 :050 > 'bar'[4,2]
+		 => nil 
+		3.0.2 :051 > 'bar'[1,50]
+		 => "ar" 
+		3.0.2 :052 > 'bar'[0,-1]
+		 => nil 
+		 
+	-> 	3.0.2 :053 > 'foo'[/o/] # => "o"
+		 => "o" 
+		3.0.2 :054 > 'foo'[/x/] 
+		 => nil 
+		3.0.2 :055 > s = 'hello there'
+		 => "hello there" 
+		3.0.2 :056 > s[/[aeiou](.)\1/]
+		 => "ell" 
+		3.0.2 :057 > s[/[aeiou](.)\1/, 0]
+		 => "ell" 
+		 
+	-> 	3.0.2 :058 > 'foo'['oo']
+ 		=> "oo" 
+		3.0.2 :059 > 'foo'['xx']
+		 => nil 
+
+	-> : Returns true for a string which has only ASCII characters.
+	Ex: 	3.0.2 :060 > "abc".force_encoding("UTF-8").ascii_only?
+		 => true 
+		3.0.2 :061 > "abc\u{6666}".force_encoding("UTF-8").ascii_only?
+		 => false 
+		 
+	-> : bytesize → integer
+	Ex: 	3.0.2 :062 > "\x80\u3042".bytesize
+		 => 4 
+		3.0.2 :063 > "hello".bytesize
+		 => 5 
+
+	-> 	: byteslice(integer) → new_str or nil click to toggle source
+		: byteslice(integer, integer) → new_str or nil
+		: byteslice(range) → new_str or nil 
+		
+	Ex: 	3.0.2 :064 > "hello".byteslice(1)  
+		 => "e" 
+		3.0.2 :065 > "hello".byteslice(-1)  
+		 => "o" 
+		3.0.2 :066 > "hello".byteslice(1,2)  
+		 => "el" 
+		3.0.2 :067 > "\x80\u3042".byteslice(1, 3)
+		 => "あ" 
+		3.0.2 :068 > "\x03\u3042\xff".byteslice(1..3)
+		 => "あ" 
+
+
+	-> : capitalize → new_str
+	: capitalize([options]) → new_str
+	Ex: 	3.0.2 :069 > 'hello'.capitalize
+		 => "Hello" 
+		3.0.2 :070 > 'HELLO'.capitalize
+		 => "Hello" 
+		3.0.2 :071 > '1HELLO'.capitalize
+		 => "1hello" 
+	
+	-> 	: capitalize! → str or nil click to toggle source
+		: capitalize!([options]) → str or nil 
+	Ex: 	3.0.2 :072 > a= "hello"
+		 => "hello" 
+		3.0.2 :077 > a.capitalize!
+		 => "Hello" 
+		3.0.2 :078 > a
+		 => "Hello" 
+		3.0.2 :079 > a.capitalize!
+		 => nil 
+		 
+	-> : casecmp(other_str) → -1, 0, 1, or nil
+	Ex:	 3.0.2 :081 > 'foo'.casecmp('foo') 
+		 => 0 
+		3.0.2 :082 > 'foo'.casecmp('food') 
+		 => -1 
+		3.0.2 :083 > 'food'.casecmp('food') 
+		 => 0 
+		3.0.2 :084 > 'food'.casecmp('foo') 
+		 => 1 
+		3.0.2 :085 > 'FOO'.casecmp('foo') 
+		 => 0 
+		3.0.2 :086 > 'foo'.casecmp('FOO') 
+		 => 0 
+		3.0.2 :087 > 'foo'.casecmp(1) 
+		 => nil 
+
+
+	-> : casecmp?(other_string) → true, false, or nil
+	Ex:	 3.0.2 :088 > 'foo'.casecmp?('foo')
+		 => true 
+		3.0.2 :089 > 'foo'.casecmp?('food')
+		 => false 
+		3.0.2 :090 > 'food'.casecmp?('food')
+		 => true 
+		3.0.2 :091 > 'food'.casecmp?('foo')
+		 => false 
+		3.0.2 :092 > 
+		3.0.2 :093 > 'FOO'.casecmp?('foo')
+		 => true 
+		3.0.2 :094 > 'foo'.casecmp?('FOO')
+		 => true 
+		 : Returns nil if the two values are incomparable:
+		 3.0.2 :095 > 'foo'.casecmp?(1) 
+		 => nil 
+
+		 
+	-> : center(width, padstr=' ') → new_str
+	Ex: 	3.0.2 :097 > "hello".center(3) 
+		 => "hello" 
+		3.0.2 :098 > "hello".center(20) 
+		 => "       hello        " 
+		3.0.2 :100 > "hello".center(20,'989') 
+		 => "9899899hello98998998"
+		 
+	-> : chars → an_array
+	: chomp(separator=$/) → new_str
+	Ex: 	3.0.2 :103 > "hello".chomp
+		 => "hello" 
+		3.0.2 :104 > "hello\n".chomp
+		 => "hello" 
+		3.0.2 :105 > "hello\r\n".chomp
+		 => "hello" 
+		3.0.2 :106 > "hello\n\r".chomp
+		 => "hello\n" 
+		3.0.2 :107 > "hello\r".chomp
+		 => "hello" 
+		3.0.2 :113 > "hellothere".chomp("there")
+		 => "hello" 
+		3.0.2 :114 > "hello\r\n\r\r\n".chomp('')
+		 => "hello\r\n\r" 
+
+
+	-> : chop → new_str click
+	Ex: 	3.0.2 :115 > "string\r\n".chop
+		 => "string" 
+		3.0.2 :116 > "string\n".chop
+		 => "string" 
+		3.0.2 :117 > "string".chop
+		 => "strin" 
+		3.0.2 :118 > "string\r".chop
+		 => "string" 
+		3.0.2 :119 > "x".chop.chop 
+		 => "" 
+		3.0.2 :120 > "x".chop 
+		 => "" 
+		 
+	-> : chr → string
+	Ex: 	3.0.2 :121 > a= "abcde"
+		 => "abcde" 
+		3.0.2 :122 > a.chr
+		 => "a" 
+		3.0.2 :127 > a.clear
+		 => "" 
+		 
+	-> : concat(*objects) → new_string
+	Ex: 	3.0.2 :128 > s = 'foo'
+		 => "foo" 
+		3.0.2 :129 > s.concat('bar', 'baz')
+		 => "foobarbaz" 
+		3.0.2 :130 > s.concat(32, 'bar', 32, 'baz')
+		 => "foobarbaz bar baz" 
+		 
+		 
+	-> : count([other_str]+) → integer
+	Ex: 	3.0.2 :131 > a = "hello world"
+		 => "hello world" 
+		3.0.2 :132 > a.count "lo"
+		 => 5 
+		3.0.2 :133 > a.count "lo","o"
+		 => 2 
+		3.0.2 :134 > a.count "lo","o"
+		 => 2 
+		3.0.2 :135 > c = "hello world\\r\\n"
+		 => "hello world\\r\\n" 
+		3.0.2 :136 > a.count "\\"
+		 => 0 
+		3.0.2 :137 > a.count "\\A"
+		 => 0 
+		3.0.2 :138 > a.count "X-\\w"
+		 => 1 
+		 
+	-> : crypt(salt_str) → new_str
+	Ex: 	3.0.2 :139 > "foo".crypt("$5$rounds=1000$salt$")
+		 => "$5$rounds=1000$salt$sOwBWdzaQ/gPXFtLc24VstV7ZQk3/x7k0cDfKUxXsn8" 
+		3.0.2 :140 > "foo".crypt("$5$round=1000$salt$")
+		 => "*0" 
+		 3.0.2 :141 > "foo".crypt("$5$rounds=1000$salt$")
+ 		=> "$5$rounds=1000$salt$sOwBWdzaQ/gPXFtLc24VstV7ZQk3/x7k0cDfKUxXsn8" 
+
+		 
+	-> : delete([other_str]+) → new_str
+	Ex: 	3.0.2 :142 > "hello".delete "l","lo" 
+		 => "heo" 
+		3.0.2 :143 > "hello".delete "l" 
+		 => "heo" 
+		3.0.2 :144 > "hello".delete "aeiou", "^e"   #=> "hell"
+		 => "hell" 
+		3.0.2 :145 > "hello".delete "ej-m" 
+		 => "ho" 
+		
+	-> : delete_prefix(prefix) → new_str
+	Ex: 	3.0.2 :146 > "hello".delete_prefix("hel")
+		 => "lo" 
+		3.0.2 :147 > "hello".delete_prefix("llo")
+		 => "hello" 
+		 
+	-> : delete_prefix!(prefix) → self or nil
+	Ex: 	3.0.2 :148 > "hello".delete_prefix!("hel")
+		 => "lo" 
+		3.0.2 :149 > "hello".delete_prefix!("llo")
+		 => nil 
+		 
+	-> : delete_suffix(suffix) → new_str
+	Ex: 	3.0.2 :150 > "hello".delete_suffix("llo")
+		 => "he" 
+		3.0.2 :151 > "hello".delete_suffix("hel")
+		 => "hello" 
+		 
+	-> : delete_suffix!(suffix) → self or nil
+	Ex: 	3.0.2 :152 > "hello".delete_suffix!("llo")
+		 => "he" 
+		3.0.2 :153 > "hello".delete_suffix!("hel") #=>
+		 => nil 
+		 
+		 
+	-> : downcase → new_str
+	Ex: 	3.0.2 :154 > "hEllO".downcase  
+ 		=> "hello"
+ 		
+ 	-> : downcase! → str or nil
+ 	Ex: 	3.0.2 :155 > "hello \n ''".dump
+		 => "\"hello \\n ''\"" 
+		3.0.2 :156 > "\f\x00\xff\\\"".dump 
+		 => "\"\\f\\x00\\xFF\\\\\\\"\"" 
+		 
+	-> : each_byte {|integer| block } → str
+	Ex: 	3.0.2 :157 > "hello".each_byte {|c| print c, ' ' }
+		 101 108 108 111  => "hello"
+		 
+	-> : each_char {|cstr| block } → str
+	Ex: 	3.0.2 :158 > "hello".each_char {|c| print c, ' ' }
+		h e l l o  => "hello" 
+ 
+	-> : each_codepoint {|integer| block } → str
+	Ex:	 3.0.2 :159 > "hello\u0639".each_codepoint {|c| print c, ' ' }
+		104 101 108 108 111 1593  => "helloع" 
+
+	-> : each_grapheme_cluster {|cstr| block } → str
+	Ex: 	3.0.2 :160 > "a\u0300".each_char.to_a.size 
+		 => 2 
+		3.0.2 :161 > "a\u0300".each_grapheme_cluster.to_a.size
+		 => 1 
+		 
+	-> : each_line(separator=$/, chomp: false) {|substr| block } → str click to tog
+	Ex: 	3.0.2 :162 > "hello\nworld".each_line {|s| p s}
+		"hello\n"
+		"world"
+		 => "hello\nworld" 
+		3.0.2 :163 > "hello\nworld".each_line('l') {|s| p s}
+		"hel"
+		"l"
+		"o\nworl"
+		"d"
+		 => "hello\nworld" 
+		3.0.2 :164 > "hello\n\n\nworld".each_line('') {|s| p s}
+		"hello\n\n"
+		"world"
+		 => "hello\n\n\nworld" 
+		3.0.2 :165 > "hello\nworld".each_line(chomp: true) {|s| p s}
+		"hello"
+		"world"
+		 => "hello\nworld" 
+		3.0.2 :166 > "hello\nworld".each_line('l', chomp: true) {|s| p s}
+		"he"
+		""
+		"o\nwor"
+		"d"
+		 => "hello\nworld" 
+		 
+	-> : empty? → true or false
+	Ex: 	3.0.2 :167 > "hello".empty?
+		 => false 
+		3.0.2 :168 > "".empty?
+		 => true 
+		3.0.2 :169 > " ".empty?
+		 => false 
+		
+	-> : end_with?([suffixes]+) → true or false
+	Ex: 	3.0.2 :001 > "hello".end_with?("ello")    
+		 => true 
+		3.0.2 :002 > "hello".end_with?("heaven", "ello")
+		 => true 
+		3.0.2 :003 > "hello".end_with?("heaven", "paradise") 
+		 => false 
+		 
+	-> : eql?(object) → true or false
+	Ex:	 3.0.2 :004 > s = 'foo'
+		 => "foo" 
+		3.0.2 :005 > s.eql?('foo')
+		 => true 
+		3.0.2 :006 > s.eql?('food')
+		 => false 
+		3.0.2 :007 > s.eql?('FOO')
+		 => false 
+		3.0.2 :008 > "\u{e4 f6 fc}".encode("ISO-8859-1").eql?("\u{c4 d6 dc}") 
+		 => false 
+		 
+	-> :  gsub(pattern, replacement) → new_str click to toggle source
+	: gsub(pattern, hash) → new_str
+	: gsub(pattern) {|match| block } → new_str
+	: gsub(pattern) → enumerator 
+	Ex: 	3.0.2 :009 > "hello".gsub(/[aeiou]/, '*')     
+		 => "h*ll*" 
+		3.0.2 :010 > "hello".gsub(/([aeiou])/, '<\1>') 
+		 => "h<e>ll<o>" 
+		3.0.2 :011 > "hello".gsub(/./) {|s| s.ord.to_s + ' '}  
+		 => "104 101 108 108 111 " 
+		3.0.2 :012 > "Aello".gsub(/./) {|s| s.ord.to_s + ' '}  
+		 => "65 101 108 108 111 " 
+		3.0.2 :013 > 'hello'.gsub(/[eo]/, 'e' => 3, 'o' => '*') 
+		 => "h3ll*" 
+		 
+	-> : hex → integer
+	Ex: 	3.0.2 :014 > "0x0a".hex 
+		 => 10 
+		3.0.2 :015 > "a".hex 
+		 => 10 
+		3.0.2 :016 > "b".hex 
+		 => 11 
+		3.0.2 :017 > "as".hex 
+		 => 10 
+		3.0.2 :018 > "0".hex  
+		 => 0 
+		3.0.2 :019 > "wombat".hex 
+		 => 0 
+		 
+	-> : include? other_str → true or false
+	Ex: 	3.0.2 :020 > "hello".include? "lo"
+		 => true 
+		3.0.2 :021 > "hello".include? "ol"
+		 => false 
+		3.0.2 :022 > "hello".include? ?h 
+		 => true 
+
+
+	-> : index(substring, offset = 0) → integer or nil
+	   : index(regexp, offset = 0) → integer or nil
+	Ex: 	3.0.2 :030 > 'foo'.index('/o/')
+		 => nil 
+		3.0.2 :031 > 'foo'.index(/o/)
+		 => 1 
+		3.0.2 :032 > 'foo'.index(/f/)
+		 => 0 
+		3.0.2 :033 > 'foo'.index(/00/)
+		 => nil 
+		3.0.2 :034 > 'foo'.index(/oo/)
+		 => 1 
+		3.0.2 :035 > 'foo'.index(/ooo/)
+		 => nil 
+		3.0.2 :036 > 'foo'.index('/o/')
+		 => nil 
+		3.0.2 :037 > 'foo'.index('o')
+		 => 1 
+		3.0.2 :039 > 'foo'.index('oo')
+		 => 1 
+		 
+	-> : index(substring, offset = 0) → integer or nil
+	 	3.0.2 :040 > 'foo'.index('o', 1)
+		 => 1 
+		3.0.2 :041 > 'foo'.index('o', 2)
+		 => 2 
+		3.0.2 :042 > 'foo'.index('o', 3)
+		 => nil 
+		3.0.2 :043 > 'foo'.index('o', -3)
+		 => 1 
+		3.0.2 :044 > 'foo'.index('o', -1)
+		 => 2 
+		3.0.2 :045 > 'foo'.index('o', -2)
+		 => 1 
+		3.0.2 :046 > 'foo'.index('o', -4)
+		 => nil 
+		 
+	-> : replace(other_str) → str
+	Ex:	 3.0.2 :047 > s = "hello" 
+		 => "hello" 
+		3.0.2 :048 > s.replace "world" 
+		 => "world"
+		 
+	-> : insert(index, other_string) → self
+	Ex: 	3.0.2 :050 > 'foo'.insert(1, 'bar') 
+		 => "fbaroo" 
+		3.0.2 :051 > 'foo'.insert(-2, 'bar') 
+		 => "fobaro"
+		 
+	-> : inspect → string
+	Ex: 	3.0.2 :052 > str = "hello"
+		 => "hello" 
+		3.0.2 :054 > str[3] 
+		 => "\b" 
+		3.0.2 :055 > str[4] 
+		 => "o" 
+		3.0.2 :056 > str.inspect  
+		 => "\"hel\\bo\"" 
+		 
+	-> : intern → symbol
+	Ex: 	3.0.2 :057 > "Koala".intern 
+		 => :Koala 
+		3.0.2 :058 > s = 'cat'.to_sym  
+		 => :cat 
+		3.0.2 :059 > s == :cat 
+		 => true 
+		3.0.2 :060 > s = '@cat'.to_sym 
+		 => :@cat 
+		3.0.2 :061 > s == :@cat  
+		 => true 
+		3.0.2 :062 > 'cat and dog'.to_sym 
+		 => :"cat and dog" 
+		 
+	-> : length → integer
+	Ex:	3.0.2 :063 > "hello".length
+ 		=> 5  
+	
+	-> : lines(separator=$/, chomp: false) → an_array
+	Ex: 	3.0.2 :064 > "hello\nworld\n".lines
+		 => ["hello\n", "world\n"] 
+		3.0.2 :065 > "hello  world".lines(' ')  
+		 => ["hello ", " ", "world"] 
+		3.0.2 :066 > "hello\nworld\n".lines(chomp: true)
+		 => ["hello", "world"] 
+		 
+	-> : ljust(integer, padstr=' ') → new_str
+	Ex: 	3.0.2 :067 > "hello".ljust(4)
+		 => "hello" 
+		3.0.2 :068 > "hello".ljust(20)
+		 => "hello               " 
+		3.0.2 :069 > "hello".ljust(20,'1234')
+		 => "hello123412341234123" 
+		 
+	-> : lstrip → new_str
+	Ex: 	3.0.2 :070 > "  hello  ".lstrip 
+		 => "hello  " 
+		3.0.2 :071 > "hello".lstrip  
+		 => "hello" 
+	
+	-> : lstrip! → self or nil
+	Ex: 	3.0.2 :072 > "  hello  ".lstrip!
+		 => "hello  " 
+		3.0.2 :073 > "hello  ".lstrip! 
+		 => nil 
+		3.0.2 :074 > "hello".lstrip!  
+		 => nil 
+		 
+	-> : match(pattern, offset = 0) → matchdata or nil
+	Ex: 	3.0.2 :075 > 'foo'.match('f') 
+		 => #<MatchData "f"> 
+		3.0.2 :076 > 'foo'.match('o')
+		 => #<MatchData "o"> 
+		3.0.2 :077 > 'foo'.match('x')
+		 => nil 
+		3.0.2 :078 > 'foo'.match('f', 1)
+		 => nil 
+		3.0.2 :079 > 'foo'.match('o', 1)
+		 => #<MatchData "o"> 
+		3.0.2 :080 > 'foo'.match(/o/) {|matchdata| matchdata }
+		 => #<MatchData "o"> 
+		3.0.2 :081 > 'foo'.match(/x/) {|matchdata| matchdata }
+		 => nil 
+		3.0.2 :082 > 'foo'.match(/f/, 1) {|matchdata| matchdata }
+		 => nil 
+		 
+	-> : match?(pattern, offset = 0) → true or false
+	Ex: 	3.0.2 :080 > 'foo'.match(/o/) {|matchdata| matchdata }
+		 => #<MatchData "o"> 
+		3.0.2 :081 > 'foo'.match(/x/) {|matchdata| matchdata }
+		 => nil 
+		3.0.2 :082 > 'foo'.match(/f/, 1) {|matchdata| matchdata }
+		 => nil 
+		3.0.2 :083 > 'foo'.match?('o', 1)
+		 => true 
+		 
+	-> : succ → new_str
+	Ex:	 3.0.2 :084 > '00'.succ
+		 => "01" 
+		3.0.2 :085 > '09'.succ
+		 => "10" 
+		3.0.2 :086 > '99'.succ
+		 => "100" 
+		3.0.2 :087 > 'aa'.succ 
+		 => "ab" 
+		3.0.2 :088 > 'ZZ'.succ
+		 => "AAA" 
+		3.0.2 :089 > 'AZ'.succ
+		 => "BA" 
+		3.0.2 :090 > 'AA'.succ
+		 => "AB" 
+		3.0.2 :091 > s = 0.chr * 3
+		 => "\x00\x00\x00" 
+		3.0.2 :092 > s = 255.chr * 3
+		 => "\xFF\xFF\xFF" 
+		 
+	-> : oct → integer
+	Ex: 	3.0.2 :093 > "123".oct  
+		 => 83 
+		3.0.2 :094 > "bad".oct
+		 => 0 
+		3.0.2 :095 > "b".oct
+
+	-> : ord → integer
+	Ex: 	3.0.2 :097 > "a".ord  
+		 => 97 
+		3.0.2 :098 > "A".ord  
+		 => 65 
+		 
+	-> : partition(sep) → [head, sep, tail]
+	Ex: 	3.0.2 :099 > "hello".partition("l")  
+		 => ["he", "l", "lo"] 
+		3.0.2 :100 > "hello".partition("x")  
+		 => ["hello", "", ""] 
+		3.0.2 :101 > "hello".partition(/.l/)  
+		 => ["h", "el", "lo"] 	
+
+	-> : prepend(*other_strings) → str
+	Ex: 	3.0.2 :102 > s = 'foo'
+		 => "foo" 
+		3.0.2 :103 > s.prepend('bar', 'baz')
+		 => "barbazfoo" 
+
+	-> : replace(other_str) → str
+	Ex: 	3.0.2 :104 > s = "hello" 
+		 => "hello" 
+		3.0.2 :105 > s.replace "world"  
+		 => "world" 
+		
+	-> : reverse → new_str click
+	Ex: 	3.0.2 :106 > "stressed".reverse 
+ 		=> "desserts" 
+
+	-> : rindex(substring, offset = self.length) → integer or nil
+	Ex: 	3.0.2 :110 > 'foo'.rindex(/o/)
+		 => 2 
+		3.0.2 :111 > 'foo'.rindex(/ooo/)
+		 => nil 
+		3.0.2 :112 > 'foo'.rindex(/oo/)
+		 => 1 
+		3.0.2 :113 > 'foo'.rindex('o', 0)
+		 => nil 
+		3.0.2 :114 >  'foo'.rindex('o', 1)
+		 => 1 
+		3.0.2 :115 > 'foo'.rindex('o', 3)
+		 => 2 
+		3.0.2 :116 > 'foo'.rindex('o', -4)
+		 => nil 
+		3.0.2 :117 > 'foo'.rindex('o', -3) 
+		 => nil 
+		3.0.2 :118 > 'foo'.rindex('o', -2)
+		 => 1 
+		3.0.2 :119 > 'foo'.rindex('o', -1)
+		 => 2
+		 
+	-> : rjust(integer, padstr=' ') → new_str
+	Ex: 	3.0.2 :120 > "hello".rjust(4)  
+		 => "hello" 
+		3.0.2 :121 > "hello".rjust(20) 
+		 => "               hello" 
+		3.0.2 :122 > "hello".rjust(20, '1234')  
+		 => "123412341234123hello" 
+		 
+	-> : rpartition(sep) → [head, sep, tail] click
+	Ex:	 3.0.2 :123 > "hello".rpartition("l") 
+		 => ["hel", "l", "o"] 
+		3.0.2 :124 > "hello".rpartition("x") 
+		 => ["", "", "hello"] 
+		3.0.2 :125 > "hello".rpartition(/.l/)
+		 => ["he", "ll", "o"] 
+		 
+	-> : rstrip → new_str
+	Ex: 	3.0.2 :126 > "  hello  ".rstrip
+		 => "  hello" 
+		3.0.2 :127 > "hello".rstrip 
+		 => "hello" 
+		 
+	-> : rstrip! → self or nil
+	Ex: 	3.0.2 :128 > "  hello  ".rstrip! 
+		 => "  hello" 
+		3.0.2 :129 > "  hello".rstrip!  
+		 => nil 
+		3.0.2 :130 > "hello".rstrip! 
+		 => nil 
+		 
+		 
+	-> : scan(pattern) → array
+	Ex: 	3.0.2 :131 > a = "cruel world"
+		 => "cruel world" 
+		3.0.2 :132 > a.scan(/\w+/) 
+		 => ["cruel", "world"] 
+		3.0.2 :133 > a.scan(/.../)
+		 => ["cru", "el ", "wor"] 
+		3.0.2 :134 > a.scan(/(...)/) 
+		 => [["cru"], ["el "], ["wor"]] 
+		3.0.2 :135 > a.scan(/(..)(..)/)
+		 => [["cr", "ue"], ["l ", "wo"]] 
+		3.0.2 :136 > a.scan(/\w+/) {|w| print "<<#{w}>> " }
+		<<cruel>> <<world>>  => "cruel world" 
+		3.0.2 :137 > a.scan(/(.)(.)/) {|x,y| print y, x }
+		rceu lowlr => "cruel world" 
+		
+	-> : scrub → new_str
+	Ex: 	3.0.2 :138 > "abc\u3042\x81".scrub
+ 		=> "abcあ�" 
+ 		
+ 		
+ 	-> : string[index] → new_string or nil
+ 	Ex:	 3.0.2 :139 > 'bar'[2]
+		 => "r" 
+		3.0.2 :140 > 'foo'[-3]
+		 => "f" 
+		3.0.2 :141 > 'foo'[-4]
+		 => nil 
+		3.0.2 :142 > 'foo'[0, 0]
+		 => "" 
+		3.0.2 :143 > 'foo'[-2, 2]
+		 => "oo" 
+		3.0.2 :144 > 'foo'[3, 2]
+		 => "" 
+		3.0.2 :145 > 'foo'[1, 50]
+		 => "oo" 
+		3.0.2 :146 > 'foo'[0, -1]
+		 => nil 
+		3.0.2 :147 > 'foo'[4, 2]
+		 => nil 
+		 
+	-> : slice!(integer) → new_str or nil click to toggle source
+	   : slice!(integer, integer) → new_str or nil
+	   : slice!(range) → new_str or nil
+	   : slice!(regexp) → new_str or nil
+	   : slice!(other_str) → new_str or nil
+	Ex: 	3.0.2 :154 > string = "this is a string"
+		 => "this is a string" 
+		3.0.2 :155 > string.slice!(2) 
+		 => "i" 
+		3.0.2 :156 > string.slice!(3..6) 
+		 => " is " 
+		3.0.2 :157 > string.slice!(/s.*t/)
+		 => "sa st" 
+		3.0.2 :158 > string.slice!("r")
+		 => "r" 
+		3.0.2 :159 > string
+		 => "thing" 
+		 
+	-> : split(pattern=nil, [limit]) → an_array
+	Ex: 	3.0.2 :160 > " now's  the time ".split  
+		 => ["now's", "the", "time"] 
+		3.0.2 :161 > " now's  the time ".split(' ')
+		 => ["now's", "the", "time"] 
+		3.0.2 :162 > " now's  the time".split(/ /) 
+		 => ["", "now's", "", "the", "time"] 
+		3.0.2 :163 > "1, 2.34,56, 7".split(%r{,\s*})
+		 => ["1", "2.34", "56", "7"] 
+		3.0.2 :164 > "hello".split(//) 
+		 => ["h", "e", "l", "l", "o"] 
+		3.0.2 :165 > "hello".split(//, 3)  
+		 => ["h", "e", "llo"] 
+		3.0.2 :166 > "hi mom".split(%r{\s*}) 
+		 => ["h", "i", "m", "o", "m"] 
+		3.0.2 :167 > "mellow yellow".split("ello")
+		 => ["m", "w y", "w"] 
+		3.0.2 :168 > "1,2,,3,4,,".split(',') 
+		 => ["1", "2", "", "3", "4"] 
+		 
+	-> : squeeze([other_str]*) → new_str
+	Ex: 	3.0.2 :169 > "yellow moon".squeeze 
+		 => "yelow mon" 
+		3.0.2 :170 > "  now   is  the".squeeze(" ") 
+		 => " now is the" 
+		3.0.2 :171 > "putters shoot balls".squeeze("m-z") 
+		 => "puters shot balls" 
+		 
+	-> : start_with?([prefixes]+) → true or false
+	Ex: 	3.0.2 :172 > "hello".start_with?("hell")  
+		 => true 
+		3.0.2 :173 > "hello".start_with?(/H/i) 
+		 => true 
+		3.0.2 :174 > "hello".start_with?("heaven", "hell") 
+		 => true 
+		3.0.2 :175 > "hello".start_with?("heaven", "paradise")
+		 => false
+		 
+	-> : strip → new_str 
+	Ex: 	3.0.2 :176 > "    hello    ".strip  
+		 => "hello" 
+		3.0.2 :177 > "\tgoodbye\r\n".strip
+		 => "goodbye" 
+		3.0.2 :178 > "\x00\t\n\v\f\r ".strip
+		 => "" 
+		3.0.2 :179 > "hello".strip 
+		 => "hello" 
+		 
+	-> : strip! → self or nil
+	Ex: 	3.0.2 :180 > "  hello  ".strip! 
+		 => "hello" 
+		3.0.2 :181 > "hello".strip! 
+		 => nil
+		 
+	-> : sub(pattern, replacement) → new_str click to toggle source
+	   : sub(pattern, hash) → new_str
+           : sub(pattern) {|match| block } → new_str 
+	Ex: 	3.0.2 :184 > "hello".sub(/[aeiou]/, '*') 
+		 => "h*llo" 
+		3.0.2 :185 > "hello".sub(/[aeiou]/, '*') 
+		 => "h*llo" 
+		3.0.2 :186 > "hello".sub(/./) {|s| s.ord.to_s + ' ' }  
+		 => "104 ello" 
+		3.0.2 :187 > 'Is SHELL your preferred shell?'.sub(/[[:upper:]]{2,}/, ENV)
+		 => "Is /bin/bash your preferred shell?" 
+		 
+	-> : sub!(pattern, replacement) → str or nil
+	Ex: 	3.0.2 :188 > 'THX1138'.succ
+		 => "THX1139" 
+		3.0.2 :189 > '<<koala>>'.succ
+		 => "<<koalb>>" 
+		3.0.2 :190 > '***'.succ
+		 => "**+" 
+		 3.0.2 :191 > 'aa'.succ
+		 => "ab" 
+		3.0.2 :192 > 'ZZ'.succ
+		 => "AAA" 
+		3.0.2 :193 > 'AZ'.succ
+		 => "BA" 
+		3.0.2 :194 > '99'.succ
+		 => "100" 
+
+		 
+	-> : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+
