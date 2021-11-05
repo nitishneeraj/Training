@@ -331,12 +331,833 @@
 		3.0.2 :130 > a[4..-1]
 		 => nil 
 	
+	-> : array[index] = object → objectclick to toggle source
+	   : array[start, length] = object → object
+	   : array[range] = object → object
+	Ex: 	3.0.2 :001 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :002 > a[0] = 'foo'
+		 => "foo" 
+		3.0.2 :003 > a
+		 => ["foo", "bar", 2] 
+		 
+		 3.0.2 :004 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :005 > a[7] = 'foo'
+		 => "foo" 
+		3.0.2 :006 > a
+		 => [:foo, "bar", 2, nil, nil, nil, nil, "foo"] 
+		 
+		3.0.2 :007 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :008 > a[-1] = 'two'
+		 => "two" 
+		3.0.2 :009 > a
+		 => [:foo, "bar", "two"] 
+		 
+		 3.0.2 :010 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :011 > a[0, 2] = 'foo'
+		 => "foo" 
+		3.0.2 :012 > a
+		 => ["foo", 2] 
+		 
+		 3.0.2 :014 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :015 > a[6, 50] = 'foo'
+		 => "foo" 
+		3.0.2 :016 > a
+		 => [:foo, "bar", 2, nil, nil, nil, "foo"] 
+		 
+		 3.0.2 :017 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :018 > a[1, 0] = 'foo'
+		 => "foo" 
+		3.0.2 :019 > a
+		 => [:foo, "foo", "bar", 2] 
+		 
+		 3.0.2 :020 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :021 > a[6..50] = 'foo'
+		 => "foo" 
+		3.0.2 :022 > a
+		 => [:foo, "bar", 2, nil, nil, nil, "foo"] 
+		 
+		 3.0.2 :023 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :024 > a[1..0] = 'foo'
+		 => "foo" 
+		3.0.2 :025 > a
+		 => [:foo, "foo", "bar", 2] 
+
+		3.0.2 :026 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :027 > a[1..-1] = 'foo' 
+		 => "foo" 
+		3.0.2 :028 > a
+		 => [:foo, "foo"] 
+		 
+		3.0.2 :029 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :030 > a[1..-2] = 'foo' 
+		 => "foo" 
+		3.0.2 :031 > a
+		 => [:foo, "foo", 2] 
+
+		3.0.2 :032 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :033 > a[1..5] = 'foo'
+		 => "foo" 
+		3.0.2 :034 > a
+		 => [:foo, "foo"] 
+
+	-> : all? → true or falseclick to toggle source
+	   : all? {|element| ... } → true or false
+	   : all?(obj) → true or false
+	   Ex: 3.0.2 :001 > ['food', 'drink'].any?(/foo/) 
+		 => true 
+		3.0.2 :002 > ['food', 'drink'].any?(/bar/) 
+		 => false 
+		3.0.2 :003 > [].any?(/foo/)
+		 => false 
+		3.0.2 :004 > [0, 1, 2].any?(1)
+		 => true 
+		3.0.2 :005 > [0, 1, 2].any?(3)
+		 => false 
+
+	   
+	-> : append(*args)
+	   : assoc(obj) → found_array or nil
+	Ex: 	3.0.2 :006 > a = [{foo: 0}, [2, 4], [4, 5, 6], [4, 5]]
+		 => [{:foo=>0}, [2, 4], [4, 5, 6], [4, 5]] 
+		3.0.2 :007 > a.assoc(4)
+		 => [4, 5, 6] 
+		 
+	-> : at(index) → object
+	Ex: 	3.0.2 :008 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :009 > a.at(0)
+		 => :foo 
+		3.0.2 :010 > a.at(2)
+		 => 2 
+		 
+	-> : bsearch {|element| ... } → objectclick to toggle source
+	   : bsearch → new_enumerator
+	   Ex:  3.0.2 :016 > a = [0, 4, 7, 10, 12]
+		 => [0, 4, 7, 10, 12] 
+		3.0.2 :017 > a.map {|x| x >= 4 } 
+		 => [false, true, true, true, true] 
+		3.0.2 :018 > a.map {|x| x >= 6 } 
+		 => [false, false, true, true, true] 
+		3.0.2 :019 > a.map {|x| x >= -1 }
+		 => [true, true, true, true, true] 
+		3.0.2 :020 > a.map {|x| x >= 100 }
+		 => [false, false, false, false, false] 
+		 
+		 3.0.2 :011 > a = [0, 4, 7, 10, 12]
+		 => [0, 4, 7, 10, 12] 
+		3.0.2 :012 > a.bsearch {|x| x >= 4 } 
+		 => 4 
+		3.0.2 :013 > a.bsearch {|x| x >= 6 }
+		 => 7 
+		3.0.2 :014 > a.bsearch {|x| x >= -1 }
+		 => 0 
+		3.0.2 :015 > a.bsearch {|x| x >= 100 }
+		 => nil 
+		 
+		 3.0.2 :021 > a = [0, 4, 7, 10, 12]
+		 => [0, 4, 7, 10, 12] 
+		3.0.2 :022 > a.map {|x| x == 7 }
+		 => [false, false, true, false, false] 
+		 
+		 3.0.2 :023 > a = [0, 4, 7, 10, 12]
+		 => [0, 4, 7, 10, 12] 
+		3.0.2 :024 > a.bsearch {|element| 7 <=> element }
+		 => 7 
+		3.0.2 :025 > a.bsearch {|element| -1 <=> element }
+		 => nil 
+		3.0.2 :026 > a.bsearch {|element| 5 <=> element }
+		 => nil 
+		3.0.2 :027 > a.bsearch {|element| 15 <=> element }
+		 => nil 
+		 
+		 3.0.2 :028 > a = [0, 4, 7, 10, 12]
+		 => [0, 4, 7, 10, 12] 
+		3.0.2 :029 > a.map {|element| 7 <=> element }
+		 => [1, 1, 0, -1, -1] 
+		3.0.2 :030 > a.map {|element| -1 <=> element }
+		 => [-1, -1, -1, -1, -1] 
+		3.0.2 :031 > a.map {|element| 5 <=> element }
+		 => [1, 1, -1, -1, -1] 
+		3.0.2 :032 > a.map {|element| 15 <=> element }
+		 => [1, 1, 1, 1, 1] 
+		 
+		 3.0.2 :033 > a = [0, 4, 7, 10, 12]
+		 => [0, 4, 7, 10, 12] 
+		3.0.2 :034 > a.bsearch
+		 => #<Enumerator: ...> 
+		 
+		 -> : clear → self
+		 Ex: 	3.0.2 :035 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :036 > a.clear
+			 => [] 
+			 
+		-> : map {|element| ... } → new_array
+		   : map → new_enumerator
+		   Ex:  3.0.2 :037 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :038 > a1 = a.map {|element| element.class }
+			 => [Symbol, String, Integer] 
+			 
+			3.0.2 :039 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :040 > a1 = a.map
+			 => #<Enumerator: ...> 
+
+		-> : map! {|element| ... } → self
+		   : map! → new_enumerator
+		   Ex:  3.0.2 :041 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :042 > a.map! { |element| element.class }
+			 => [Symbol, String, Integer] 
+
+		-> : combination(n) {|element| ... } → self
+		   : combination(n) → new_enumerator
+		   Ex:  3.0.2 :045 > a = [0, 1, 2]
+			 => [0, 1, 2] 
+			3.0.2 :046 > a.combination(2) {|combination| p combination }
+			[0, 1]
+			[0, 2]
+			[1, 2]
+			 => [0, 1, 2] 
+			 
+			3.0.2 :047 > a = [0, 1, 2]
+			 => [0, 1, 2] 
+			3.0.2 :048 > a.combination(3) {|combination| p combination }
+			[0, 1, 2]
+			 => [0, 1, 2] 
+			 
+			 3.0.2 :052 > a.combination(0) {|combination| p combination }
+			[]
+			 => [0, 1, 2] 
+			 
+			3.0.2 :056 > a.combination(-1) {|combination| fail 'Cannot happen' }
+			 => [0, 1, 2] 
+			3.0.2 :057 > a.combination(4) {|combination| fail 'Cannot happen' }
+			 => [0, 1, 2] 
+			3.0.2 :058 > a.combination(2)
+			 => #<Enumerator: ...> 
+			 
+		-> : compact → new_array
+		Ex: 	3.0.2 :059 > a = [nil, 0, nil, 1, nil, 2, nil]
+			 => [nil, 0, nil, 1, nil, 2, nil] 
+			3.0.2 :060 > a.compact
+			 => [0, 1, 2] 
+
+
+		-> : concat(*other_arrays) → self
+		Ex: 	3.0.2 :061 > a = [0, 1]
+			 => [0, 1] 
+			3.0.2 :062 > a.concat([2, 3], [4, 5])
+			 => [0, 1, 2, 3, 4, 5] 
+			 
+		-> : count → an_integerclick to toggle source
+		   : count(obj) → an_integer
+		   : count {|element| ... } → an_integer
+		   Ex:  3.0.2 :063 > [0, 1, 2].count
+			 => 3 
+			3.0.2 :064 > [].count
+			 => 0 
+			3.0.2 :065 > [0, 1, 2, 0].count(0)
+			 => 2 
+			3.0.2 :066 > [0, 1, 2].count(3) 
+			 => 0 
+			3.0.2 :067 > [0, 1, 2, 3].count {|element| element > 1}
+			 => 2 
+			 
+		-> : cycle {|element| ... } → nilclick to toggle source
+		   : cycle(count) {|element| ... } → nil
+		   : cycle → new_enumerator
+		   : cycle(count) → new_enumerator
+		Ex: 	3.0.2 :068 > output = []
+			 => [] 
+			3.0.2 :069 > [0, 1].cycle(2) {|element| output.push(element) }
+			 => nil 
+			3.0.2 :070 > output
+			 => [0, 1, 0, 1] 
+
+
+		-> : # Prints 0 and 1 forever.
+			[0, 1].cycle {|element| puts element }
+			[0, 1].cycle(nil) {|element| puts element }
+			
+			3.0.2 :073 > [0, 1].cycle(2)
+			 => #<Enumerator: ...> 
+			3.0.2 :074 > [0, 1].cycle
+			 => #<Enumerator: ...> 
+			3.0.2 :075 > [0, 1].cycle.first(5)
+			 => [0, 1, 0, 1, 0] 
+
+		-> : delete(obj) → deleted_objectclick to toggle source
+		   : delete(obj) {|nosuch| ... } → deleted_object or block_return
+		Ex: 	3.0.2 :076 > s1 = 'bar'; s2 = 'bar'
+			 => "bar" 
+			3.0.2 :077 > a = [:foo, s1, 2, s2]
+			 => [:foo, "bar", 2, "bar"] 
+			3.0.2 :078 > a.delete('bar')
+			 => "bar" 
+			3.0.2 :079 > a
+			 => [:foo, 2] 
+			 
+			3.0.2 :080 > s1 = 'bar'; s2 = 'bar'
+			 => "bar" 
+			3.0.2 :081 > a = [:foo, s1, 2, s2]
+			 => [:foo, "bar", 2, "bar"] 
+			3.0.2 :082 > deleted_obj = a.delete('bar') {|obj| fail 'Cannot happen' }
+			 => "bar" 
+			3.0.2 :083 > a
+			 => [:foo, 2]
+
+
+		-> : delete_at(index) → deleted_object or nil
+		Ex: 	3.0.2 :084 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :085 > a.delete_at(1)
+			 => "bar" 
+			3.0.2 :086 > a
+			 => [:foo, 2]
+			
+			3.0.2 :091 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :092 > a.delete_at(-2) 
+			 => "bar" 
+			3.0.2 :093 > a
+			 => [:foo, 2] 
+
+		-> : delete_if {|element| ... } → self
+		   : delete_if → Enumerator
+		   Ex:  3.0.2 :002 > a = [:foo, 'bar', 2, 'bat']
+			 => [:foo, "bar", 2, "bat"] 
+			3.0.2 :003 > a.delete_if {|element| element.to_s.start_with?('b') }
+			 => [:foo, 2] 
+			3.0.2 :004 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :005 > a.delete_if
+			 => #<Enumerator: ...> 
+			 
+		-> : difference(*other_arrays) → new_array
+		Ex: 	3.0.2 :006 > [0, 1, 1, 2, 1, 1, 3, 1, 1].difference([1])
+			 => [0, 2, 3] 
+			3.0.2 :007 > [0, 1, 2, 3].difference([3, 0], [1, 3])
+			 => [2] 
+			3.0.2 :001 > [0, 1, 2].difference([4]) 
+			 => [0, 1, 2] 
+			 
+		-> : dig(index, *identifiers) → object
+		Ex: 3.0.2 :002 > a = [:foo, [:bar, :baz, [:bat, :bam]]]
+		 => [:foo, [:bar, :baz, [:bat, :bam]]] 
+		3.0.2 :003 > a.dig(1)
+		 => [:bar, :baz, [:bat, :bam]] 
+		3.0.2 :004 > a.dig(1, 2)
+		 => [:bat, :bam] 
+		3.0.2 :005 > a.dig(1, 2, 0)
+		 => :bat 
+		3.0.2 :006 > a.dig(1, 2, 3)
+		 => nil 
+		 
+		-> : drop(n) → new_array
+		Ex:  3.0.2 :007 >  a = [0, 1, 2, 3, 4, 5]
+			 => [0, 1, 2, 3, 4, 5] 
+			3.0.2 :008 > a.drop(0)
+			 => [0, 1, 2, 3, 4, 5] 
+			3.0.2 :009 > a.drop(1)
+			 => [1, 2, 3, 4, 5] 
+			3.0.2 :010 > a.drop(2)
+			 => [2, 3, 4, 5] 
+			 
+		-> : drop_while {|element| ... } → new_array
+		   : drop_while → new_enumerator
+		   Ex: 3.0.2 :011 > a = [0, 1, 2, 3, 4, 5]
+			 => [0, 1, 2, 3, 4, 5] 
+			3.0.2 :012 > a.drop_while {|element| element < 3 }
+			 => [3, 4, 5] 
+			3.0.2 :013 > [0, 1].drop_while
+			 => #<Enumerator: ...> 
+			 
+		-> : each {|element| ... } → selfclick to toggle source
+		   : each → Enumerator
+		   Ex: 3.0.2 :014 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :015 > a.each {|element|  puts "#{element.class} #{element}" }
+			Symbol foo
+			String bar
+			Integer 2
+			 => [:foo, "bar", 2] 
+			 
+			 3.0.2 :016 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :017 > a.each {|element| puts element; a.clear if element.to_s.start_with?('b') }
+			foo
+			bar
+			 => [] 
+			3.0.2 :018 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :019 > e = a.each
+			 => #<Enumerator: ...> 
+			3.0.2 :020 > a1 = e.each {|element|  puts "#{element.class} #{element}" }
+			Symbol foo
+			String bar
+			Integer 2
+			 => [:foo, "bar", 2] 
+
+			 
+		-> : each_index {|index| ... } → self
+		   : each_index → Enumerator
+		   Ex: 3.0.2 :021 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :022 > a.each_index {|index|  puts "#{index} #{a[index]}" }
+			0 foo
+			1 bar
+			2 2
+			 => [:foo, "bar", 2] 
+			3.0.2 :023 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :024 > a.each_index {|index| puts index; a.clear if index > 0 }
+			0
+			1
+			 => [] 
+			 
+		-> : 	3.0.2 :025 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :026 > e = a.each_index
+			 => #<Enumerator: ...> 
+			3.0.2 :027 > a1 = e.each {|index|  puts "#{index} #{a[index]}"}
+			0 foo
+			1 bar
+			2 2
+			 => [:foo, "bar", 2] 
+
+
+		-> : eql? other_array → true or false
+		Ex: 	3.0.2 :029 > a0 = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :030 > a1 = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :031 > a1.eql?(a0)
+			 => true 
+			 
+		-> : fetch(index) → elementclick to toggle source
+		   : fetch(index, default_value) → element
+                   : fetch(index) {|index| ... } → element
+                   Ex: 3.0.2 :032 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :033 > a.fetch(1)
+			 => "bar" 
+			 
+			3.0.2 :034 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :035 > a.fetch(-1)
+			 => 2 
+			3.0.2 :036 > a.fetch(-2)
+			 => "bar" 
+			 
+			3.0.2 :037 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :039 >  a.fetch(1, nil)
+			 => "bar" 
+			 
+			 3.0.2 :041 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :042 > a.fetch(1) {|index| raise 'Cannot happen' }
+			 => "bar" 
+			3.0.2 :043 > a.fetch(50) {|index| "Value for #{index}" }
+			 => "Value for 50"
+			 
+			 
+		-> : 	fill(obj) → selfclick to toggle source
+			fill(obj, start) → self
+			fill(obj, start, length) → self
+			fill(obj, range) → self
+			fill {|index| ... } → self
+			fill(start) {|index| ... } → self
+			fill(start, length) {|index| ... } → self
+			fill(range) {|index| ... } → self
+			
+			Ex: 	3.0.2 :045 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :046 > a.fill(:X)
+				 => [:X, :X, :X, :X] 
+
+				3.0.2 :047 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :048 > a.fill(:X, 2)
+				 => ["a", "b", :X, :X] 
+				 
+				 3.0.2 :049 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :050 > a.fill(:X, 4)
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :051 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :052 > a.fill(:X, 5)
+				 => ["a", "b", "c", "d"] 
+				 
+				3.0.2 :053 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :054 > a.fill(:X, -2)
+				 => ["a", "b", :X, :X] 
+				 
+				3.0.2 :055 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :056 > a.fill(:X, -6)
+				 => [:X, :X, :X, :X] 
+				 
+				3.0.2 :057 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :058 > a.fill(:X, -50)
+				 => [:X, :X, :X, :X] 
+				 
+				3.0.2 :059 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :060 > a.fill(:X, 1, 1) 
+				 => ["a", :X, "c", "d"] 
+				 
+				3.0.2 :061 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :062 > a.fill(:X, -2, 1)
+				 => ["a", "b", :X, "d"] 
+				 
+				3.0.2 :063 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :064 > a.fill(:X, 1, 0)
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :065 > a.fill(:X, 1, -1)
+				 => ["a", "b", "c", "d"] 
+				 
+				3.0.2 :066 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :067 > a.fill(:X, (1..1))
+				 => ["a", :X, "c", "d"] 
+				 
+				3.0.2 :068 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :069 > a.fill(:X, (-1..1))
+				 => ["a", "b", "c", "d"] 
+				 
+				3.0.2 :070 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :071 > a.fill(:X, (0..-2)) 
+				 => [:X, :X, :X, "d"] 
+				 
+				3.0.2 :072 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :073 > a.fill(:X, (1..-2))
+				 => ["a", :X, :X, "d"] 
+				 
+				3.0.2 :074 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :075 > a.fill { |index| "new_#{index}" }
+				 => ["new_0", "new_1", "new_2", "new_3"] 
+				 
+				3.0.2 :076 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :077 > a.fill(1) { |index| "new_#{index}" }
+				 => ["a", "new_1", "new_2", "new_3"] 
+				 
+				3.0.2 :078 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :079 > a.fill(4) { |index| fail 'Cannot happen' } 
+				 => ["a", "b", "c", "d"] 
+				 
+				3.0.2 :080 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :081 > a.fill(-6) { |index| "new_#{index}" } 
+				 => ["new_0", "new_1", "new_2", "new_3"] 
+				 
+				3.0.2 :082 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :083 > a.fill(-50) { |index| "new_#{index}" }
+				 => ["new_0", "new_1", "new_2", "new_3"] 
+				 
+				3.0.2 :084 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :085 > a.fill(1, 1) { |index| "new_#{index}" } 
+				 => ["a", "new_1", "c", "d"]
+
+				3.0.2 :086 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :087 > a.fill(-1..-1) { |index| "new_#{index}" }
+				 => ["a", "b", "c", "new_3"] 
+				 
+				3.0.2 :088 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :089 > a.fill(-2..-2) { |index| "new_#{index}" }
+				 => ["a", "b", "new_2", "d"] 
+				 
+				3.0.2 :090 > a = ['a', 'b', 'c', 'd']
+				 => ["a", "b", "c", "d"] 
+				3.0.2 :091 > a.fill(1..1) { |index| "new_#{index}" }
+				 => ["a", "new_1", "c", "d"] 
+				 
+	-> : select {|element| ... } → new_arrayclick to toggle source
+	   : select → new_enumerator
+	Ex: 	3.0.2 :094 > a = [:foo, 'bar', 2, :bam]
+		 => [:foo, "bar", 2, :bam] 
+		3.0.2 :095 > a.select
+		 => #<Enumerator: ...> 
+		 
+		3.0.2 :097 > a = [:foo, 'bar', 2, :bam]
+		 => [:foo, "bar", 2, :bam] 
+		3.0.2 :098 > a1 = a.select {|element| element.to_s.start_with?('b') }
+		 => ["bar", :bam] 
+		3.0.2 :099 > a
+		 => [:foo, "bar", 2, :bam] 
+
+		 
+	-> : select! {|element| ... } → self or nilclick to toggle source
+	   : select! → new_enumerator
+	   Ex: 3.0.2 :102 > a = [:foo, 'bar', 2, :bam]
+		 => [:foo, "bar", 2, :bam] 
+		3.0.2 :103 > a.select!
+		 => #<Enumerator: ...> 
+		 
+	-> : index(object) → integer or nilclick to toggle source
+	   : index {|element| ... } → integer or nil
+	   : index → new_enumerator
+	Ex: 	3.0.2 :104 > a = [:foo, 'bar', 2, 'bar']
+		 => [:foo, "bar", 2, "bar"] 
+		3.0.2 :105 > a.index('bar')
+		 => 1 
+		 
+		3.0.2 :108 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :109 > e = a.index
+		 => #<Enumerator: ...> 
+		3.0.2 :110 > e
+		 => #<Enumerator: ...> 
+		3.0.2 :111 > e.each {|element| element == 'bar' }
+		 => 1 
+
+	-> : first → object or nilclick to toggle source
+	   : first(n) → new_array
+	   Ex: 	3.0.2 :112 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :113 > a.first 
+			 => :foo 
+			3.0.2 :114 > a
+			 => [:foo, "bar", 2] 
+			3.0.2 :115 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :116 > a.first(2)
+			 => [:foo, "bar"] 
+			3.0.2 :117 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :118 > a.first(50)
+			 => [:foo, "bar", 2] 
+			3.0.2 :119 > a = [:foo, 'bar', 2]
+			 => [:foo, "bar", 2] 
+			3.0.2 :120 > a.first(0)
+			 => [] 
+			 
+	-> : flatten → new_arrayclick to toggle source
+	   : flatten(level) → new_array
+	   Ex:  3.0.2 :121 > a = [ 0, [ 1, [2, 3], 4 ], 5 ]
+		 => [0, [1, [2, 3], 4], 5] 
+		3.0.2 :122 > a.flatten(0)
+		 => [0, [1, [2, 3], 4], 5] 
+		 
+		3.0.2 :123 > a = [ 0, [ 1, [2, 3], 4 ], 5 ]
+		 => [0, [1, [2, 3], 4], 5] 
+		3.0.2 :124 > a.flatten(1)
+		 => [0, 1, [2, 3], 4, 5] 
+		 
+		3.0.2 :125 > a = [ 0, [ 1, [2, 3], 4 ], 5 ]
+		 => [0, [1, [2, 3], 4], 5] 
+		3.0.2 :126 > a.flatten(2)
+		 => [0, 1, 2, 3, 4, 5] 
+		 
+		3.0.2 :127 > a = [ 0, [ 1, [2, 3], 4 ], 5 ]
+		 => [0, [1, [2, 3], 4], 5] 
+		3.0.2 :128 > a.flatten(3)
+		 => [0, 1, 2, 3, 4, 5] 
+
+
+	-> : flatten! → self or nil
+	Ex: 	3.0.2 :130 > a = [ 0, [ 1, [2, 3], 4 ], 5 ]
+		 => [0, [1, [2, 3], 4], 5] 
+		3.0.2 :131 > a.flatten!(1)
+		 => [0, 1, [2, 3], 4, 5] 
+		 
+		3.0.2 :132 > a = [ 0, [ 1, [2, 3], 4 ], 5 ]
+		 => [0, [1, [2, 3], 4], 5] 
+		3.0.2 :133 > a.flatten!(2) 
+		 => [0, 1, 2, 3, 4, 5] 
+		 
+		3.0.2 :134 > a = [ 0, [ 1, [2, 3], 4 ], 5 ]
+		 => [0, [1, [2, 3], 4], 5] 
+		3.0.2 :135 > a.flatten!(3)
+		 => [0, 1, 2, 3, 4, 5] 
+		3.0.2 :136 > [0, 1, 2].flatten!(1)
+		 => nil 
+		 
+	-> : hash → integer
+	Ex: 	3.0.2 :137 > [0, 1, 2].hash == [0, 1, 2].hash
+		 => true 
+		3.0.2 :138 > [0, 1, 2].hash == [0, 1, 3].hash
+		 => false 
+	
+	-> : include?(obj) → true or false
+	Ex: 	3.0.2 :139 > [0, 1, 2].include?(2)
+		 => true 
+		3.0.2 :140 > [0, 1, 2].include?(3)
+		 => false 
+		 
+	-> : index(object) → integer or nilclick to toggle source
+	   : index {|element| ... } → integer or nil
+	   : index → new_enumerator
+	Ex: 	3.0.2 :141 > a = [:foo, 'bar', 2, 'bar']
+		 => [:foo, "bar", 2, "bar"] 
+		3.0.2 :142 > a.index('bar')
+		 => 1 
+		3.0.2 :143 > a = [:foo, 'bar', 2, 'bar']
+		 => [:foo, "bar", 2, "bar"] 
+		3.0.2 :144 > a.index {|element| element == 'bar' }
+		 => 1 
+		3.0.2 :145 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :146 > e = a.index
+		 => #<Enumerator: ...> 
+		3.0.2 :147 > e.each {|element| element == 'bar' }
+		 => 1 
+		 
+	-> : replace(other_array) → self
+	Ex: 	3.0.2 :148 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :149 > a.replace(['foo', :bar, 3]) 
+		 => ["foo", :bar, 3] 
+		 
+	-> : insert(index, *objects) → self
+	Ex: 	3.0.2 :150 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :151 > a.insert(1, :bat, :bam) 
+		 => [:foo, :bat, :bam, "bar", 2] 
+		3.0.2 :152 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :153 > a.insert(5, :bat, :bam)
+		 => [:foo, "bar", 2, nil, nil, :bat, :bam] 
+		 
+		 3.0.2 :157 > a.insert(1)
+		 => [:foo, "bar", 2] 
+		3.0.2 :158 > a.insert(50)
+		 => [:foo, "bar", 2] 
+		3.0.2 :159 > a.insert(-50)
+		 => [:foo, "bar", 2] 
+		 
+		 3.0.2 :156 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :157 > a.insert(1)
+		 => [:foo, "bar", 2] 
+		3.0.2 :158 > a.insert(50)
+		 => [:foo, "bar", 2] 
+		3.0.2 :159 > a.insert(-50)
+		 => [:foo, "bar", 2] 
+		3.0.2 :160 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :161 > a.insert(-2, :bat, :bam)
+		 => [:foo, "bar", :bat, :bam, 2] 
+		3.0.2 :162 > a.insert(-2, :bat, :bam)
+		 => [:foo, "bar", :bat, :bam, :bat, :bam, 2] 
+
+	
+	-> : inspect → new_string
+	Ex: 	3.0.2 :164 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :165 > a.inspect
+		 => "[:foo, \"bar\", 2]"
+	
+	-> : intersection(*other_arrays) → new_array
+	Ex:	3.0.2 :166 >  [0, 1, 2, 3].intersection([0, 1, 2], [0, 1, 3])
+		 => [0, 1] 
+		3.0.2 :167 > [0, 0, 1, 1, 2, 3].intersection([0, 1, 2], [0, 1, 3]) 
+		 => [0, 1] 
+		3.0.2 :168 > [0, 1, 2].intersection([2, 1, 0])
+		 => [0, 1, 2] 
+		 
+	-> : join →new_string
+	   : join(separator = $,) → new_string
+	Ex: 	3.0.2 :169 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :170 > $,
+		 => nil 
+		3.0.2 :171 > a.join
+		 => "foobar2" 
+		3.0.2 :172 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :173 > a.join("\n") 
+		 => "foo\nbar\n2" 
+		3.0.2 :174 > a = [:foo, [:bar, [:baz, :bat]]]
+		 => [:foo, [:bar, [:baz, :bat]]] 
+		3.0.2 :175 > a.join
+		 => "foobarbazbat" 
+		 
+	-> : keep_if {|element| ... } → self
+	   : keep_if → new_enumeration
+	  Ex: 	3.0.2 :176 > a = [:foo, 'bar', 2, :bam]
+		 => [:foo, "bar", 2, :bam] 
+		3.0.2 :177 > a.keep_if {|element| element.to_s.start_with?('b') } 
+		 => ["bar", :bam] 
+		3.0.2 :178 > a = [:foo, 'bar', 2, :bam]
+		 => [:foo, "bar", 2, :bam] 
+		3.0.2 :179 > a.keep_if
+		 => #<Enumerator: ...> 
+		 
+		 3.0.2 :181 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :182 > a.last
+		 => 2 
+		3.0.2 :183 > a
+		 => [:foo, "bar", 2] 
+		3.0.2 :184 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :185 > a.last(2)
+		 => ["bar", 2] 
+		 
+		 3.0.2 :001 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :002 > a.last(50) 
+		 => [:foo, "bar", 2] 
+		3.0.2 :003 > a = [:foo, 'bar', 2]
+		 => [:foo, "bar", 2] 
+		3.0.2 :004 > a.last(0)
+		 => [] 
+
 	-> : 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 
 	
