@@ -25,8 +25,8 @@ b1.bitwise_xor  9,8
 
 Ex: ruby Bitwise_Operations.rb 
 	n1 & n2 = 8
-	n1 | n2 = 9
-		n1 ^ n2 = 1
+	n1 | n2 = 9		
+	n1 ^ n2 = 1
 
 	
 =end

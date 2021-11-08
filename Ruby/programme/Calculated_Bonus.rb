@@ -6,7 +6,6 @@ Days	Bonus
 41 to 48 days	SGD$550 per billable day
 Greater than 48 days	SGD$600 per billable day
 
-
 =end
 
 
