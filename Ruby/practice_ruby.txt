@@ -185,28 +185,643 @@
 		# Now using above class to create objects
 		object = Sample. new
 		object.hello
+		
+		
+	-> : Ruby Global Variables
+	Ex: 	$global_variable = 10
+		class Class1
+		   def print_global
+		      puts "Global variable in Class1 is #$global_variable"
+		   end
+		end
+		class Class2
+		   def print_global
+		      puts "Global variable in Class2 is #$global_variable"
+		   end
+		end
+
+		class1obj = Class1.new
+		class1obj.print_global
+		class2obj = Class2.new
+		class2obj.print_global
 
 
+	-> : Ruby Instance Variables
+		Ex: class Customer
+	   def initialize(id, name, addr)
+	      @cust_id = id
+	      @cust_name = name
+	      @cust_addr = addr
+	   end
+	   def display_details()
+	      puts "Customer id #@cust_id"
+	      puts "Customer name #@cust_name"
+	      puts "Customer address #@cust_addr"
+	   end
+	end
+
+	# Create Objects
+	cust1 = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
+	cust2 = Customer.new("2", "Poul", "New Empire road, Khandala")
+	
+	-> : Backslash Notations
+	Ex: 	\n	Newline (0x0a)
+		\r	Carriage return (0x0d)
+		\f	Formfeed (0x0c)
+		\b	Backspace (0x08)
+		\a	Bell (0x07)
+		\e	Escape (0x1b)
+		\s	Space (0x20)
+		\nnn	Octal notation (n being 0-7)
+		\xnn	Hexadecimal notation (n being 0-9, a-f, or A-F)
+		\cx, \C-x	Control-x
+		\M-x	Meta-x (c | 0x80)
+		\M-\C-x	Meta-Control-x
+		\x	Character x	
+		
+	-> : Ruby Ranges
+	Ex:	 (10..15).each do |n| 
+		   print n, ' ' 
+		end
+		
+		output: 10 11 12 13 14 15
+		
+		
+	-> : Ruby Arithmetic Operators
+	Ex: 
+		Operator	Description	Example
+		+	Addition − Adds values on either side of the operator.			a + b will give 30
+		−	Subtraction − Subtracts right hand operand from left hand operand.		a - b will give -10
+		*	Multiplication − Multiplies values on either side of the operator.		a * b will give 200
+		/	Division − Divides left hand operand by right hand operand.			b / a will give 2
+		%	Modulus − Divides left hand operand by right hand operand and returns remainder.	b % a will give 0
+		**	Exponent − Performs exponential (power) calculation on operators.		a**b will give 10 to the power 20
+		
+	
+	-> : Ruby Parallel Assignment
+	Ex:  	a = 10
+		b = 20
+		c = 30
+		
+		a, b, c = 10, 20, 30
 
 
+	-> : Ruby Bitwise Operators
+	Ex: 	 a    =  0011 1100
+		 b    =  0000 1101
+		 ------------------
+		 a&b  =  0000 1100
+		 a|b  =  0011 1101
+		 a^b  =  0011 0001
+		 ~a   =  1100 0011
+		 
+		 
+	-> : Ruby Range Operators
+	Ex: 	Operator		Description							Example
+		..	Creates a range from start point to end point inclusive.	1..10 Creates a range from 1 to 10 inclusive.
+		...	Creates a range from start point to end point exclusive.	1...10 Creates a range from 1 to 9.
 
 
+	-> : Ruby - Comments
+	Ex: 	# This is a single line comment.
+		
+		
+		-> : Ruby Multiline Comments
+		Ex: 	=begin
+			This is a multiline comment and con spwan as many lines as you
+			like. But =begin and =end should come in the first line only. 
+			=end
+			
+	-> : Ruby if...else Statement
+	Ex: 	x = 1
+		if x > 2
+		   puts "x is greater than 2"
+		elsif x <= 2 and x!=0
+		   puts "x is 1"
+		else
+		   puts "I can't guess the number"
+		end
+		
+		Output:- x is 1
+		
+	-> : Ruby unless Statement
+	Ex: 	x = 1 
+		unless x>=2
+		   puts "x is less than 2"
+		 else
+		   puts "x is greater than 2"
+		end
+		
+		Output:-
+
+		x is less than 2	
+
+	-> : Ruby case Statement
+	Ex: 	$age =  5
+		case $age
+		when 0 .. 2
+		   puts "baby"
+		when 3 .. 6
+		   puts "little child"
+		when 7 .. 12
+		   puts "child"
+		when 13 .. 18
+		   puts "youth"
+		else
+		   puts "adult"
+		end
+		
+		Output:-  little child
+		
+		
+	-> : Ruby while Statement
+		Syntax
+		
+		while conditional [do]
+		   code
+		end
+
+	Ex:	$i = 0
+		$num = 5
+
+		while $i < $num  do
+		   puts("Inside the loop i = #$i" )
+		   $i +=1
+		end
 
 
+	-> : Ruby until Statement (Same while loop)
+	Ex: 	$i = 0
+		$num = 5
+
+		until $i > $num  do
+		   puts("Inside the loop i = #$i" )
+		   $i +=1;
+		end
+		
+	-> : Ruby for Statement
+	Ex: 	for i in 0..5
+		   puts "Value of local variable is #{i}"
+		end
+			
+	->	(0..5).each do |i|
+		   puts "Value of local variable is #{i}"
+		end
+
+	-> : Ruby break Statement
+	Ex: 	for i in 0..5
+		   if i > 2 then
+		      break
+		   end
+		   puts "Value of local variable is #{i}"
+		end
+		
+	-> : Ruby next Statement
+	Ex: 	for i in 0..5
+		   if i < 2 then
+		      next
+		   end
+		   puts "Value of local variable is #{i}"
+		end
+		
+	-> : Ruby redo Statement
+	   : Restarts this iteration of the most internal loop, without checking loop condition. Restarts yield or call if called within a block.
+	   Ex: 	for i in 0..5
+			   if i < 2 then
+			      puts "Value of local variable is #{i}"
+			      redo
+			   end
+			end
+			
+	
+	-> : Ruby - Methods
+	Ex: 	def method_name 
+		   expr..
+		end	
+		
+		Ex: 	def test
+			   i = 100
+			   j = 10
+			   k = 0
+			end
+			
+	-> : Ruby return Statement
+	Ex: 	def test
+		   i = 100
+		   j = 200
+		   k = 300
+		return i, j, k
+		end
+		var = test
+		puts var
 
 
+	-> : Variable Number of Parameters
+	Ex: 	def sample (*test)
+		   puts "The number of parameters is #{test.length}"
+		   for i in 0...test.length
+		      puts "The parameters are #{test[i]}"
+		   end
+		end
+		sample "Zara", "6", "F"
+		sample "Mac", "36", "M", "MCA"
+		
+	
+	-> : Class Methods
+	Ex: 	class Accounts
+		   def reading_charge
+		   end
+		   def Accounts.return_date
+		   end
+		end
+		
+	
+	-> : Blocks
+	Ex:	Syntax
+		block_name {
+		   statement1
+		   statement2
+		   ..........
+		}
+		
+	
+	-> : The yield Statement
+	Ex: 	def test
+		   puts "You are in the method"
+		   yield
+		   puts "You are again back to the method"
+		   yield
+		end
+		test {puts "You are in the block"}
+
+	Output: -
+		You are in the method
+		You are in the block
+		You are again back to the method
+		You are in the block
+		
+		
+	-> : BEGIN and END Blocks
+	Ex: 	BEGIN { 
+		   # BEGIN block code 
+		   puts "BEGIN code block"
+		} 
+
+		END { 
+		   # END block code 
+		   puts "END code block"
+		}
+		   # MAIN block code 
+		puts "MAIN code block"
+		
+		
+	Output :- 
+			BEGIN code block
+			MAIN code block
+			END code block
+			
+	-> : Mixins in Ruby
+	Ex: 	module A
+		   def a1
+		   end
+		   def a2
+		   end
+		end
+		module B
+		   def b1
+		   end
+		   def b2
+		   end
+		end
+
+		class Sample
+		include A
+		include B
+		   def s1
+		   end
+		end
+
+		samp = Sample.new
+		samp.a1
+		samp.a2
+		samp.b1
+		samp.b2
+		samp.s1
+		
+		
+	-> : Ruby - Strings
+	: A String object in Ruby holds and manipulates an arbitrary sequence of one or more bytes
+	Ex: 'This is a simple Ruby string literal'
+	
+	
+	
+	-> : Expression Substitution
+	Ex: 	x, y, z = 12, 36, 72
+		puts "The value of x is #{ x }."
+		puts "The sum of x and y is #{ x + y }."
+		puts "The average was #{ (x + y + z)/3 }."
+		
+	-> : String Built-in Methods
+	Ex: 	myStr = String.new("THIS IS TEST")
+		foo = myStr.downcase
+
+		puts "#{foo}"
+		
+	-> : Ruby - Arrays
+	: Creating Arrays
+	Ex: names = Array.new
+	  : names = Array.new(20)
+	
+	Ex: 	names = Array.new(20)
+		puts names.size  # This returns 20
+		puts names.length # This also returns 20
+	
+	Ex: 	nums = Array.new(10) { |e| e = e * 2 }
+		puts "#{nums}"
+	
+	Ex: 	digits = Array(0..9)
+		puts "#{digits}"
+
+		
+	-> : Array Built-in Methods
+	Ex: 	a = [ "a", "b", "c" ]
+		n = [ 65, 66, 67 ]
+		puts a.pack("A3A3A3")   #=> "a  b  c  "
+		puts a.pack("a3a3a3")   #=> "a\000\000b\000\000c\000\000"
+		puts n.pack("ccc")      #=> "ABC"
+		
+	-> : Hashes
+	   : Creating Hashes
+	Ex: 	3.0.2 :001 > h = Hash.new
+ 		=> {} 
+ 	
+ 	Ex: 	3.0.2 :005 > h = {}
+		 => {} 
+		3.0.2 :006 > h.class
+		 => Hash 
+		 
+	Ex: 	3.0.2 :003 > Hash.new(h)
+		3.0.2 :004 > h.class
 
 
+	Ex:     H = Hash["a" => 100, "b" => 200]
+		puts "#{H['a']}"
+		puts "#{H['b']}"
+
+	Ex: 	$, = ", "
+		months = Hash.new( "month" )
+		months = {"1" => "January", "2" => "February"}
+
+		keys = months.keys
+		puts "#{keys}"
+		
+	Output : ["1", "2"]
+	
+	
+	-> : Date & Time
+	   : Getting Current Date and Time
+	   Ex:   3.0.2 :006 > time1 = Time.new(2002,12,31,10,12,23)
+		 => 2002-12-31 10:12:23 +0530 
+
+	Ex: 	3.0.2 :008 > time1 = Time.now
+ 		=> 2021-11-08 16:47:01.368420099 +0530 
+		
+	Ex:    time = Time.new
+		puts "Current Time : " + time.inspect						Current Time : 2021-11-08 11:17:56 +0000
+		puts time.year    # => Year of the date 							2021
+		puts time.month   # => Month of the date (1 to 12)						11
+		puts time.day     # => Day of the date (1 to 31 )						8
+		puts time.wday    # => 0: Day of week: 0 is Sunday						1
+		puts time.yday    # => 365: Day of year							312
+		puts time.hour    # => 23: 24-hour clock							11
+		puts time.min     # => 59									17
+		puts time.sec     # => 59									56
+		puts time.usec    # => 999999: microseconds							617135
+		puts time.zone    # => "UTC": timezone name							UTC		
+		
+		
+	-> : Time.utc, Time.gm and Time.local Functions
+	Ex: 	3.0.2 :006 > time1 = Time.new(2002,12,31,10,12,23)
+		 => 2002-12-31 10:12:23 +0530 
+		3.0.2 :007 > time1 = Time.new
+		 => 2021-11-08 16:46:55.023705294 +0530 
+		3.0.2 :008 > time1 = Time.now
+		 => 2021-11-08 16:47:01.368420099 +0530 
+		3.0.2 :009 > Time.local(2008, 7, 8)  
+		 => 2008-07-08 00:00:00 +0530 
+		3.0.2 :010 > Time.local(2008, 7, 8, 9, 10)   
+		 => 2008-07-08 09:10:00 +0530 
+		3.0.2 :011 > Time.utc(2008, 7, 8, 9, 10)  
+		 => 2008-07-08 09:10:00 UTC 
+		3.0.2 :012 > Time.gm(2008, 7, 8, 9, 10, 11)  
+		 => 2008-07-08 09:10:11 UTC
+		 
+		3.0.2 :013 > time = Time.new
+		 => 2021-11-08 17:11:15.457143444 +0530 
+		3.0.2 :014 > values = time.to_a
+ 		=> [15, 11, 17, 8, 11, 2021, 1, 312, false, "IST"]
+ 		
+ 		3.0.2 :015 > time = Time.now.to_i  
+		 => 1636371759 
+		3.0.2 :016 > 
+		3.0.2 :017 > Time.at(time)
+		 => 2021-11-08 17:12:39 +0530 
+		3.0.2 :018 > time = Time.now.to_f
+		 => 1636371782.6344233 
+
+	-> : Timezones and Daylight Savings Time
+	Ex:	3.0.2 :020 > time.zone       # => "UTC": return the timezone
+		 => "IST" 
+		3.0.2 :021 > time.utc_offset # => 0: UTC is 0 seconds offset from UTC
+		 => 19800 
+		3.0.2 :022 > time.zone       # => "PST" (or whatever your timezone is)
+		 => "IST" 
+		3.0.2 :023 > time.isdst      # => false: If UTC does not have DST.
+		 => false 
+		3.0.2 :024 > time.utc?       # => true: if t is in UTC time zone
+		 => false 
+		3.0.2 :025 > time.localtime  # Convert to local timezone.
+		 => 2021-11-08 17:14:37.89308173 +0530 
+		3.0.2 :026 > time.gmtime     # Convert back to UTC.
+		 => 2021-11-08 11:44:37.89308173 UTC 
+		3.0.2 :027 > time.getlocal   # Return a new Time object in local zone
+		 => 2021-11-08 17:14:37.89308173 +0530 
+		3.0.2 :028 > time.getutc     # Return a new Time object in UTC
+		 => 2021-11-08 11:44:37.89308173 UTC 
+		 
+	-> : Formatting Times and Dates
+	Ex: 	time = Time.new
+		puts time.to_s
+		puts time.ctime
+		puts time.localtime
+		puts time.strftime("%Y-%m-%d %H:%M:%S")
+		
+		Output :
+		
+		2021-11-08 11:50:45 +0000
+		Mon Nov  8 11:50:45 2021
+		2021-11-08 11:50:45 +0000
+		2021-11-08 11:50:45
+		
+		
+		
+	-> : Ranges as Sequences
+	Ex: 	(1..5)        #==> 1, 2, 3, 4, 5
+		(1...5)       #==> 1, 2, 3, 4
+		('a'..'d')    #==> 'a', 'b', 'c', 'd'
+	
+	-> : Ranges as Intervals
+	Ex: 	if ((1..10) === 5)
+		   puts "5 lies in (1..10)"
+		end
+
+		if (('a'..'j') === 'c')
+		   puts "c lies in ('a'..'j')"
+		end
+
+		if (('a'..'j') === 'z')
+		   puts "z lies in ('a'..'j')"
+		end
+		
+		
+		Output: 
+			5 lies in (1..10)
+			c lies in ('a'..'j')
+			
+	-> : Ranges as Conditions
+	Ex: 	score = 70
+
+		result = case score
+		   when 0..40 then "Fail"
+		   when 41..60 then "Pass"
+		   when 61..70 then "Pass with Merit"
+		   when 71..100 then "Pass with Distinction"
+		   else "Invalid Score"
+		end
+
+		puts result
+		
+		Output:-  Pass with Merit
+		
+		
+	-> : 	digits = 0..9
+
+		puts digits.include?(5)
+		ret = digits.min
+		puts "Min value is #{ret}"
+
+		ret = digits.max
+		puts "Max value is #{ret}"
+
+		ret = digits.reject {|i| i < 5 }
+		puts "Rejected values are #{ret}"
+
+		digits.each do |digit|
+		   puts "In Loop #{digit}"
+		end
+		
+		
+		Output:        true
+				Min value is 0
+				Max value is 9
+				Rejected values are [5, 6, 7, 8, 9]
+				In Loop 0
+				In Loop 1
+				In Loop 2
+				In Loop 3
+				In Loop 4
+				In Loop 5
+				In Loop 6
+				In Loop 7
+				In Loop 8
+				In Loop 9
+				
+				
+	-> : 	$, =", "   # Array value separator
+		range1 = (1..10).to_a
+		range2 = ('bar'..'bat').to_a
+
+		puts "#{range1}"
+		puts "#{range2}"
+		
+		Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+			["bar", "bas", "bat"]
+			
+			
+			
+	-> : Ruby each Iterator
+	Ex: 		Syntax:-
+				collection.each do |variable|
+				   code
+				end
+				
+	Ex: 	ary = [1,2,3,4,5]
+		ary.each do |i|
+		   puts i
+		end
+		
+		
+		Output: 1
+			2
+			3
+			4
+			5
+			
+			
+	-> : Ruby collect Iterator
+	Ex: 	a = [1,2,3,4,5]
+		b = Array.new
+		b = a.collect
+		puts b
+		
+		Output :
+			1
+			2
+			3
+			4
+			5
+			
+			
+	Ex : 	a = [1,2,3,4,5]
+		b = a.collect{|x| 10*x}
+		puts b
+		
+		
+	-> : The puts Statement
+	Ex: 	
+		val1 = "This is variable one"
+		val2 = "This is variable two"
+		puts val1
+		puts val
+		
+		Output:
+		
+		This is variable one
+		This is variable two
+		
+		
+	-> :  The gets Statement 
+	Ex: 	puts "Enter a value :"
+		val = gets
+		puts val	
+		
+	
+	-> : The putc Statement
+	   : which outputs the entire string onto the screen, the putc statement can be used to output one character at a time.
+	Ex: 	str = "Hello Ruby!"
+		putc str
+		
+		Output:
+		H
+		
+		
+	-> : The print Statement
+	Ex: 	print "Hello World"
+		print "Good Morning"
+		
+		Output:
+		Hello WorldGood Morning
 
 
-
-
-
-
-
-
-
-
-
-
-
+	-> : Opening and Closing Files
+	Ex: 
