@@ -824,4 +824,183 @@
 
 
 	-> : Opening and Closing Files
-	Ex: 
+	   :The File.open Method
+	Ex: 	File.open("filename", "mode") do |aFile|
+		   # ... process the file
+		end
+		
+	-> : Reading and Writing Files
+	   : The sysread Method ( the method sysread to read the contents of a file.)
+	   Ex: 	aFile = File.new("input.txt", "r")
+			if aFile
+			   content = aFile.sysread(20)
+			   puts content
+			else
+			   puts "Unable to open file!"
+			end
+			
+	-> : The syswrite Method
+	Ex: 	aFile = File.new("input.txt", "r+")
+		if aFile
+		   aFile.syswrite("ABCDEF")
+		else
+		   puts "Unable to open file!"
+		end	
+		
+		
+		
+	-> : The IO.readlines Method
+	Ex: 	arr = IO.readlines("textfile.txt")
+		puts arr[0]
+		puts arr[1]
+					
+					
+	-> : Renaming and Deleting Files
+	Ex: 	File.rename( "test1.txt", "test2.txt" )
+	
+		File.delete("test2.txt")
+	
+	-> : File Modes and Ownership
+	Ex: 	file = File.new( "test.txt", "w" )
+		file.chmod( 0755 )
+		
+		
+	-> : File Inquiries
+	Ex: 	t=File.file?( "textfile.txt" ) 
+		puts t
+		t1 = File.readable?( "textfile.txt" )   # => true
+		puts t1
+		t2 = File.executable?( "test.txt" ) # => false
+		puts t2
+		t3 = File.zero?( "textfile.txt" ) 
+		puts t3
+		t4 = File.size?( "textfile.txt" ) 
+		puts t4
+		t5 = File::ftype( "textfile.txt" )  
+		puts t5
+		t6 = File::ctime( "textfile.txt" )
+		puts t6
+		t7=File::mtime( "textfile.txt" )
+		puts t7
+		
+	-> : Directories in Ruby
+	Ex: puts Dir.pwd 
+	
+	-> : Creating a Directory
+	Ex: 	Dir.mkdir("mynewdir")
+
+		Dir.mkdir( "mynewdir", 755 )
+
+	
+	-> : Deleting a Directory
+	Ex: Dir.delete("testdir")
+	
+	-> : Ruby - Exceptions
+	Ex: 	Syntax
+		begin  
+		# -  
+		rescue OneTypeOfException  
+		# -  
+		rescue AnotherTypeOfException  
+		# -  
+		else  
+		# Other exceptions
+		ensure
+		# Always will be executed
+		end 
+		
+	-> : Using retry Statement
+	Ex: 	begin
+		   file = open("/unexistant_file")
+		   if file
+		      puts "File opened successfully"
+		   end
+		rescue
+		   fname = "existant_file"
+		   retry
+		end		
+
+	
+		
+		begin  
+		   puts 'I am before the raise.'  
+		   raise 'An error has occurred.'  
+		   puts 'I am after the raise.'  
+		rescue  
+		   puts 'I am rescued.'  
+		end  
+		puts 'I am after the begin block.'  
+		
+		
+		
+		begin  
+		   raise 'A test exception.'  
+		rescue Exception => e  
+		   puts e.message  
+		   puts e.backtrace.inspect  
+		end 		
+		 
+
+	-> : Using ensure Statement
+	Ex: 	Syntax
+		begin 
+		   #.. process 
+		   #..raise exception
+		rescue 
+		   #.. handle error 
+		ensure 
+		   #.. finally ensure execution
+		   #.. This will always execute.
+		end
+		
+		
+		begin
+		   raise 'A test exception.'
+		rescue Exception => e
+		   puts e.message
+		   puts e.backtrace.inspect
+		ensure
+		   puts "Ensuring execution"
+		end		
+			
+			
+		begin
+		   # raise 'A test exception.'
+		   puts "I'm not raising exception"
+		rescue Exception => e
+		   puts e.message
+		   puts e.backtrace.inspect
+		else
+		   puts "Congratulations-- no errors!"
+		ensure
+		   puts "Ensuring execution"
+		end		
+			
+	-> : Catch and Throw
+	Ex: 	def promptAndGet(prompt)
+		   print prompt
+		   res = readline.chomp
+		   throw :quitRequested if res == "!"
+		   return res
+		end
+
+		catch :quitRequested do
+		   name = promptAndGet("Name: ")
+		   age = promptAndGet("Age: ")
+		   sex = promptAndGet("Sex: ")
+		   # ..
+		   # process information
+		end
+		promptAndGet("Name:")
+		
+		
+	-> : Class Exception
+	   : Ruby's standard classes and modules raise exceptions. 
+	  	 Interrupt
+		NoMemoryError
+		SignalException
+		ScriptError
+		StandardError
+		SystemExit
+	
+
