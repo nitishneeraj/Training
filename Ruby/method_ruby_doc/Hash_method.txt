@@ -1,0 +1,908 @@
+---------------------------------------------------- Hash_methods ------------------------------------------------------
+
+1.Hash
+	: A Hash maps each of its unique keys to a specific value.
+	:	Hash Data Syntax
+	Ex:	3.0.2 :001 > h = {:foo => 0, :bar => 1, :baz => 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :002 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		 
+		3.0.2 :001 > h = { 'food':0,'tiger':1,'Loin':2}
+		 => {:food=>0, :tiger=>1, :Loin=>2}
+	
+	-> : Common Uses
+	Ex: 	3.0.2 :002 > person = {name: 'Matz', language: 'Ruby'}
+		=> {:name=>"Matz", :language=>"Ruby"} 
+
+	-> : You can use a Hash to give names to method arguments:
+	Ex:	 3.0.2 :003 > def some_method(hash)
+		3.0.2 :004 >   p hash
+		3.0.2 :005 > end
+		3.0.2 :006 > some_method({foo: 0, bar: 1, baz: 2})
+		{:foo=>0, :bar=>1, :baz=>2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+
+	-> : You can use a Hash to initialize an object:
+	Ex: 	3.0.2 :007 > class Dev
+		3.0.2 :008 >   attr_accessor :name, :language
+		3.0.2 :009 >   def initialize(hash)
+		3.0.2 :010 >     self.name = hash[:name]
+		3.0.2 :011 >     self.language = hash[:language]
+		3.0.2 :012 >   end
+		3.0.2 :013 > end
+		3.0.2 :014 > matz = Dev.new(name: 'Matz', language: 'Ruby')
+		 => #<Dev:0x00005582ed1d2b10 @language="Ruby", @name="Matz"> 
+		 
+	-> : Creating a Hash
+	: Here are three ways to create a Hash:
+
+		Method Hash.new
+
+		Method Hash[]
+
+		Literal form: {}.
+
+
+	Ex: 	3.0.2 :016 > h=Hash.new
+		 => {} 
+		3.0.2 :017 > h.class
+		 => Hash 
+		 
+		3.0.2 :018 > h=Hash[]
+		 => {} 
+		3.0.2 :019 > h.class
+		 => Hash 
+		 
+		3.0.2 :020 > h={}
+		 => {} 
+		3.0.2 :021 > h.class
+		 => Hash
+		 
+		3.0.2 :023 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2}
+		 
+		 3.0.2 :028 > h[:tigrt]=3
+		3.0.2 :030 > h
+		 => {:foo=>0, :bar=>1, :baz=>2, :tigrt=>3} 
+		 
+	-> : The simplest way to delete a Hash entry 
+	Ex: 	3.0.2 :038 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :039 > h.delete(:bar)
+		 => 1 
+		3.0.2 :040 > h
+		 => {:foo=>0, :baz=>2}
+
+
+	-> : Entry Order
+	   : 3.0.2 :041 > h = Hash[foo: 0, bar: 1]
+             => {:foo=>0, :bar=>1} 
+	   
+	   
+	   : New entries are added at the end:
+	   Ex : 3.0.2 :042 > h[:baz] = 2
+		 => 2 
+		3.0.2 :043 > h
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+
+	   : Updating a value does not affect the order
+	   Ex: 3.0.2 :043 > h
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :044 > h[:baz] = 3
+		 => 3 
+		3.0.2 :045 > h
+		 => {:foo=>0, :bar=>1, :baz=>3} 
+		 
+	: But re-creating a deleted entry can affect the order:
+	Ex: 	3.0.2 :047 > h[:foo] = 5
+		 => 5 
+		3.0.2 :048 > h
+		 => {:bar=>1, :baz=>3, :foo=>5} 
+		 
+	-> : Hash Keys
+	   : This Hash has keys that are Arrays:
+	Ex: 	3.0.2 :049 > a0 = [ :foo, :bar ]
+		 => [:foo, :bar] 
+		3.0.2 :050 > a1 = [ :baz, :bat ]
+		 => [:baz, :bat] 
+		3.0.2 :051 > h = {a0 => 0, a1 => 1}
+		 => {[:foo, :bar]=>0, [:baz, :bat]=>1} 
+		3.0.2 :053 > h.include?(a0)
+		 => true 
+		3.0.2 :054 > h[a0]
+		 => 0 
+		3.0.2 :055 > a0.hash 
+		 => -136359119495226755 
+		 
+		: You can repair the hash index using method rehash:
+		Ex: 3.0.2 :058 > h.rehash
+ 		=> {[:bam, :bar]=>0, [:baz, :bat]=>1} 
+		 
+	
+	-> : Default Values
+	Ex: 	3.0.2 :059 > h = Hash.new
+		 => {} 
+		3.0.2 :060 > h.default
+		 => nil 
+		3.0.2 :061 > h = Hash.new(-1)
+		 => {} 
+		3.0.2 :062 > h.default
+		 => -1 
+		 
+	   : This default value is returned for [], values_at and dig when a key is not found:
+	   Ex: 3.0.2 :065 > counts = {foo: 42}
+		 => {:foo=>42} 
+		3.0.2 :066 > counts.default 
+		 => nil 
+		3.0.2 :067 > counts[:foo]
+		 => 42 
+		3.0.2 :068 > counts[:bar]
+		 => nil 
+		3.0.2 :069 > counts.default
+		 => nil 
+		3.0.2 :070 > counts[:bar]
+		 => nil 
+		3.0.2 :071 > counts.values_at(:foo, :bar, :baz) 
+		 => [42, nil, nil] 
+		3.0.2 :072 > counts.dig(:bar)
+		 => nil 
+		 
+	-> : Default Proc
+	Ex: 	3.0.2 :073 > h = Hash.new
+		 => {} 
+		3.0.2 :074 > h.default_proc
+		 => nil 
+		3.0.2 :075 > h = Hash.new { |hash, key| "Default value for #{key}" }
+		 => {} 
+		3.0.2 :076 > h.default_proc.class
+		 => Proc 
+		3.0.2 :077 > h.default_proc = proc { |hash, key| "Default value for #{key.inspect}" }
+		 => #<Proc:0x00005582ecf96d10 (irb):77> 
+		3.0.2 :078 > h.default_proc.class
+		 => Proc 
+		 
+		3.0.2 :079 > h = Hash.new { |hash, key| "Default value for #{key}" }
+		 => {} 
+		3.0.2 :080 > 
+		3.0.2 :081 > h[:nosuch]
+		 => "Default value for nosuch" 
+		3.0.2 :082 > h.include?(:nosuch)
+		 => false 
+		3.0.2 :083 > synonyms = Hash.new { |hash, key| hash[key] = [] }
+		 => {} 
+		3.0.2 :084 > synonyms.include?(:hello)
+		 => false 
+		3.0.2 :085 > synonyms[:hello] << :hi 
+		 => [:hi] 
+		3.0.2 :086 > synonyms[:world] << :universe 
+		 => [:universe] 
+		3.0.2 :087 > synonyms.keys 
+		 => [:hello, :world] 
+
+-----------------------------------------Public Class Methods-------------------------------------------------- 
+	-> : Hash[] → new_empty_hashclick to toggle source
+	   : Hash[hash] → new_hash
+	   : Hash[ [*2_element_arrays] ] → new_hash
+	   : Hash[*objects] → new_hash
+	Ex: 	3.0.2 :088 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :089 > h
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :090 > Hash[h]
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		 
+		 3.0.2 :091 > Hash[ [ [:foo, 0], [:bar, 1] ] ]
+		 => {:foo=>0, :bar=>1} 
+		3.0.2 :092 > Hash[:foo, 0, :bar, 1] 
+		 => {:foo=>0, :bar=>1} 
+
+	-> : new(default_value = nil) 
+	   : new {|hash, key| ... } → new_hash
+	Ex: 	3.0.2 :097 > h = Hash.new
+		 => {} 
+		3.0.2 :098 > h.default
+		 => nil 
+		3.0.2 :099 > h.default_proc
+		 => nil 
+		 
+		 3.0.2 :100 > h = Hash.new {|hash, key| "Default value for #{key}" }
+		 => {} 
+		3.0.2 :101 > h.default
+		 => nil 
+		3.0.2 :102 > h.default_proc.class 
+		 => Proc 
+		3.0.2 :103 > h[:nosuch]
+		 => "Default value for nosuch" 
+		 
+	
+	-> : ruby2_keywords_hash?(hash) → true or false
+	Ex: 	3.0.2 :104 > ruby2_keywords def foo(*args)
+		3.0.2 :105 >   Hash.ruby2_keywords_hash?(args.last)
+		3.0.2 :106 > end
+		 => nil 
+		3.0.2 :107 > foo(k: 1)   
+		 => true
+		3.0.2 :108 > foo({k: 1}) 
+		 => false
+		 
+	--------------------------------Public Instance Methods--------------------------------------------------
+	
+	
+	-> : hash < other_hash → true or false
+	Ex: 	3.0.2 :109 > h1 = {foo: 0, bar: 1}
+		 => {:foo=>0, :bar=>1} 
+		3.0.2 :110 > h2 = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :111 > h1 < h2
+		 => true 
+		3.0.2 :112 > h2 < h1
+		 => false 
+		3.0.2 :113 > h1 < h1
+		 => false 
+		 
+		 
+	-> : hash <= other_hash → true or false
+	Ex: 	3.0.2 :114 > h1 = {foo: 0, bar: 1}
+		 => {:foo=>0, :bar=>1}  
+		3.0.2 :116 > h2 = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :117 > h1 <= h2
+		 => true 
+		3.0.2 :118 > h2 <= h1
+		 => false 
+		3.0.2 :119 > h1 <= h1
+		 => true
+		 
+		 
+	-> : hash == object → true or false
+	Ex: 	3.0.2 :120 > h1 = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :121 > h2 = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :122 > h1 == h2
+		 => true 
+		3.0.2 :123 > h3 = {baz: 2, bar: 1, foo: 0}
+		 => {:baz=>2, :bar=>1, :foo=>0} 
+		3.0.2 :124 > h1 == h3
+		 => true 
+		 
+	-> : hash > other_hash → true or false
+	Ex: 	3.0.2 :125 > h1 = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :126 > h2 = {foo: 0, bar: 1}
+		 => {:foo=>0, :bar=>1} 
+		3.0.2 :127 > h1 > h2
+		 => true 
+		3.0.2 :128 > h2 > h1
+		 => false 
+		3.0.2 :129 > h1 > h1
+		 => false
+		 
+		 
+	-> : hash >= other_hash → true or false
+	Ex: 	3.0.2 :130 > h1 = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :131 > h2 = {foo: 0, bar: 1}
+		 => {:foo=>0, :bar=>1} 
+		3.0.2 :132 > h1 >= h2
+		 => true 
+		3.0.2 :133 > h2 >= h1
+		 => false 
+		3.0.2 :134 > h1 >= h1
+		 => true
+		 
+		 
+	-> : hash[key] → value
+	Ex: 	3.0.2 :135 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :136 > h[:foo]
+		 => 0 
+		3.0.2 :137 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :138 > h[:nosuch]
+		 => nil 
+
+
+	-> : hash[key] = value → value
+	Ex: 	3.0.2 :139 > h = {foo: 0, bar: 1}
+		 => {:foo=>0, :bar=>1} 
+		3.0.2 :140 > h[:foo] = 2
+		 => 2 
+		3.0.2 :141 > h.store(:bar, 3)
+		 => 3 
+		3.0.2 :142 > h
+		 => {:foo=>2, :bar=>3} 
+
+
+	-> : any? → true or false
+	   : any?(object) → true or false
+	   : any? {|key, value| ... } → true or false
+	Ex: 	3.0.2 :143 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :144 > h.any?([:bar, 1])
+		 => true 
+		3.0.2 :145 > h.any?([:bar, 0]) 
+		 => false 
+		3.0.2 :146 > h.any?([:baz, 1])
+		 => false 
+		3.0.2 :147 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :148 > h.any? {|key, value| value < 3 }
+		 => true 
+		3.0.2 :149 > h.any? {|key, value| value > 3 }
+		 => false
+		 
+	-> : assoc(key) → new_array or nil
+	Ex: 	3.0.2 :150 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :151 > h.assoc(:bar)
+		 => [:bar, 1] 
+		 
+	-> : compact → new_hash
+	Ex:	3.0.2 :152 > h = {foo: 0, bar: nil, baz: 2, bat: nil}
+		 => {:foo=>0, :bar=>nil, :baz=>2, :bat=>nil} 
+		3.0.2 :153 > h1 = h.compact
+		 => {:foo=>0, :baz=>2}
+		 
+	-> : compare_by_identity → self
+		By default, these two object are considered to be the same key, so s1 will overwrite s0:
+	Ex: 	3.0.2 :154 > s0 = 'x'
+		 => "x" 
+		3.0.2 :155 > s1 = 'x'
+		 => "x" 
+		3.0.2 :156 > h = {}
+		 => {} 
+		3.0.2 :157 > h.compare_by_identity?
+		 => false 
+		3.0.2 :158 > h[s0] = 0
+		 => 0 
+		3.0.2 :159 > h[s1] = 1
+		 => 1 
+		3.0.2 :160 > h
+		 => {"x"=>1} 
+		 
+	-> : default → object
+	   : default(key) → object
+	Ex: 	3.0.2 :161 > h = {}
+		 => {} 
+		3.0.2 :162 > h.default
+		 => nil 
+		3.0.2 :163 > h = Hash.new { |hash, key| hash[key] = "No key #{key}"}
+		 => {} 
+		3.0.2 :164 > h[:foo] = "Hello"
+		 => "Hello" 
+		3.0.2 :165 > h.default(:foo)
+		 => "No key foo" 
+		 
+	-> : default = value → object
+	Ex: 	3.0.2 :166 > h = {}
+		 => {} 
+		3.0.2 :167 > h.default
+		 => nil 
+		3.0.2 :168 > h.default = false 
+		 => false 
+		3.0.2 :169 > h.default
+		 => false 
+		 
+		 
+	-> : default_proc → proc or nil
+	Ex: 	3.0.2 :170 > h = {}
+		 => {} 
+		3.0.2 :171 > h.default_proc
+		 => nil 
+		3.0.2 :172 > h.default_proc = proc {|hash, key| "Default value for #{key}" }
+		 => #<Proc:0x00005582ed190dc8 (irb):172> 
+		3.0.2 :173 > h.default_proc.class
+		 => Proc 
+		 
+	-> : default_proc = proc → proc
+	Ex: 	3.0.2 :174 > h = {}
+		 => {} 
+		3.0.2 :175 > h.default_proc
+		 => nil 
+		3.0.2 :176 > h.default_proc = proc { |hash, key| "Default value for #{key}" }
+		 => #<Proc:0x00005582ed431078 (irb):176> 
+		3.0.2 :177 > h.default_proc.class
+		 => Proc 
+		3.0.2 :178 > h.default_proc
+		 => #<Proc:0x00005582ed431078 (irb):176> 
+		3.0.2 :179 > h.default_proc 
+		 => #<Proc:0x00005582ed431078 (irb):176> 
+		 
+		 
+	-> : delete(key) → value or nilclick to toggle source
+	   : delete(key) {|key| ... } → object
+	Ex: 	3.0.2 :180 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :181 > h.delete(:bar)
+		 => 1 
+		3.0.2 :182 > h
+		 => {:foo=>0, :baz=>2} 
+		3.0.2 :183 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :184 > h.delete(:baz) { |key| raise 'Will never happen'}
+		 => 2 
+		3.0.2 :185 > h
+		 => {:foo=>0, :bar=>1}
+		 
+	-> : delete_if {|key, value| ... } 
+	   : delete_if → new_enumerator
+	Ex: 	3.0.2 :186 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :187 > h.delete_if {|key, value| value > 0 }
+		 => {:foo=>0} 
+		3.0.2 :188 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :189 > e = h.delete_if
+		 => #<Enumerator: ...> 
+		3.0.2 :190 > e.each { |key, value| value > 0 }
+		 => {:foo=>0} 
+
+
+	-> : dig(key, *identifiers) → object
+	Ex: 	3.0.2 :191 > h = {foo: {bar: {baz: 2}}}
+		 => {:foo=>{:bar=>{:baz=>2}}} 
+		3.0.2 :192 > h.dig(:foo)
+		 => {:bar=>{:baz=>2}} 
+		3.0.2 :193 > h.dig(:foo, :bar) 
+		 => {:baz=>2} 
+		3.0.2 :194 > h.dig(:foo, :bar, :baz)
+		 => 2 
+		3.0.2 :195 > h.dig(:foo, :bar, :BAZ)
+		 => nil
+		 
+		3.0.2 :196 > h = {foo: {bar: [:a, :b, :c]}}
+		 => {:foo=>{:bar=>[:a, :b, :c]}} 
+		3.0.2 :197 > h.dig(:hello)
+		 => nil 
+		3.0.2 :198 > h.default_proc = -> (hash, _key) { hash }
+		 => #<Proc:0x00005582ed339af8 (irb):198 (lambda)> 
+		3.0.2 :199 > h.dig(:hello, :world) 
+		 => {:foo=>{:bar=>[:a, :b, :c]}} 
+		3.0.2 :200 > h.dig(:hello, :world, :foo, :bar, 2)
+		 => :c 
+
+	-> : 	each {|key, value| ... } 
+		each_pair {|key, value| ... } → self
+		each → new_enumerator
+		each_pair → new_enumerator
+		Ex: 	3.0.2 :203 > h = {foo: 0, bar: 1, baz: 2}
+			 => {:foo=>0, :bar=>1, :baz=>2} 
+			3.0.2 :204 > e = h.each_pair 
+			 => #<Enumerator: ...> 
+			3.0.2 :205 > h1 = e.each {|key, value| puts "#{key}: #{value}"}
+			foo: 0
+			bar: 1
+			baz: 2
+			 => {:foo=>0, :bar=>1, :baz=>2}
+			 
+	-> : each_key {|key| ... } → self
+	   : each_key → new_enumerator
+	Ex: 	3.0.2 :206 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :207 > h.each_key {|key| puts key } 
+		foo
+		bar
+		baz
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :208 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :209 > e = h.each_key
+		 => #<Enumerator: ...> 
+		3.0.2 :210 > h1 = e.each {|key| puts key }
+		foo
+		bar
+		baz
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :211 > h1
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		 
+	-> : each_pair {|key, value| ... } → self
+	   : each_pair → new_enumerator
+	Ex: 	3.0.2 :214 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :215 > e = h.each_pair
+		 => #<Enumerator: ...> 
+		3.0.2 :216 > h1 = e.each {|key, value| puts "#{key}: #{value}"}
+		foo: 0
+		bar: 1
+		baz: 2
+		 => {:foo=>0, :bar=>1, :baz=>2}
+		 
+	-> : each_value {|value| ... } → self
+	   : each_value → new_enumerator
+	Ex: 	3.0.2 :217 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :218 > h.each_value {|value| puts value } 
+		0
+		1
+		2
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :219 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :220 > e = h.each_value
+		 => #<Enumerator: ...> 
+		3.0.2 :221 > h1 = e.each {|value| puts value }
+		0
+		1
+		2
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		 
+	-> : empty? → true or false
+	Ex: 	3.0.2 :222 > {}.empty?
+		 => true 
+		3.0.2 :223 > {foo: 0, bar: 1, baz: 2}.empty?
+		 => false
+		 
+	-> : eql? object → true or false
+	Ex: 	3.0.2 :226 > h1 = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :227 > h2 = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :228 > h1.eql? h2 
+		 => true 
+		3.0.2 :229 > h3 = {baz: 2, bar: 1, foo: 0}
+		 => {:baz=>2, :bar=>1, :foo=>0} 
+		3.0.2 :230 > h1.eql? h3
+		 => true
+		 
+	-> : except(*keys) → a_hash
+	Ex: 	3.0.2 :231 > h = { a: 100, b: 200, c: 300 }
+		 => {:a=>100, :b=>200, :c=>300} 
+		3.0.2 :232 > h.except(:a) 
+		 => {:b=>200, :c=>300} 
+			
+			
+	-> : fetch(key) → object
+	   : fetch(key, default_value) → object
+	   : fetch(key) {|key| ... } → object
+	Ex: 	3.0.2 :233 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :234 > h.fetch(:bar)
+		 => 1 
+		3.0.2 :235 > {}.fetch(:nosuch, :default)
+		 => :default 
+		3.0.2 :237 > {}.fetch(:nosuch) {|key| "No key #{key}"}
+		 => "No key nosuch" 
+
+
+	-> : fetch_values(*keys) → new_array
+	   : fetch_values(*keys) {|key| ... } → new_array
+	Ex: 	3.0.2 :238 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :239 > h.fetch_values(:baz, :foo)
+		 => [2, 0] 
+		3.0.2 :240 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :241 > values = h.fetch_values(:bar, :foo, :bad, :bam) {|key| key.to_s}
+		 => [1, 0, "bad", "bam"]
+		 
+	-> : 	select {|key, value| ... } → new_hash
+	   : select → new_enumerator
+	Ex: 	3.0.2 :242 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :243 > h.select {|key, value| value < 2 }
+		 => {:foo=>0, :bar=>1} 
+		3.0.2 :244 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :245 > e = h.select
+		 => #<Enumerator: ...> 
+		3.0.2 :246 > e.each {|key, value| value < 2 }
+		 => {:foo=>0, :bar=>1} 
+		 
+	-> : select! {|key, value| ... } → self or nil
+	   : select! → new_enumerator
+	Ex: 	3.0.2 :247 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :248 > e = h.select!
+		 => #<Enumerator: ...> 
+		3.0.2 :249 > e.each { |key, value| value < 2 } 
+		 => {:foo=>0, :bar=>1} 
+		 
+		 
+	-> : flatten → new_arrayc
+	   : flatten(level) → new_array
+	Ex: 	3.0.2 :250 > h = {foo: 0, bar: [:bat, 3], baz: 2}
+		 => {:foo=>0, :bar=>[:bat, 3], :baz=>2} 
+		3.0.2 :251 > h.flatten
+		 => [:foo, 0, :bar, [:bat, 3], :baz, 2] 
+		3.0.2 :252 > h = {foo: 0, bar: [:bat, [:baz, [:bat, ]]]}
+		 => {:foo=>0, :bar=>[:bat, [:baz, [:bat]]]} 
+		3.0.2 :253 > h.flatten(1)
+		 => [:foo, 0, :bar, [:bat, [:baz, [:bat]]]] 
+		3.0.2 :254 > h.flatten(2)
+		 => [:foo, 0, :bar, :bat, [:baz, [:bat]]] 
+		3.0.2 :255 > h.flatten(3)
+		 => [:foo, 0, :bar, :bat, :baz, [:bat]] 
+		3.0.2 :256 > h.flatten(4) 
+		 => [:foo, 0, :bar, :bat, :baz, :bat] 
+		 
+		3.0.2 :257 > h = {foo: 0, bar: [:bat, [:baz, [:bat, ]]]}
+		 => {:foo=>0, :bar=>[:bat, [:baz, [:bat]]]} 
+		3.0.2 :258 > h.flatten(-1)
+		 => [:foo, 0, :bar, :bat, :baz, :bat] 
+		3.0.2 :259 > h.flatten(-2)
+		 => [:foo, 0, :bar, :bat, :baz, :bat] 
+
+
+	-> : hash → an_integer
+	Ex:	 3.0.2 :260 > h1 = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :261 > h2 = {baz: 2, bar: 1, foo: 0}
+		 => {:baz=>2, :bar=>1, :foo=>0} 
+		3.0.2 :263 > h2.hash == h1.hash
+		 => true 
+		3.0.2 :264 > h2.eql? h1
+		 => true
+		 
+	-> : replace(other_hash) → self
+	Ex: 	3.0.2 :265 > h = {foo: 0, bar: 1, baz: 2}
+	 	=> {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :266 > h.replace({bat: 3, bam: 4})
+		 => {:bat=>3, :bam=>4} 
+
+	
+	-> : inspect → new_string
+	Ex: 	3.0.2 :267 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :268 > h.inspect
+		 => "{:foo=>0, :bar=>1, :baz=>2}" 
+		 
+	-> : invert → new_hash
+	Ex:	 3.0.2 :269 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :270 > h1 = h.invert
+		 => {0=>:foo, 1=>:bar, 2=>:baz} 
+		3.0.2 :271 > h = {foo: 0, bar: 0, baz: 0}
+		 => {:foo=>0, :bar=>0, :baz=>0} 
+		3.0.2 :272 > h.invert
+		 => {0=>:baz}
+		 
+	-> : keep_if {|key, value| ... } → self
+	   : keep_if → new_enumerator
+	Ex: 	3.0.2 :273 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :274 > h.keep_if { |key, value| key.start_with?('b') } 
+		 => {:bar=>1, :baz=>2} 
+		3.0.2 :275 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :276 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :277 > e.each { |key, value| key.start_with?('b') } 
+		 => {:bar=>1} 
+		  
+	-> : key(value) → key or nil
+	Ex: 	3.0.2 :278 > h = {foo: 0, bar: 2, baz: 2}
+		 => {:foo=>0, :bar=>2, :baz=>2} 
+		3.0.2 :279 > h.key(0)
+		 => :foo 
+		3.0.2 :280 > h.key(2)
+		 => :bar 
+		 
+	-> : keys → new_array
+	Ex: 	3.0.2 :281 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :282 > h.keys 
+		 => [:foo, :bar, :baz]
+		 
+	-> : length → integer
+	ex: 	3.0.2 :283 > {foo: 0, bar: 1, baz: 2}.length
+ 		=> 3 
+ 		
+ 	-> : merge → copy_of_self
+	   : merge(*other_hashes) → new_hash
+           : merge(*other_hashes) { |key, old_value, new_value| ... } → new_hash
+	Ex:	3.0.2 :284 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :285 > h1 = {bat: 3, bar: 4}
+		 => {:bat=>3, :bar=>4} 
+		3.0.2 :286 > h2 = {bam: 5, bat:6}
+		 => {:bam=>5, :bat=>6} 
+		 
+		3.0.2 :287 > h.merge(h1, h2)
+		 => {:foo=>0, :bar=>4, :baz=>2, :bat=>6, :bam=>5} 
+		3.0.2 :288 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :289 > h1 = {bat: 3, bar: 4}
+		 => {:bat=>3, :bar=>4} 
+		3.0.2 :290 > h2 = {bam: 5, bat:6}
+		 => {:bam=>5, :bat=>6} 
+		3.0.2 :291 > h3 = h.merge(h1, h2) { |key, old_value, new_value| old_value + new_value }
+		 => {:foo=>0, :bar=>5, :baz=>2, :bat=>9, :bam=>5} 
+		 
+		3.0.2 :292 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :293 > h.merge
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :294 > h1 = h.merge { |key, old_value, new_value| raise 'Cannot happen' }
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+
+		 
+	-> : rassoc(value) → new_array or nil
+	Ex:	3.0.2 :295 > h = {foo: 0, bar: 1, baz: 1}
+		 => {:foo=>0, :bar=>1, :baz=>1}  
+		3.0.2 :297 > h.rassoc(1)
+		 => [:bar, 1] 
+		 
+	-> : reject {|key, value| ... } → new_hash
+	   : reject → new_enumerator
+ 	Ex: 	3.0.2 :298 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :300 > h1 = h.reject {|key, value| key.start_with?('b') }
+		 => {:foo=>0} 
+		3.0.2 :301 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :302 > e = h.reject
+		 => #<Enumerator: ...> 
+		3.0.2 :303 > h1 = e.each {|key, value| key.start_with?('b') }
+		 => {:foo=>0} 
+		 
+	-> : replace(other_hash) → self
+	Ex: 	3.0.2 :304 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :305 > h.replace({bat: 3, bam: 4}) 
+		 => {:bat=>3, :bam=>4} 
+		 
+	-> : select {|key, value| ... } → new_hash
+	   : select → new_enumerator
+	Ex: 	3.0.2 :306 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :307 > h.select {|key, value| value < 2 } 
+		 => {:foo=>0, :bar=>1} 
+		3.0.2 :308 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :309 > e = h.select
+		 => #<Enumerator: ...> 
+		3.0.2 :310 > e.each {|key, value| value < 2 }
+		 => {:foo=>0, :bar=>1}
+		 
+	-> : select! {|key, value| ... } → self or nil
+	   : select! → new_enumerator
+	 Ex: 	3.0.2 :311 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :312 > e = h.select! 
+		 => #<Enumerator: ...> 
+		3.0.2 :313 > e.each { |key, value| value < 2 }
+		 => {:foo=>0, :bar=>1} 
+		 
+	-> : shift → [key, value] or default_value
+	Ex:	3.0.2 :314 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :315 > h.shift
+		 => [:foo, 0] 
+
+
+	-> : size → integer
+	Ex: 	3.0.2 :316 > {foo: 0, bar: 1, baz: 2}.length 
+		 => 3 
+		 
+	-> : slice(*keys) → new_hash
+	Ex: 	3.0.2 :317 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :318 > h.slice(:baz, :foo) 
+		 => {:baz=>2, :foo=>0}
+		 
+	-> : store(key, value)
+	Ex: 	3.0.2 :319 > h = {foo: 0, bar: 1}
+		 => {:foo=>0, :bar=>1} 
+		3.0.2 :320 > h[:foo] = 2
+		 => 2 
+		3.0.2 :321 > h.store(:bar, 3)
+		 => 3 
+		3.0.2 :322 > h = {foo: 0, bar: 1}
+		 => {:foo=>0, :bar=>1} 
+		3.0.2 :323 > h[:baz] = 2
+		 => 2 
+		3.0.2 :324 > h.store(:bat, 3)
+		 => 3
+		 
+		 
+	-> : to_a → new_array
+	Ex: 	3.0.2 :325 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :326 > h.to_a
+		 => [[:foo, 0], [:bar, 1], [:baz, 2]]
+		 
+	-> : to_h → self or new_hash
+	   : to_h {|key, value| ... } → new_hash
+	Ex: 	3.0.2 :327 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :328 > h1 = h.to_h {|key, value| [value, key] }
+		 => {0=>:foo, 1=>:bar, 2=>:baz}
+		 
+	-> : to_proc → proc
+	Ex: 	3.0.2 :329 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :330 > proc = h.to_proc
+		 => #<Proc:0x00005582ed413b40 (lambda)> 
+		3.0.2 :331 > proc.class 
+		 => Proc 
+		3.0.2 :332 > proc.call(:foo)
+		 => 0 
+		3.0.2 :333 > proc.call(:bar)
+		 => 1 
+		3.0.2 :334 > proc.call(:nosuch)
+		 => nil 
+		 
+	-> : transform_keys {|key| ... } → new_hash
+	   : transform_keys(hash2) → new_hash
+	   : transform_keys(hash2) {|other_key| ...} → new_hash
+	   : transform_keys → new_enumerator
+	Ex: 	3.0.2 :335 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :337 > h1 = h.transform_keys {|key| key.to_s }
+		 => {"foo"=>0, "bar"=>1, "baz"=>2} 
+		3.0.2 :338 > h.transform_keys(foo: :bar, bar: :foo)
+		 => {:bar=>0, :foo=>1, :baz=>2} 
+		3.0.2 :339 > h.transform_keys(foo: :hello, &:to_s)
+		 => {:hello=>0, "bar"=>1, "baz"=>2} 
+		3.0.2 :340 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :341 > h1 = h.transform_keys {|key| :bat }
+		 => {:bat=>2} 
+		3.0.2 :342 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :343 > e = h.transform_keys
+		 => #<Enumerator: ...> 
+		3.0.2 :344 > h1 = e.each { |key| key.to_s }
+		 => {"foo"=>0, "bar"=>1, "baz"=>2} 
+
+
+	-> : values_at(*keys) → new_array
+	Ex: 	3.0.2 :345 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :346 > h.values_at(:baz, :foo)
+		 => [2, 0] 
+		3.0.2 :347 > h.values_at(:hello, :foo)
+		 => [nil, 0]
+		 
+	-> : values → new_array
+	Ex: 	3.0.2 :348 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :349 > h.values
+		 => [0, 1, 2] 
+		 
+	
+	-> : merge! → self
+	   : merge!(*other_hashes) → self
+	   : merge!(*other_hashes) { |key, old_value, new_value| ... } → self
+	Ex: 	3.0.2 :350 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :352 > h1 = {bat: 3, bar: 4}
+		 => {:bat=>3, :bar=>4} 
+		3.0.2 :353 > h2 = {bam: 5, bat:6}
+		 => {:bam=>5, :bat=>6} 
+		3.0.2 :354 > h.merge!(h1, h2)
+		 => {:foo=>0, :bar=>4, :baz=>2, :bat=>6, :bam=>5} 
+
+		3.0.2 :355 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :356 > h1 = {bat: 3, bar: 4}
+		 => {:bat=>3, :bar=>4} 
+		3.0.2 :357 > h2 = {bam: 5, bat:6}
+		 => {:bam=>5, :bat=>6} 
+		3.0.2 :358 > h3 = h.merge!(h1, h2) { |key, old_value, new_value| old_value + new_value }
+		 => {:foo=>0, :bar=>5, :baz=>2, :bat=>9, :bam=>5} 
+		3.0.2 :359 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :360 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :361 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :362 > h1 = h.merge! { |key, old_value, new_value| raise 'Cannot happen' }
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+
+	-> : transform_values {|value| ... } → new_hash
+	   : transform_values → new_enumerator
+	Ex: 	3.0.2 :364 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :365 > h1 = h.transform_values {|value| value * 100}
+		 => {:foo=>0, :bar=>100, :baz=>200} 
+		3.0.2 :366 > h = {foo: 0, bar: 1, baz: 2}
+		 => {:foo=>0, :bar=>1, :baz=>2} 
+		3.0.2 :367 > e = h.transform_values 
+		 => #<Enumerator: ...> 
+		3.0.2 :368 > h1 = e.each { |value| value * 100}
+		 => {:foo=>0, :bar=>100, :baz=>200} 		
+
