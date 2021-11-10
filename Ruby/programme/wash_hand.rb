@@ -16,8 +16,8 @@ class Covid
 	# nm is the number of months
 	def hand(n,nm)
 		time = n * nm * 30  # total time  
-		mint = time * 21 / 60
-		sec = time * 21 % 60
+		mint = time * 21 / 60 # find mint
+		sec = time * 21 % 60  # find sec
 		puts "#{mint} minutes and #{sec} Seconds"
 	end
 end
