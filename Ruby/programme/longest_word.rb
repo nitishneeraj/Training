@@ -1,6 +1,10 @@
 =begin
 	
+Longest Word
 
+longest_word("Hello darkness my old friend.") ➞ "darkness"
+
+longest_word("Hello there mate.") ➞ "Hello"
 	
 =end
 
@@ -26,3 +30,15 @@ end
 t1 = Longest.new
 puts "Find largest word in your sting"
 t1.thelong "this is my pen , welcome to digital world"
+
+
+
+=begin
+	
+Output:
+
+Find largest word in your sting
+Your string = this is my pen , welcome to digital world
+Logest word : welcome
+
+=end
