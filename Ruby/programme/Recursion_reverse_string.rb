@@ -15,13 +15,23 @@ class Reverse
 		else
 			last = str[-1]
 			left = str[0..str.length-2]
-			return reverse(last) + reverse(left)
-		end
-
+			return  last.reverse + left.reverse
+		end	
 	end
 end
 
 r1 = Reverse.new
 print "Enter String : "
 a1 = gets.to_s
-r1.theReverse a1
+reverse_value = r1.theReverse a1
+print "Your reverse value = #{reverse_value}" 
+
+
+=begin
+	
+Output: 
+Enter String : String
+Your reverse value = 
+gnirtS
+	
+=end
