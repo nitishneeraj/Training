@@ -47,6 +47,8 @@ g1.theGame p1
 
 =begin
 	
-
+Output : 
+ Enter any number : 6
+Your Pattern :->  Loves me  , Loves me not , Loves me  , Loves me not , Loves me  , Loves me not
 	
 =end
