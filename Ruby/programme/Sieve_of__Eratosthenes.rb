@@ -11,30 +11,35 @@ eratosthenes(20) ➞ [2, 3, 5, 7, 11, 13, 17, 19]
 =end
 
 class Sieve
+	require 'prime'
 	def theSieve(num)
-		a = Array.new(num)
-		for i in 0..a.length-1
-			a[i] = true
-		end
-		for j in 2..Math.sqrt(num)
-			if(a[j] == true)
-				for k in j*j..num
-					a[k] = false
-					k = j+k
-				end
+		arr = []
+		start = 2
+		while(start < num)
+			if(start.prime?)
+				arr.push(start)
+				start = start +1
+			else
+				start = start +1
 			end
 		end
-		puts " List of prime numbers upto given number are :"
-		for l in 2..a.length
-			if(a[l] == true)
-				puts l
-			end
-		end
+		puts " List of prime numbers upto given number are : #{arr}"
 	end
 end
 
 s1 = Sieve.new
-puts "Sieve of Eratosthenes"
+print "Sieve of Eratosthenes"
 print "Enter a Number = "
 a1 = gets.to_i
 s1.theSieve a1
+
+
+=begin
+
+Output :
+	Sieve of EratosthenesEnter a Number = 50
+ List of prime numbers upto given number are : [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+	
+
+=end
+	
