@@ -22,9 +22,7 @@ def array()
 				a[a2+1]=temp
 			end
 		end
-		for a1 in a
-			puts a1
-		end
+
 	end
 end
 
