@@ -1,0 +1,264 @@
+=================================================Database=================================================
+
+Database Name => Sales
+
+
+================================================Tables=====================================================
+
+1. Customers:
+
+sales=# select * from customers;
+ id | first_name | last_name |   phone    |       email       |  city   | state | pincode 
+----+------------+-----------+------------+-------------------+---------+-------+---------
+  5 | aman       | sharma    | 9999002222 | aman@gmail.com    | gaya    | UP    |  351211
+  6 | nitish     | kumar     | 9999000000 | nitish@gmail.com  | FBD     | HR    |  121004
+  7 | mukesh     | sharma    | 9999015151 | mukesh@gmail.com  | jaipur  | RJ    |  121004
+  8 | bindu      | devi      | 9999000151 | bindu@gmail.com   | ponda   | GOA   |  131204
+  9 | rinkesh    |           | 9999000001 | rinkesh@gmail.com | ambala  | HR    |  121006
+ 10 | parkesh    | sharma    | 9999115522 | parkesh@gmail.com | sonipat | HR    |  131006
+  1 | sagar      | sharma    | 9911991199 | sagar@gmail.com   | FBD     | HR    |  121001
+  2 | neeraj     | sharma    | 6611881199 | neeraj@gmail.com  | FBD     | HR    |  121001
+  3 | ram        |           | 6611001155 | ram@gmail.com     | gaya    | BR    |  351211
+  4 | sita       | devi      | 9999001155 | sita@gmail.com    | gaya    | BR    |  351211
+(10 rows)
+
+
+2. Orders:
+
+sales=# select * from orders;
+ id | customer_id | order_status | order_date | shipped_date | store_id | staff_id 
+----+-------------+--------------+------------+--------------+----------+----------
+  1 |           1 | successful   | 2002-10-14 | 2002-10-21   |        1 |        1
+  2 |           1 | successful   | 2008-08-11 | 2008-09-01   |        1 |        1
+  3 |           1 | successful   | 2010-09-11 | 2010-09-10   |        4 |        4
+  4 |           2 | successful   | 2010-10-11 | 2010-10-12   |        4 |        4
+  5 |           2 | successful   | 2012-12-11 | 2012-12-15   |        2 |        5
+  6 |           3 | successful   | 2012-11-13 | 2012-11-15   |        3 |        2
+  7 |           5 | successful   | 2010-11-13 | 2010-11-15   |        5 |        3
+  8 |           5 | successful   | 2012-10-13 | 2012-11-10   |        5 |        4
+  9 |           6 | successful   | 2021-01-13 | 2021-01-15   |        5 |        5
+ 10 |           7 | successful   | 2021-01-15 | 2021-01-20   |        4 |        2
+ 11 |           8 | successful   | 2020-12-15 | 2020-12-21   |        1 |        3
+ 12 |           9 | successful   | 2020-10-17 | 2020-10-19   |        3 |        1
+ 13 |           9 | successful   | 2018-12-17 | 2020-12-23   |        2 |        5
+(13 rows)
+
+
+3. Staffs:
+
+ sales=# select * from staffs;
+ id | first_name | last_name |      email       |   phone    | active  | store_id 
+----+------------+-----------+------------------+------------+---------+----------
+  1 | sohan      | sharma    | sohan@gmail.com  | 9934112271 | present |        1
+  2 | mohan      | sharma    | mohan@gmail.com  | 9934112272 | present |        2
+  3 | rohan      | sharma    | rohan@gmail.com  | 9934112273 | present |        4
+  4 | aman       | sharma    | aman@gmail.com   | 9934112274 | present |        3
+  5 | nitish     | kumar     | nitish@gmail.com | 9934112275 | present |        5
+(5 rows)
+
+
+
+4. Order_items:
+
+sales=# select * from order_items;
+ id | order_id | quantity | price 
+----+----------+----------+-------
+  1 |        1 |        3 |   100
+  2 |        2 |        5 |    50
+  3 |        3 |        2 |   150
+  4 |        4 |        1 |  1000
+  5 |        5 |       10 |   500
+  6 |        6 |        3 |  5000
+  7 |        7 |        2 |  1000
+  8 |        8 |        1 |  2000
+  9 |        9 |        1 |  3000
+(9 rows)
+
+
+5. Stores:
+
+
+sales=# select * from stores;
+ id |        name        |   phone    |        email         |  city  | state | pincode 
+----+--------------------+------------+----------------------+--------+-------+---------
+  1 | Modern Store       | 9911991177 | modern@gmail.com     | FBD    | HR    |  121005
+  2 | Sharma superstore  | 9911995577 | superstore@gmail.com | gaya   | BR    |  171105
+  3 | Sri Balaji Store   | 9911171620 | balaji@gmail.com     | jaipur | RJ    |  341105
+  4 | Sakshi superstore. | 9911171613 | sakshi@gmail.com     | FBD    | HR    |  121005
+  5 | Sonu General Store | 9999900000 | general@gmail.com    | Noida  | UP    |  131005
+(5 rows)
+
+
+
+
+
+================================================ Describe a table ==================================================================
+
+
+1. Customers:
+
+                                     Table "public.customers"
+   Column   |         Type          | Collation | Nullable |                Default                
+------------+-----------------------+-----------+----------+---------------------------------------
+ id         | integer               |           | not null | nextval('customers_id_seq'::regclass)
+ first_name | character varying(20) |           |          | 
+ last_name  | character varying(20) |           |          | 
+ phone      | numeric               |           |          | 
+ email      | character varying(20) |           |          | 
+ city       | character varying(20) |           |          | 
+ state      | character varying(20) |           |          | 
+ pincode    | integer               |           |          | 
+Indexes:
+    "customers_pkey" PRIMARY KEY, btree (id)
+
+
+
+
+2. Stores
+
+
+                                    Table "public.stores"
+ Column  |         Type          | Collation | Nullable |              Default               
+---------+-----------------------+-----------+----------+------------------------------------
+ id      | integer               |           | not null | nextval('stores_id_seq'::regclass)
+ name    | character varying(20) |           |          | 
+ phone   | numeric               |           |          | 
+ email   | character varying(20) |           |          | 
+ city    | character varying(20) |           |          | 
+ state   | character varying(20) |           |          | 
+ pincode | integer               |           |          | 
+Indexes:
+    "stores_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "orders" CONSTRAINT "orders_store_id_fkey" FOREIGN KEY (store_id) REFERENCES stores(id)
+    TABLE "staffs" CONSTRAINT "staff_store_id_fkey" FOREIGN KEY (store_id) REFERENCES stores(id)
+
+
+3. Staffs
+
+
+                                     Table "public.staffs"
+   Column   |         Type          | Collation | Nullable |              Default              
+------------+-----------------------+-----------+----------+-----------------------------------
+ id         | integer               |           | not null | nextval('staff_id_seq'::regclass)
+ first_name | character varying(20) |           |          | 
+ last_name  | character varying(20) |           |          | 
+ email      | character varying(20) |           |          | 
+ phone      | numeric               |           |          | 
+ active     | character varying(20) |           |          | 
+ store_id   | integer               |           |          | 
+Indexes:
+    "staff_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "staff_store_id_fkey" FOREIGN KEY (store_id) REFERENCES stores(id)
+Referenced by:
+    TABLE "orders" CONSTRAINT "orders_staff_id_fkey" FOREIGN KEY (staff_id) REFERENCES staffs(id)
+
+
+
+4. Orders
+
+
+                                      Table "public.orders"
+    Column    |         Type          | Collation | Nullable |              Default               
+--------------+-----------------------+-----------+----------+------------------------------------
+ id           | integer               |           | not null | nextval('orders_id_seq'::regclass)
+ customer_id  | integer               |           |          | 
+ order_status | character varying(20) |           |          | 
+ order_date   | date                  |           |          | 
+ shipped_date | date                  |           |          | 
+ store_id     | integer               |           |          | 
+ staff_id     | integer               |           |          | 
+Indexes:
+    "orders_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "orders_staff_id_fkey" FOREIGN KEY (staff_id) REFERENCES staffs(id)
+    "orders_store_id_fkey" FOREIGN KEY (store_id) REFERENCES stores(id)
+Referenced by:
+    TABLE "order_items" CONSTRAINT "order_items_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id)
+
+
+
+5. Order_items
+
+                             Table "public.order_items"
+  Column  |  Type   | Collation | Nullable |                 Default                 
+----------+---------+-----------+----------+-----------------------------------------
+ id       | integer |           | not null | nextval('order_items_id_seq'::regclass)
+ order_id | integer |           |          | 
+ quantity | integer |           |          | 
+ price    | numeric |           |          | 
+Indexes:
+    "order_items_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "order_items_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id)
+
+
+
+=================================================== Practice Questions =================================================
+
+
+1. Find name of customer,staff name,order status,store name,quantity,price
+
+
+Solution:
+
+	select c.first_name as customer,s.first_name as staff_name,o.order_status,st.name as store_name,oo.quantity,oo.price from staffs as s,
+	customers as c,orders as o,order_items as oo,stores as st where c.id = o.customer_id AND o.id = oo.order_id AND st.id = o.store_id 
+	AND s.id = o.staff_id AND o.id >2 ; 
+
+ customer | staff_name | order_status |     store_name     | quantity | price 
+----------+------------+--------------+--------------------+----------+-------
+ sagar    | aman       | successful   | Sakshi superstore. |        2 |   150
+ neeraj   | aman       | successful   | Sakshi superstore. |        1 |  1000
+ neeraj   | nitish     | successful   | Sharma superstore  |       10 |   500
+ ram      | mohan      | successful   | Sri Balaji Store   |        3 |  5000
+ aman     | rohan      | successful   | Sonu General Store |        2 |  1000
+ aman     | aman       | successful   | Sonu General Store |        1 |  2000
+ nitish   | nitish     | successful   | Sonu General Store |        1 |  3000
+(7 rows)
+
+
+2. Find the name of customers have two orders
+
+Solution:
+
+	select c.first_name as customer,oo.order_id as numbers_of_orders from customers as c,orders as o,order_items as oo
+	 where c.id = o.customer_id AND o.id = oo.order_id AND oo.order_id >2 ; 
+
+ customer | numbers_of_orders 
+----------+-------------------
+ sagar    |                 3
+ neeraj   |                 4
+ neeraj   |                 5
+ ram      |                 6
+ aman     |                 7
+ aman     |                 8
+ nitish   |                 9
+(7 rows)
+
+
+
+3. How many order each customers
+
+Solution:
+
+	select c.first_name,count(oo.order_id) from customers as c,orders as o,order_items as oo
+	 where c.id = o.customer_id AND o.id = oo.order_id group by c.first_name;
+
+ first_name | count 
+------------+-------
+ nitish     |     1
+ neeraj     |     2
+ ram        |     1
+ sagar      |     3
+ aman       |     2
+(5 rows)
+	 
+
+
+4. 
+
+Solution:
+
+
