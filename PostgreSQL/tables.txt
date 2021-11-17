@@ -1,6 +1,6 @@
 =================================================Database=================================================
 
-Database Name => Sales
+Database Name => flipkart
 
 
 ================================================Tables=====================================================
@@ -26,11 +26,11 @@ sales=# select * from customers;
 2. Orders:
 
 sales=# select * from orders;
+
  id | customer_id | order_status | order_date | shipped_date | store_id | staff_id 
 ----+-------------+--------------+------------+--------------+----------+----------
   1 |           1 | successful   | 2002-10-14 | 2002-10-21   |        1 |        1
   2 |           1 | successful   | 2008-08-11 | 2008-09-01   |        1 |        1
-  3 |           1 | successful   | 2010-09-11 | 2010-09-10   |        4 |        4
   4 |           2 | successful   | 2010-10-11 | 2010-10-12   |        4 |        4
   5 |           2 | successful   | 2012-12-11 | 2012-12-15   |        2 |        5
   6 |           3 | successful   | 2012-11-13 | 2012-11-15   |        3 |        2
@@ -40,7 +40,8 @@ sales=# select * from orders;
  10 |           7 | successful   | 2021-01-15 | 2021-01-20   |        4 |        2
  11 |           8 | successful   | 2020-12-15 | 2020-12-21   |        1 |        3
  12 |           9 | successful   | 2020-10-17 | 2020-10-19   |        3 |        1
- 13 |           9 | successful   | 2018-12-17 | 2020-12-23   |        2 |        5
+  3 |           1 | successful   | 2010-09-11 | 2010-09-14   |        4 |        4
+ 13 |           9 | successful   | 2020-11-21 | 2021-03-14   |        2 |        5
 (13 rows)
 
 
@@ -223,42 +224,179 @@ Solution:
 
 Solution:
 
-	select c.first_name as customer,oo.order_id as numbers_of_orders from customers as c,orders as o,order_items as oo
-	 where c.id = o.customer_id AND o.id = oo.order_id AND oo.order_id >2 ; 
+	select c.first_name as customer,count(o.id) as numbers_of_orders from customers as c,orders as o where c.id = o.customer_id
+	 group by c.first_name having count(o.id) > 2;
 
  customer | numbers_of_orders 
 ----------+-------------------
  sagar    |                 3
- neeraj   |                 4
- neeraj   |                 5
- ram      |                 6
- aman     |                 7
- aman     |                 8
- nitish   |                 9
-(7 rows)
-
+(1 row)
 
 
 3. How many order each customers
 
 Solution:
 
-	select c.first_name,count(oo.order_id) from customers as c,orders as o,order_items as oo
-	 where c.id = o.customer_id AND o.id = oo.order_id group by c.first_name;
+	select c.first_name as "Customers name",count(o.customer_id) as "Numbers of orders" from orders as o,customers as c
+	 where c.id = o.customer_id group by c.first_name;
 
- first_name | count 
-------------+-------
- nitish     |     1
- neeraj     |     2
- ram        |     1
- sagar      |     3
- aman       |     2
-(5 rows)
-	 
+ Customers name | Numbers of orders 
+----------------+-------------------
+ nitish         |                 1
+ neeraj         |                 2
+ ram            |                 1
+ rinkesh        |                 2
+ bindu          |                 1
+ sagar          |                 3
+ aman           |                 2
+ mukesh         |                 1
+(8 rows)
 
 
-4. 
+
+4. How many oder each customers taken more then 2 orders
+
+Soultion
+
+	select c.first_name as "Customers name",count(o.customer_id) as "Numbers of orders" from orders as o,customers as c
+	 where c.id = o.customer_id group by c.first_name having count(o.customer_id) > 2;
+
+ Customers name | Numbers of orders 
+----------------+-------------------
+ sagar          |                 3
+(1 row)
+
+
+
+
+
+5. Differenece between order_date and shipped_date
+
+Solution
+	
+	select id as order_id,age(shipped_date , order_date) as "difference b/w shipped_date" from orders;
+
+ order_id | difference b/w shipped_date 
+----------+-----------------------------
+        1 | 7 days
+        2 | 21 days
+        4 | 1 day
+        5 | 4 days
+        6 | 2 days
+        7 | 2 days
+        8 | 28 days
+        9 | 2 days
+       10 | 5 days
+       11 | 6 days
+       12 | 2 days
+        3 | 3 days
+       13 | 3 mons 23 days
+(13 rows)
+
+
+
+
+6. find the name of staff and customer who email is " nitish@gmail.com"
+
+Solution
+
+	select c.first_name as "customer name",s.first_name as "staff name" from customers as c,orders as o,staffs as s
+	 where c.id = o.customer_id AND s.id = o.staff_id AND s.email = 'nitish@gmail.com' AND c.email ='nitish@gmail.com';
+
+ customer name | staff name 
+---------------+------------
+ nitish        | nitish
+(1 row)
+
+
+7. find the name of customer who also works as staff  
 
 Solution:
+
+	select c.first_name as "Intersection b/w staff and customer name" from customers as c,staffs as s,orders as o
+	 where s.id = o.staff_id AND c.id = o.customer_id AND c.first_name = s.first_name;
+
+ Intersection b/w staff and customer name 
+------------------------------------------
+ aman
+ nitish
+(2 rows)
+
+
+(Second way)
+
+	select first_name from customers INTERSECT select first_name from staffs;
+
+ first_name 
+------------
+ nitish
+ aman
+(2 rows)
+
+
+8. find the name of customer ,staff name,order status, store name with price =100
+
+Solution
+
+	 select c.first_name as customer,s.first_name as staff_name,o.order_status,st.name as store_name,oo.price from staffs as s,
+        customers as c,orders as o,order_items as oo,stores as st where c.id = o.customer_id AND o.id = oo.order_id AND st.id = o.store_id
+        AND s.id = o.staff_id AND oo.price = 100;
+
+ customer | staff_name | order_status |  store_name  | price 
+----------+------------+--------------+--------------+-------
+ sagar    | sohan      | successful   | Modern Store |   100
+(1 row)
+
+
+
+
+9. For every state how many orders are there which are shipped  before 2020-10-19
+
+Solution:
+
+	select st.state,count(o.id) from orders as o,stores as st where st.id = o.staff_id AND o.shipped_date < '2020-10-19' group by st.state;
+
+
+ state | count 
+-------+-------
+ BR    |     1
+ UP    |     1
+ RJ    |     1
+ HR    |     5
+(4 rows)
+
+
+
+10. find the staff AND customer name end with a 
+
+Solution
+
+	select c.first_name as "common and with last word a" from staffs as s,orders as o,customers as c where c.id = o.customer_id
+	 AND s.id = o.staff_id AND c.first_name = s.first_name AND s.first_name LIKE 'a%';
+
+
+ common and with last word a 
+-----------------------------
+ aman
+(1 row)
+	
+
+
+(Second way)
+
+
+        select s.first_name as "End with a" from staffs as s
+	 INNER JOIN orders as o 
+	 ON s.id = o.staff_id
+	 INNER JOIN customers as c
+	 ON  c.id = o.customer_id 
+	 AND c.first_name = s.first_name
+	 AND s.first_name LIKE 'a%';
+
+ End with a 
+------------
+ aman
+(1 row)
+
 
 
