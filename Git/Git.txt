@@ -424,8 +424,18 @@
 		   85132ac..57578a4  master     -> origin/master
 
 
-	
-	
+42. delete commits in remote repository
+
+	: git reset --soft HEAD^1
+
+	: git push -f origin HEAD^:master
+
+
+43. How to change push commit 
+	step1: git rebase -i HEAD~5
+	step2: replace pick with reword
+	step3: new message add
+	step4: git push --force origin master
 
 
 
