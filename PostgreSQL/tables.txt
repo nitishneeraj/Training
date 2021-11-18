@@ -480,7 +480,7 @@ group by st.state;
 (4 rows)
 
 
-10. find the staff AND customer name end with a 
+10. Write a query to find the names of customer and staff that begin with ‘S’ 
 
 Solution
 
@@ -527,4 +527,307 @@ AND c.first_name LIKE 'a%';
 (1 row)
 
 
+
+
+11.  Write a query to get the current date.
+
+Solution 
+
+
+	 SELECT CURRENT_DATE ;
+
+ current_date 
+--------------
+ 2021-11-18
+(1 row)
+
+
+select now();
+               now                
+----------------------------------
+ 2021-11-18 12:43:52.721066+05:30
+(1 row)
+
+
+12. Write a query to retrieve the first four characters of  customer_name from the customers table.
+
+
+Solution 
+
+
+	select SUBSTRING(first_name,1,4) as "first fout characters substring" from customers;
+
+ first fout characters substring 
+---------------------------------
+ aman
+ niti
+ muke
+ bind
+ rink
+ park
+ saga
+ neer
+ ram
+ sita
+(10 rows)
+
+
+13. Write a query to fetch the first_name from the customer table in upper case and use the ALIAS name as customer name.
+
+
+Solution:
+
+	select UPPER(first_name) as "Customer Name" from customers;
+
+ Customer Name 
+---------------
+ AMAN
+ NITISH
+ MUKESH
+ BINDU
+ RINKESH
+ PARKESH
+ SAGAR
+ NEERAJ
+ RAM
+ SITA
+(10 rows)
+
+
+
+
+14. Write a query to create a new table which consists of data and structure copied from the other table.
+
+
+
+Solution:
+
+Step1:->	select * INTO clone from orders;
+		SELECT 13
+
+
+
+Step2:->(Show table clone)	 select * from clone;
+
+ id | customer_id | order_status | order_date | shipped_date | store_id | staff_id 
+----+-------------+--------------+------------+--------------+----------+----------
+  1 |           1 | successful   | 2002-10-14 | 2002-10-21   |        1 |        1
+  2 |           1 | successful   | 2008-08-11 | 2008-09-01   |        1 |        1
+  4 |           2 | successful   | 2010-10-11 | 2010-10-12   |        4 |        4
+  5 |           2 | successful   | 2012-12-11 | 2012-12-15   |        2 |        5
+  6 |           3 | successful   | 2012-11-13 | 2012-11-15   |        3 |        2
+  7 |           5 | successful   | 2010-11-13 | 2010-11-15   |        5 |        3
+  8 |           5 | successful   | 2012-10-13 | 2012-11-10   |        5 |        4
+  9 |           6 | successful   | 2021-01-13 | 2021-01-15   |        5 |        5
+ 10 |           7 | successful   | 2021-01-15 | 2021-01-20   |        4 |        2
+ 11 |           8 | successful   | 2020-12-15 | 2020-12-21   |        1 |        3
+ 12 |           9 | successful   | 2020-10-17 | 2020-10-19   |        3 |        1
+  3 |           1 | successful   | 2010-09-11 | 2010-09-14   |        4 |        4
+ 13 |           9 | successful   | 2020-11-21 | 2021-03-14   |        2 |        5
+(13 rows)
+
+
+
+15. Write a query to fetch top N records.
+
+
+Solution:
+
+	SELECT * FROM customers ORDER BY first_name DESC LIMIT 5;
+ id | first_name | last_name |   phone    |       email       |  city   | state | pincode 
+----+------------+-----------+------------+-------------------+---------+-------+---------
+  4 | sita       | devi      | 9999001155 | sita@gmail.com    | gaya    | BR    |  351211
+  1 | sagar      | sharma    | 9911991199 | sagar@gmail.com   | FBD     | HR    |  121001
+  9 | rinkesh    |           | 9999000001 | rinkesh@gmail.com | ambala  | HR    |  121006
+  3 | ram        |           | 6611001155 | ram@gmail.com     | gaya    | BR    |  351211
+ 10 | parkesh    | sharma    | 9999115522 | parkesh@gmail.com | sonipat | HR    |  131006
+(5 rows)
+
+
+
+
+16.      Write a query to retrieve the first_name and last_name in a single column as “FullName”.
+	 The first name and the last name must be separated with space.
+
+Solution
+
+	SELECT id,concat(first_name,' ',last_name) from customers order by first_name;
+ id |     concat     
+----+----------------
+  5 | aman sharma
+  8 | bindu devi
+  7 | mukesh sharma
+  2 | neeraj sharma
+  6 | nitish kumar
+ 10 | parkesh sharma
+  3 | ram  
+  9 | rinkesh 
+  1 | sagar sharma
+  4 | sita devi 
+(10 rows)
+
+
+
+17.  Write a query find number of orders whose orders_date is between 02/05/2010 to 31/10/2021 and are grouped according to order_id
+
+
+Solution:
+	
+	
+	select id,count(id),order_date from orders where order_date between '2015-05-02' AND '2021-10-31' group by id  order by id DESC;
+ id | count | order_date 
+----+-------+------------
+ 13 |     1 | 2020-11-21
+ 12 |     1 | 2020-10-17
+ 11 |     1 | 2020-12-15
+ 10 |     1 | 2021-01-15
+  9 |     1 | 2021-01-13
+(5 rows)
+
+
+18.  	Write a query to fetch all the records from the customers table ordered by Last_name in descending order
+	 and state in the ascending order.
+
+
+Solution:
+	
+	 select * from customers order by first_name DESC , state ASC;
+ id | first_name | last_name |   phone    |       email       |  city   | state | pincode 
+----+------------+-----------+------------+-------------------+---------+-------+---------
+  4 | sita       | devi      | 9999001155 | sita@gmail.com    | gaya    | BR    |  351211
+  1 | sagar      | sharma    | 9911991199 | sagar@gmail.com   | FBD     | HR    |  121001
+  9 | rinkesh    |           | 9999000001 | rinkesh@gmail.com | ambala  | HR    |  121006
+  3 | ram        |           | 6611001155 | ram@gmail.com     | gaya    | BR    |  351211
+ 10 | parkesh    | sharma    | 9999115522 | parkesh@gmail.com | sonipat | HR    |  131006
+  6 | nitish     | kumar     | 9999000000 | nitish@gmail.com  | FBD     | HR    |  121004
+  2 | neeraj     | sharma    | 6611881199 | neeraj@gmail.com  | FBD     | HR    |  121001
+  7 | mukesh     | sharma    | 9999015151 | mukesh@gmail.com  | jaipur  | RJ    |  121004
+  8 | bindu      | devi      | 9999000151 | bindu@gmail.com   | ponda   | GOA   |  131204
+  5 | aman       | sharma    | 9999002222 | aman@gmail.com    | gaya    | UP    |  351211
+(10 rows)
+
+
+
+
+19.  Write a query to fetch details of all customer excluding the Customer with first names, “Aman” and “Nitish” from the Customer table.
+	
+
+
+Solution :
+
+	select * from customers where first_name NOT IN ('aman','nitish')  order by first_name;
+ id | first_name | last_name |   phone    |       email       |  city   | state | pincode 
+----+------------+-----------+------------+-------------------+---------+-------+---------
+  8 | bindu      | devi      | 9999000151 | bindu@gmail.com   | ponda   | GOA   |  131204
+  7 | mukesh     | sharma    | 9999015151 | mukesh@gmail.com  | jaipur  | RJ    |  121004
+  2 | neeraj     | sharma    | 6611881199 | neeraj@gmail.com  | FBD     | HR    |  121001
+ 10 | parkesh    | sharma    | 9999115522 | parkesh@gmail.com | sonipat | HR    |  131006
+  3 | ram        |           | 6611001155 | ram@gmail.com     | gaya    | BR    |  351211
+  9 | rinkesh    |           | 9999000001 | rinkesh@gmail.com | ambala  | HR    |  121006
+  1 | sagar      | sharma    | 9911991199 | sagar@gmail.com   | FBD     | HR    |  121001
+  4 | sita       | devi      | 9999001155 | sita@gmail.com    | gaya    | BR    |  351211
+(8 rows)
+
+
+
+20.  Write a query to fetch details of customer with the state  as “BR)”.
+
+Solution
+
+	select * from customers as c where c.state = 'BR';
+ id | first_name | last_name |   phone    |     email      | city | state | pincode 
+----+------------+-----------+------------+----------------+------+-------+---------
+  3 | ram        |           | 6611001155 | ram@gmail.com  | gaya | BR    |  351211
+  4 | sita       | devi      | 9999001155 | sita@gmail.com | gaya | BR    |  351211
+(2 rows)
+
+
+
+21.  Write a query to calculate the even records from a table.
+
+Solution:
+
+
+	select * from customers where id % 2 = 0 order by id ;
+ id | first_name | last_name |   phone    |       email       |  city   | state | pincode 
+----+------------+-----------+------------+-------------------+---------+-------+---------
+  2 | neeraj     | sharma    | 6611881199 | neeraj@gmail.com  | FBD     | HR    |  121001
+  4 | sita       | devi      | 9999001155 | sita@gmail.com    | gaya    | BR    |  351211
+  6 | nitish     | kumar     | 9999000000 | nitish@gmail.com  | FBD     | HR    |  121004
+  8 | bindu      | devi      | 9999000151 | bindu@gmail.com   | ponda   | GOA   |  131204
+ 10 | parkesh    | sharma    | 9999115522 | parkesh@gmail.com | sonipat | HR    |  131006
+(5 rows)
+	
+
+
+	select * from customers where id % 2 != 0 order by id ;
+ id | first_name | last_name |   phone    |       email       |  city  | state | pincode 
+----+------------+-----------+------------+-------------------+--------+-------+---------
+  1 | sagar      | sharma    | 9911991199 | sagar@gmail.com   | FBD    | HR    |  121001
+  3 | ram        |           | 6611001155 | ram@gmail.com     | gaya   | BR    |  351211
+  5 | aman       | sharma    | 9999002222 | aman@gmail.com    | gaya   | UP    |  351211
+  7 | mukesh     | sharma    | 9999015151 | mukesh@gmail.com  | jaipur | RJ    |  121004
+  9 | rinkesh    |           | 9999000001 | rinkesh@gmail.com | ambala | HR    |  121006
+(5 rows)
+
+
+
+22. Write a query to retrieve two minimum and maximum price from the order_items table.
+
+
+Solution
+
+	select price as minimum from customers as c, orders as o,order_items as oo where c.id = o.customer_id AND o.id = oo.order_id
+	  order by price LIMIT 2;
+
+ minimum 
+---------
+      50
+     100
+(2 rows)
+
+
+	price as maximum from customers as c, orders as o,order_items as oo where c.id = o.customer_id AND o.id = oo.order_id 
+	 order by price DESC LIMIT 2;
+ maximum 
+---------
+    5000
+    3000
+(2 rows)
+
+
+
+
+23. Write a query to find the third-highest price from the order_items table.
+
+Solution
+
+
+	select price from customers as c, orders as o,order_items as oo where c.id = o.customer_id AND o.id = oo.order_id 
+	 order by price DESC limit 1 offset 2;
+
+ price 
+-------
+  2000
+(1 row)
+
+
+24. Write a query to display the first and the last record from the customers table.
+
+Solution:
+
+	(select * from customers order by id limit 1) UNION (select * from customers order by id limit 1 offset 9);
+
+ id | first_name | last_name |   phone    |       email       |  city   | state | pincode 
+----+------------+-----------+------------+-------------------+---------+-------+---------
+  1 | sagar      | sharma    | 9911991199 | sagar@gmail.com   | FBD     | HR    |  121001
+ 10 | parkesh    | sharma    | 9999115522 | parkesh@gmail.com | sonipat | HR    |  131006
+(2 rows)
+	
+
+25.  Write a query to fetch 50% records from the Customers table.
+
+Solution :
+
+	
 
