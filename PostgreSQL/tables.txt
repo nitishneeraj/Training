@@ -220,6 +220,33 @@ Solution:
 (7 rows)
 
 
+(INNER JOIN WAY)
+
+select c.first_name as customer,s.first_name as staff_name,o.order_status,st.name as store_name,oo.quantity,oo.price from customers as c
+INNER JOIN orders as o
+ON c.id = o.customer_id
+INNER JOIN staffs as s
+ON s.id = o.staff_id
+INNER JOIN stores as st
+ON st.id = o.store_id
+INNER JOIN order_items as oo
+ON o.id = oo.order_id
+;
+ customer | staff_name | order_status |     store_name     | quantity | price 
+----------+------------+--------------+--------------------+----------+-------
+ sagar    | sohan      | successful   | Modern Store       |        3 |   100
+ sagar    | sohan      | successful   | Modern Store       |        5 |    50
+ sagar    | aman       | successful   | Sakshi superstore. |        2 |   150
+ neeraj   | aman       | successful   | Sakshi superstore. |        1 |  1000
+ neeraj   | nitish     | successful   | Sharma superstore  |       10 |   500
+ ram      | mohan      | successful   | Sri Balaji Store   |        3 |  5000
+ aman     | rohan      | successful   | Sonu General Store |        2 |  1000
+ aman     | aman       | successful   | Sonu General Store |        1 |  2000
+ nitish   | nitish     | successful   | Sonu General Store |        1 |  3000
+(9 rows)
+
+
+
 2. Find the name of customers have two orders
 
 Solution:
@@ -228,6 +255,20 @@ Solution:
 	 group by c.first_name having count(o.id) > 2;
 
  customer | numbers_of_orders 
+----------+-------------------
+ sagar    |                 3
+(1 row)
+
+
+(INNER JOIN WAY)
+
+select c.first_name as customer,count(o.id) as "number of orders " from customers as c
+INNER JOIN orders as o
+ON c.id = o.customer_id 
+group by c.first_name 
+having count(o.id) > 2 ;
+
+ customer | number of orders  
 ----------+-------------------
  sagar    |                 3
 (1 row)
@@ -253,6 +294,26 @@ Solution:
 (8 rows)
 
 
+(INNER JOIN WAY)
+
+select c.first_name as "customer Name",count(o.id) as "numbers of orders" from customers as c
+INNER JOIN orders as o
+ON c.id = o.customer_id
+group by c.first_name
+;
+ customer Name | numbers of orders 
+---------------+-------------------
+ nitish        |                 1
+ neeraj        |                 2
+ ram           |                 1
+ rinkesh       |                 2
+ bindu         |                 1
+ sagar         |                 3
+ aman          |                 2
+ mukesh        |                 1
+(8 rows)
+
+
 
 4. How many oder each customers taken more then 2 orders
 
@@ -267,6 +328,20 @@ Soultion
 (1 row)
 
 
+
+(Inner Join way)
+
+Solution
+
+select c.first_name as "customer Name",count(o.id) as "numbers of orders" from customers as c
+INNER JOIN orders as o
+ON c.id = o.customer_id
+group by c.first_name
+having count(o.id) > 2;
+ customer Name | numbers of orders 
+---------------+-------------------
+ sagar         |                 3
+(1 row)
 
 
 
@@ -292,7 +367,6 @@ Solution
         3 | 3 days
        13 | 3 mons 23 days
 (13 rows)
-
 
 
 
@@ -334,6 +408,26 @@ Solution:
 (2 rows)
 
 
+
+(Inner Join )
+
+
+select c.first_name as "customer name",s.first_name as "staff name" from customers as c
+INNER JOIN orders as o
+ON o.customer_id = c.id
+INNER JOIN staffs as s
+ON s.id = o.staff_id
+AND c.first_name = s.first_name
+;
+
+ customer name | staff name 
+---------------+------------
+ aman          | aman
+ nitish        | nitish
+(2 rows)
+
+
+
 8. find the name of customer ,staff name,order status, store name with price =100
 
 Solution
@@ -345,6 +439,9 @@ Solution
  customer | staff_name | order_status |  store_name  | price 
 ----------+------------+--------------+--------------+-------
  sagar    | sohan      | successful   | Modern Store |   100
+
+
+
 (1 row)
 
 
@@ -365,6 +462,22 @@ Solution:
  HR    |     5
 (4 rows)
 
+(Inner Join )
+
+
+select st.state as "State Name",count(o.id) as " orders shipped " from stores as st
+INNER JOIN orders as o
+ON o.staff_id = st.id
+AND o.shipped_date < '2020-10-19'
+group by st.state;
+
+ State Name |  orders shipped  
+------------+------------------
+ BR         |                1
+ UP         |                1
+ RJ         |                1
+ HR         |                5
+(4 rows)
 
 
 10. find the staff AND customer name end with a 
@@ -379,7 +492,22 @@ Solution
 -----------------------------
  aman
 (1 row)
-	
+
+
+(Inner Join )
+
+
+select s.first_name as "staff Name",c.first_name as " Customer name " from staffs as s
+INNER JOIN orders as o
+ON o.staff_id = s.id
+INNER JOIN customers as c
+ON c.id = o.customer_id
+AND c.first_name = s.first_name
+AND c.first_name LIKE 'a%';
+ staff Name |  Customer name  
+------------+-----------------
+ aman       | aman
+(1 row)	
 
 
 (Second way)
