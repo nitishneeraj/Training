@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.9 (Ubuntu 12.9-1.pgdg20.04+1)
--- Dumped by pg_dump version 14.1 (Ubuntu 14.1-1.pgdg20.04+1)
+-- Dumped from database version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -21,44 +21,6 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: order_details; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.order_details (
-    id integer NOT NULL,
-    order_id integer,
-    product_id integer,
-    name character varying,
-    price character varying,
-    quantity integer
-);
-
-
-ALTER TABLE public.order_details OWNER TO postgres;
-
---
--- Name: order_details_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.order_details_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.order_details_id_seq OWNER TO postgres;
-
---
--- Name: order_details_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.order_details_id_seq OWNED BY public.order_details.id;
-
-
---
 -- Name: orders; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -66,7 +28,7 @@ CREATE TABLE public.orders (
     id integer NOT NULL,
     order_date date,
     shipped_date date,
-    order_amount character varying(20),
+    order_amount numeric,
     payment_id integer,
     shipped_address character varying(100),
     user_id integer,
@@ -246,13 +208,6 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: order_details id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.order_details ALTER COLUMN id SET DEFAULT nextval('public.order_details_id_seq'::regclass);
-
-
---
 -- Name: orders id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -288,14 +243,6 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
--- Data for Name: order_details; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.order_details (id, order_id, product_id, name, price, quantity) FROM stdin;
-\.
-
-
---
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -313,10 +260,10 @@ COPY public.orders (id, order_date, shipped_date, order_amount, payment_id, ship
 11	2018-06-17	2018-06-20	8499	2	51,Samman Bazart	2	4
 12	2018-06-17	2018-06-20	13495	5	51,Samman Bazart	2	2
 13	2021-11-17	2021-12-01	42990	3	8/24 Sanjay colony	7	1
-14	2019-10-12	2019-10-19	179900	1	2nd Main Kanteerava Nagar, Nandhini Layout	1	6
 15	2019-10-12	2019-10-19	179900	5	51,Samman Bazart 	2	7
 16	2020-10-14	2020-10-16	6999	3	2nd Main Kanteerava Nagar, Nandhini Layout	1	8
 17	2017-11-14	2017-11-17	219000	5	8/24 Sanjay colony	1	9
+14	2019-10-12	2019-10-19	169000	1	2nd Main Kanteerava Nagar, Nandhini Layout	1	6
 \.
 
 
@@ -356,10 +303,10 @@ COPY public.products (id, name, price, size, color, categery_id, description) FR
 4	Jacket	8499	XL	Dark Brown	4	Full Sleeve Solid Men Riding Jacket
 5	Bed	127000	Queen	Choco	5	mozart Solid Wood Queen Bed
 1	Laptop	42990	14 Inch	Arctic Grey	1	Lenovo Ideapad Slim3 Core i3 11th Gen - (8 GB/256 GB SSD/Windows 10 Home)
-6	Mobile	179900	6.7 inch	Graphite	1	APPLE iPhone 13 Pro Max (Graphite, 1 TB)
 7	TV	179900	55 inch		1	LG OLED Ultra HD (4K) Smart TV  (OLED55BXPTA)
 8	Grip	6999	55 inch	Sunblaze-White	2	PUMA FUTURE Z Grip 1 Hybrid Goalkeeping Gloves
 9	Sofa	219000		Brown	5	WLI Fabric 3 + 2 + 1 Brown Sofa Set 
+6	Mobile	169000	6.7 inch	Graphite	1	APPLE iPhone 13 Pro Max (Graphite, 1 TB)
 \.
 
 
@@ -376,13 +323,6 @@ COPY public.users (id, fname, lname, phone, email, city, state, address) FROM st
 2	Om	parkesh	9999900012	om@gmail.com	Delhi	Delhi	51,Samman Bazart
 7	Mohan	panday	9990023415	mohan@gmail.com	sonipat	HR	8/24 Sanjay colony
 \.
-
-
---
--- Name: order_details_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.order_details_id_seq', 1, false);
 
 
 --
@@ -418,14 +358,6 @@ SELECT pg_catalog.setval('public.products_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('public.users_id_seq', 1, false);
-
-
---
--- Name: order_details order_details_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.order_details
-    ADD CONSTRAINT order_details_pkey PRIMARY KEY (id);
 
 
 --
