@@ -1002,5 +1002,12 @@
 		ScriptError
 		StandardError
 		SystemExit
+		
+		
+	->: Error:- Error running 'requirements_debian_libs_install libssl-dev',
+	Ex: sudo nano /etc/apt/sources.list
+	    add deb http://security.ubuntu.com/ubuntu bionic-security main
+	    sudo apt update && apt-cache policy libssl1.0-dev
+	    sudo apt-get install libssl1.0-dev
 	
 
