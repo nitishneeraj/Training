@@ -831,3 +831,223 @@ Solution :
 
 	
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=============================================================Database==============================================================
+
+1.  Database name -> Flipkart
+
+
+
+============================================================Tables==================================================================
+
+2. Orders		
+
+	 select * from orders;
+ id | order_date | shipped_date | order_amount | payment_id |              shipped_address               | user_id | product_id 
+----+------------+--------------+--------------+------------+--------------------------------------------+---------+------------
+  1 | 2018-11-20 | 2018-11-30   | 42990        |          1 | 2nd Main Kanteerava Nagar, Nandhini Layout |       1 |          1
+  2 | 2019-12-20 | 2019-12-23   | 13495        |          3 | 2nd Main Kanteerava Nagar, Nandhini Layout |       1 |          2
+  3 | 2020-12-20 | 2021-01-10   | 8499         |          2 | 2nd Main Kanteerava Nagar, Nandhini Layout |       1 |          4
+  4 | 2010-11-20 | 2010-12-01   | 127000       |          5 | 136, Veperyhighrd, Periamet                |       4 |          5
+  5 | 2012-01-20 | 2012-01-25   | 127000       |          5 | 35, Kandappa St, Vepery                    |       5 |          5
+  6 | 2013-01-21 | 2013-01-24   | 1139         |          1 | 35, Kandappa St, Vepery                    |       5 |          3
+  7 | 2014-04-15 | 2014-05-25   | 42990        |          4 | 134, Veperyhighrd, Periamet                |       3 |          1
+  8 | 2015-03-15 | 2015-03-25   | 127000       |          5 | 406, Blue Chip Cplx, Sayajigunj            |       6 |          5
+  9 | 2016-05-10 | 2016-05-17   | 13495        |          2 | 406, Blue Chip Cplx, Sayajigunj            |       6 |          2
+ 10 | 2016-05-15 | 2016-05-17   | 1139         |          3 | 406, Blue Chip Cplx, Sayajigunj            |       6 |          3
+ 11 | 2018-06-17 | 2018-06-20   | 8499         |          2 | 51,Samman Bazart                           |       2 |          4
+ 12 | 2018-06-17 | 2018-06-20   | 13495        |          5 | 51,Samman Bazart                           |       2 |          2
+ 13 | 2021-11-17 | 2021-12-01   | 42990        |          3 | 8/24 Sanjay colony                         |       7 |          1
+ 14 | 2019-10-12 | 2019-10-19   | 179900       |          1 | 2nd Main Kanteerava Nagar, Nandhini Layout |       1 |          6
+ 15 | 2019-10-12 | 2019-10-19   | 179900       |          5 | 51,Samman Bazart                           |       2 |          7
+ 16 | 2020-10-14 | 2020-10-16   | 6999         |          3 | 2nd Main Kanteerava Nagar, Nandhini Layout |       1 |          8
+ 17 | 2017-11-14 | 2017-11-17   | 219000       |          5 | 8/24 Sanjay colony                         |       1 |          9
+(17 rows)
+
+
+3. product_categories
+
+	select * from product_categories;
+ id |   categery_name    
+----+--------------------
+  1 | Electronics
+  2 | Sports
+  4 | Clothing
+  5 | Home
+  3 | Beauty,Toys & more
+(5 rows)
+
+4. Products
+
+	select * from products;
+ id |  name   | price  |   size   |     color      | categery_id |                                description                                
+----+---------+--------+----------+----------------+-------------+---------------------------------------------------------------------------
+  2 | Shoes   |  13495 | 8        | Black          |           2 | Air Zoom Vomero 16 Running Shoes For Men
+  3 | Shampoo |   1139 | 250 ml   | White          |           3 | LOréal Professionnel Xtenso Care Shampoo
+  4 | Jacket  |   8499 | XL       | Dark Brown     |           4 | Full Sleeve Solid Men Riding Jacket
+  5 | Bed     | 127000 | Queen    | Choco          |           5 | mozart Solid Wood Queen Bed
+  1 | Laptop  |  42990 | 14 Inch  | Arctic Grey    |           1 | Lenovo Ideapad Slim3 Core i3 11th Gen - (8 GB/256 GB SSD/Windows 10 Home)
+  6 | Mobile  | 179900 | 6.7 inch | Graphite       |           1 | APPLE iPhone 13 Pro Max (Graphite, 1 TB)
+  7 | TV      | 179900 | 55 inch  |                |           1 | LG OLED Ultra HD (4K) Smart TV  (OLED55BXPTA)
+  8 | Grip    |   6999 | 55 inch  | Sunblaze-White |           2 | PUMA FUTURE Z Grip 1 Hybrid Goalkeeping Gloves
+  9 | Sofa    | 219000 |          | Brown          |           5 | WLI Fabric 3 + 2 + 1 Brown Sofa Set 
+(9 rows)
+
+
+5. Users
+
+	select * from users;
+ id | fname  |  lname  |   phone    |      email       |  city   | state |                  address                   
+----+--------+---------+------------+------------------+---------+-------+--------------------------------------------
+  1 | sagar  | sharma  | 9999900000 | sagar@gmail.com  | FBD     | HR    | 2nd Main Kanteerava Nagar, Nandhini Layout
+  4 | sohan  | kumar   | 9999923012 | sohan@gmail.com  | gaya    | UP    | 136, Veperyhighrd, Periamet
+  5 | kajal  |         | 9999923015 | kajal@gmail.com  | KGG     | BR    | 35, Kandappa St, Vepery
+  3 | satyam | kumar   | 9999900012 | satyam@gmail.com | Noida   | UP    | 134, Veperyhighrd, Periamet
+  6 | aman   | verma   | 9999923415 | aman@gmail.com   | rohtak  | HR    | 406, Blue Chip Cplx, Sayajigunj
+  2 | Om     | parkesh | 9999900012 | om@gmail.com     | Delhi   | Delhi | 51,Samman Bazart
+  7 | Mohan  | panday  | 9990023415 | mohan@gmail.com  | sonipat | HR    | 8/24 Sanjay colony
+(7 rows)
+
+
+6. Payment
+
+	select * from payment;
+ id |          payment_type           
+----+---------------------------------
+  1 | Pay on delivery
+  2 | Credit/Debit card
+  3 | Net Banking
+  4 | Unified Payment Interface (UPI)
+  5 | Easy Monthly Installments (EMI)
+(5 rows)
+
+
+
+====================================================== Describe a table ================================================================
+
+7. Orders
+	
+	                                        Table "public.orders"
+     Column      |          Type          | Collation | Nullable |              Default               
+-----------------+------------------------+-----------+----------+------------------------------------
+ id              | integer                |           | not null | nextval('orders_id_seq'::regclass)
+ order_date      | date                   |           |          | 
+ shipped_date    | date                   |           |          | 
+ order_amount    | character varying(20)  |           |          | 
+ payment_id      | integer                |           |          | 
+ shipped_address | character varying(100) |           |          | 
+ user_id         | integer                |           |          | 
+ product_id      | integer                |           |          | 
+Indexes:
+    "orders_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "orders_payment_id_fkey" FOREIGN KEY (payment_id) REFERENCES payment(id)
+    "orders_product_id_fkey" FOREIGN KEY (product_id) REFERENCES products(id)
+    "orders_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
+
+
+8. Payment
+
+	  Table "public.payment"
+    Column    |         Type          | Collation | Nullable |               Default               
+--------------+-----------------------+-----------+----------+-------------------------------------
+ id           | integer               |           | not null | nextval('payment_id_seq'::regclass)
+ payment_type | character varying(50) |           |          | 
+Indexes:
+    "payment_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "orders" CONSTRAINT "orders_payment_id_fkey" FOREIGN KEY (payment_id) REFERENCES payment(id)
+
+
+
+9. Products
+
+	                                      Table "public.products"
+   Column    |          Type          | Collation | Nullable |               Default                
+-------------+------------------------+-----------+----------+--------------------------------------
+ id          | integer                |           | not null | nextval('products_id_seq'::regclass)
+ name        | character varying(20)  |           |          | 
+ price       | numeric                |           |          | 
+ size        | character varying(10)  |           |          | 
+ color       | character varying(20)  |           |          | 
+ categery_id | integer                |           |          | 
+ description | character varying(500) |           |          | 
+Indexes:
+    "products_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "products_categery_id_fkey" FOREIGN KEY (categery_id) REFERENCES product_categories(id)
+Referenced by:
+    TABLE "orders" CONSTRAINT "orders_product_id_fkey" FOREIGN KEY (product_id) REFERENCES products(id)
+
+
+10. Product_categories
+
+	                  Table "public.product_categories"
+    Column     |         Type          | Collation | Nullable |                    Default                     
+---------------+-----------------------+-----------+----------+------------------------------------------------
+ id            | integer               |           | not null | nextval('product_categories_id_seq'::regclass)
+ categery_name | character varying(30) |           |          | 
+Indexes:
+    "product_categories_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "products" CONSTRAINT "products_categery_id_fkey" FOREIGN KEY (categery_id) REFERENCES product_categories(id)
+
+
+11. Users
+
+	                                    Table "public.users"
+ Column  |         Type          | Collation | Nullable |              Default              
+---------+-----------------------+-----------+----------+-----------------------------------
+ id      | integer               |           | not null | nextval('users_id_seq'::regclass)
+ fname   | character varying(20) |           |          | 
+ lname   | character varying(20) |           |          | 
+ phone   | numeric               |           |          | 
+ email   | character varying(20) |           |          | 
+ city    | character varying(20) |           |          | 
+ state   | character varying(20) |           |          | 
+ address | character varying(50) |           |          | 
+Indexes:
+    "users_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "orders" CONSTRAINT "orders_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
+
+
+
+=========================================================== Practices Questions ===============================================================
+
+
+1. 
+
+Solution:
+	
+	
+	select sum(price)from products where id IN ( select o.product_id from orders as o,
+	products as p,product_categories as pc
+ 	where p.id = o.product_id
+	 AND pc.id = p.categery_id
+ 	AND pc.categery_name = 'Electronics')
+	 ;
+ 
+ sum   
+--------
+ 402790
+(1 row)
+
