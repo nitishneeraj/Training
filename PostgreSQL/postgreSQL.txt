@@ -594,7 +594,14 @@ Foreign-key constraints:
 
 
 
+35. How to reset postgres password
+	
 
+	EX:->   \password postgres
+
+
+
+ 
 
 
 
