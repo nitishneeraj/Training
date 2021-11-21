@@ -860,7 +860,7 @@ Solution :
 
 2. Orders		
 
-	select * from orders;
+select * from orders;
  id | order_date | shipped_date | order_amount | payment_id |              shipped_address               | user_id | product_id 
 ----+------------+--------------+--------------+------------+--------------------------------------------+---------+------------
   1 | 2018-11-20 | 2018-11-30   |        42990 |          1 | 2nd Main Kanteerava Nagar, Nandhini Layout |       1 |          1
@@ -878,8 +878,8 @@ Solution :
  13 | 2021-11-17 | 2021-12-01   |        42990 |          3 | 8/24 Sanjay colony                         |       7 |          1
  15 | 2019-10-12 | 2019-10-19   |       179900 |          5 | 51,Samman Bazart                           |       2 |          7
  16 | 2020-10-14 | 2020-10-16   |         6999 |          3 | 2nd Main Kanteerava Nagar, Nandhini Layout |       1 |          8
- 17 | 2017-11-14 | 2017-11-17   |       219000 |          5 | 8/24 Sanjay colony                         |       1 |          9
  14 | 2019-10-12 | 2019-10-19   |       169000 |          1 | 2nd Main Kanteerava Nagar, Nandhini Layout |       1 |          6
+ 17 | 2017-11-14 | 2017-11-17   |       219000 |          5 | 8/24 Sanjay colony                         |       7 |          9
 (17 rows)
 
 
@@ -1053,4 +1053,71 @@ Solution:
 --------
  402790
 (1 row)
+
+
+
+
+2. How manu orders each Users
+
+solution:
+	select u.fname,count(o.id)as "Numbers of orders" from users as u,orders as o where u.id = o.user_id group by u.fname;
+
+  fname  | Numbers of orders 
+--------+-------------------
+ sohan  |                 1
+ Mohan  |                 2
+ Om     |                 3
+ satyam |                 1
+ kajal  |                 2
+ sagar  |                 5
+ aman   |                 3
+(7 rows)
+
+
+
+ 3. As an output we need a list of all userid and the total payment received from them in the year 2018.
+ 
+ Solution:
+ 
+ 	select u.id as " User id",sum(o.order_amount) as "Total shoping " from orders as o,users as u where u.id = o.user_id AND o.id IN
+ 	 ( select o.id from users as u,orders as o where u.id = o.user_id AND o.order_date between '2018-01-01' AND '2018-12-31') 
+ 	 group by u.fname,u.id;
+ 
+  User id | Total shoping  
+----------+----------------
+        1 |          42990
+        2 |          21994
+(2 rows)
+
+
+4. As an output we need a list of all userid, user name and the total payment received
+
+Solution:
+
+	select u.id as " User id",u.fname as " Users name ",sum(o.order_amount) as "Total shoping " from orders as o,users as u 
+	where u.id = o.user_id AND o.id IN ( select o.id from users as u,orders as o where u.id = o.user_id )
+	 group by u.fname,u.id order by u.id;
+ 
+  User id |  Users name  | Total shoping  
+----------+--------------+----------------
+        1 | sagar        |         240983
+        2 | Om           |         201894
+        3 | satyam       |          42990
+        4 | sohan        |         127000
+        5 | kajal        |         128139
+        6 | aman         |         141634
+        7 | Mohan        |         261990
+
+
+5. We need a list of all userids which have bought for more than 10,000 Rs. of value in 2012 but not bought at all in 2013.
+
+Solution:
+
+ select u.id as "User ID" from users as u, orders as o where u.id = o.user_id AND o.order_amount between '50000' AND '150000' AND o.order_date Not between '2013-01-01' AND '2013-12-31' group by u.id order by u.id;
+ User ID 
+---------
+       4
+       5
+       6
+(3 rows)
 
