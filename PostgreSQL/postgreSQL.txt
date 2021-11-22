@@ -600,7 +600,9 @@ Foreign-key constraints:
 	EX:->   \password postgres
 
 
+36. Change column data type in postgres
 
+	Ex: ALTER TABLE tbl_name ALTER COLUMN col_name TYPE varchar (11);  
  
 
 
