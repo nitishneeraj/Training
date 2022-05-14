@@ -439,6 +439,34 @@
 
 
 
+44. Error
+	- ! [rejected]        master -> master (non-fast-forward)
+	error: failed to push some refs to 'git@github.com:nitishneeraj/Persnal-Activitys.git'
+	hint: Updates were rejected because the tip of your current branch is behind
+	hint: its remote counterpart. Integrate the remote changes (e.g.
+	hint: 'git pull ...') before pushing again.
+	hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+	
+	- git push -f origin master
+
+
+45. 	Configure your Git username/email
+		- Set your username:
+			git config --global user.name "FIRST_NAME LAST_NAME"
+
+		- Set your email address:
+			git config --global user.email "MY_NAME@example.com"
+
+		- Show global username
+			git config --list
+		
+		- How can I remove an entry in global configuration with git config?
+			git config --global --unset user.name
+			git config --global --unset user.email
+			
+
+
+
 		
 	
 	
